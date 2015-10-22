@@ -2,6 +2,7 @@
 
 # Membres :
 - Ludovic Caisso
+- Gillian Perard
 - Sylvain Toffoli
 - Benoît Garreau
 -
