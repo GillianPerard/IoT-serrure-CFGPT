@@ -2,7 +2,7 @@
 
 # Membres :
 - Ludovic Caisso
--
+- Corentin Fagherazzi
 -
 -
 -
