@@ -3,6 +3,6 @@
 # Membres :
 - Ludovic Caisso
 - Sylvain Toffoli
--
+- Benoît Garreau
 -
 -
