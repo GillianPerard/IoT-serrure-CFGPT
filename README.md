@@ -1,4 +1,4 @@
-# IoT-serrure-CCGPT
+# IoT-serrure-CFGPT
 
 # Membres :
 - Ludovic Caisso
