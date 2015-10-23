@@ -17,7 +17,7 @@ module.exports = {
 	},
 	connectedobjects:{
 		collection: 'connectedobjects',
-		via: 'group'
+		via: 'groups'
 	},
 	groupusers:{
 		collection: 'groupusers',
