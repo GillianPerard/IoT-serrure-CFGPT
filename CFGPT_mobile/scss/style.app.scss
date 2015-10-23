@@ -1,0 +1,25 @@
+$colorGray: #222222;
+$colorRose: #FF3D3D;
+$stable: $colorRose;
+
+.backgroundGray{
+	background-color: $colorGray !important;
+	a{
+		background-color: $colorGray !important;
+	}
+}
+
+.colorRose{
+	color: $colorRose !important;
+}
+.backgroundRose{
+	background-color: $colorRose !important;
+}
+
+.noBorder{
+	border: 0 !important;
+}
+
+.colorWhite{
+	color: white !important;
+}
