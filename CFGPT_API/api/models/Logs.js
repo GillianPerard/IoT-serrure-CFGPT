@@ -11,6 +11,9 @@ module.exports = {
 	connectedobject: {
   		model: 'connectedobjects'
   	},
+	user: {
+		model: 'users'
+	},
 	date: {
 		type: 'datetime',
 		required: true

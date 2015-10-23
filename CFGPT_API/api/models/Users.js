@@ -29,6 +29,10 @@ module.exports = {
 	groupusers:{
 		collection: 'groupusers',
 		via: 'user'
+	},
+	logs:{
+		collection: 'logs',
+		via: 'user'
 	}
   }
 };
