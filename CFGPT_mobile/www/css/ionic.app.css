@@ -9287,6 +9287,9 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+html, body {
+  color: white !important; }
+
 .backgroundGray {
   background-color: #222222 !important; }
   .backgroundGray a {
@@ -9303,3 +9306,6 @@ a.button {
 
 .colorWhite {
   color: white !important; }
+
+.borderColorSemiDarkGray {
+  border-color: #333333; }
