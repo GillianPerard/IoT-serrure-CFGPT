@@ -1,34 +1,36 @@
 /**
-* Users.js
+* ConnectedObject.js
 *
 * @description :: TODO: You might write a short summary of how this model works and what it represents here.
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 
 module.exports = {
+
   attributes: {
-	firstname: {
+  	name: {
 	    type: 'string',
 	    required: true,
 	    minLength: 2
 	},
-	lastname: {
+	token: {
 	    type: 'string',
 	    required: true,
+	    unique: true,
 	    minLength: 2
 	},
-	email: {
-	    type: 'email',
-	    required: true, 
-	    unique: true
+	state: {
+	    type: 'string',
+	    enum: ['Ouvert', 'Fermé', 'Autre'],
+	    required: true
 	},
-	password: {
-		type: 'string',
-		required: true
+	logs:{
+		collection: 'logs',
+		via: 'connectedobject'
 	},
-	groupusers:{
-		collection: 'groupusers',
-		via: 'user'
+	groups:{
+		collection: 'groups',
+		via: 'connectedobjects'
 	}
   }
 };

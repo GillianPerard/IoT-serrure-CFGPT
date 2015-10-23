@@ -1,5 +1,5 @@
 /**
-* Users.js
+* Groups.js
 *
 * @description :: TODO: You might write a short summary of how this model works and what it represents here.
 * @docs        :: http://sailsjs.org/#!documentation/models
@@ -7,28 +7,21 @@
 
 module.exports = {
   attributes: {
-	firstname: {
+  	name: {
 	    type: 'string',
 	    required: true,
 	    minLength: 2
 	},
-	lastname: {
-	    type: 'string',
-	    required: true,
-	    minLength: 2
+	parentgroup:{
+		model: 'groups'
 	},
-	email: {
-	    type: 'email',
-	    required: true, 
-	    unique: true
-	},
-	password: {
-		type: 'string',
-		required: true
+	connectedobjects:{
+		collection: 'connectedobjects',
+		via: 'group'
 	},
 	groupusers:{
 		collection: 'groupusers',
-		via: 'user'
+		via: 'group'
 	}
   }
 };
