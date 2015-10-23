@@ -8,7 +8,29 @@
 module.exports = {
 
   attributes: {
-
+	firstname: {
+	    type: 'string',
+	    required: true,
+	    minLength: 2
+	},
+	lastname: {
+	    type: 'string',
+	    required: true,
+	    minLength: 2
+	},
+	email: {
+	    type: 'email',
+	    required: true, 
+	    unique: true
+	},
+	password: {
+		type: 'string',
+		required: true
+	},
+	groupusers:{
+		collection: 'groupUsers',
+		via: 'user'
+	}
   }
 };
 
