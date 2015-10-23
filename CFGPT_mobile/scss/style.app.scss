@@ -1,11 +1,11 @@
-$colorGray: #222222;
-$colorRose: #FF3D3D;
-$stable: $colorRose;
+html, body{
+	color: white !important;
+}
 
 .backgroundGray{
-	background-color: $colorGray !important;
+	background-color: $colorDarkGray !important;
 	a{
-		background-color: $colorGray !important;
+		background-color: $colorDarkGray !important;
 	}
 }
 
@@ -22,4 +22,8 @@ $stable: $colorRose;
 
 .colorWhite{
 	color: white !important;
+}
+
+.borderColorSemiDarkGray{
+	border-color: $colorSemiDarkGray;
 }
