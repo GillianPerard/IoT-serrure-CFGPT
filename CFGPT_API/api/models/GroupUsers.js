@@ -16,7 +16,7 @@ module.exports = {
 	},
 	is_admin:{
 		type: 'boolean'
-	}
+	},
 	is_to_call:{
 		type: 'boolean'
 	}
