@@ -22,30 +22,48 @@
 
 module.exports.routes = {
 
-  /***************************************************************************
-  *                                                                          *
-  * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
-  * etc. depending on your default view engine) your home page.              *
-  *                                                                          *
-  * (Alternatively, remove this and add an `index.html` file in your         *
-  * `assets` directory)                                                      *
-  *                                                                          *
-  ***************************************************************************/
+// Url spécifique des objets connectés
+'POST /connectedobjects/:tokenObject/reportState': 'ConnectedObjects.reportState', //(tokenObject, state)
+'POST /connectedobjects/:tokenObject/checkUserValidity': 'ConnectedObjects.checkUserValidity', //(tokenObject, idUser)
+'POST /connectedobjects/:tokenObject/receiveVideoStream': 'ConnectedObjects.receiveVideoStream', //(tokenObject, stream)
 
-/*
-  '/': {
-    view: 'homepage'
-  }
-*/
+// Url de gestion des users
+'POST /app/account/new_account': 'Users.newAccount', //(email, password, firstName, lastName)
+'POST /app/account/login' : 'Users.login', //(email, password)
+'POST /app/account/logout': 'Users.logout',
 
-  /***************************************************************************
-  *                                                                          *
-  * Custom routes here...                                                    *
-  *                                                                          *
-  * If a request to a URL doesn't match any of the custom routes above, it   *
-  * is matched against Sails route blueprints. See `config/blueprints.js`    *
-  * for configuration options and examples.                                  *
-  *                                                                          *
-  ***************************************************************************/
+// Url de gestion des objets connectés
+//[VerifAccount]
+'GET  /app/connectedobjects/': 'ConnectedObjects.getConnectedObjects',
+'POST /app/connectedobjects/add' : 'ConnectedObjects.add', //(tokenObject, name)
+
+// Url des interactions avec les objets connectés
+//[VerifAccount]
+'POST /app/connectedobjects/:tokenObject/remove' : 'ConnectedObjects.removeByToken',
+'POST /app/connectedobjects/:tokenObject/logs' : 'ConnectedObjects.logsByToken',
+'POST /app/connectedobjects/:tokenObject/receiveVideoStream' : 'ConnectedObjects.receiveVideoStreamByToken',
+'POST /app/connectedobjects/:tokenObject/sendAudioStream' : 'ConnectedObjects.sendAudioStreamByToken', //(stream)
+'POST /app/connectedobjects/:tokenObject/changeState' : 'ConnectedObjects.changeStateByToken', //(state)
+
+// Url de gestion des groupes
+//[VerifAccount]
+'POST /app/groups/new_group' : 'Groups.newGroup', //(name, groupId)
+'POST /app/groups/remove/:groupId' : 'Groups.removeByGroupId', //(groupId)
+
+// Url des objets connectés dans les groupes
+//[VerifAccount]
+'GET  /app/groups/:groupId/connectedobjects' : 'Groups.getConnectedObjects', //(groupId)
+'POST /app/groups/:groupId/connectedobjects/assign' : 'Groups.assignConnectedObjectById', //(groupId, tokenObjects)
+'POST /app/groups/:groupId/connectedobjects/remove' : 'Groups.removeConnectedObjectById', //(groupId, tokenObjects)
+
+// Url des users dans les groupes
+//[VerifAccount]
+'GET  /app/groups/:groupId/users' : 'Groups.getUsers', //(groupId)
+'POST /app/groups/:groupId/users/assign' : 'Groups.assignUserById', //(groupId, userId)
+'POST /app/groups/:groupId/users/remove' : 'Groups.removeUserById', //(groupId, userId)
+
+'/' :{
+  view: '404'
+}
 
 };
