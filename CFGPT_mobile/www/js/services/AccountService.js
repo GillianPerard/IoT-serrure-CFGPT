@@ -13,6 +13,6 @@ angular.module('CFGPT_Mobile.services.AccountService', [])
     }
 
     this.IsConnected = function () {
-      return !currentUser;
+      return currentUser != undefined;
     }
   });
