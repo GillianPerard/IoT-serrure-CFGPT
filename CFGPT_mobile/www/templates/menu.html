@@ -9,26 +9,32 @@
         </button>
       </ion-nav-buttons>
     </ion-nav-bar>
-    <ion-nav-view name="menuContent"></ion-nav-view>
+    <ion-nav-view name="menuContent">
+      
+      </ion-nav-view>
   </ion-side-menu-content>
 
-  <ion-side-menu side="left">
-    <ion-header-bar class="bar-stable">
-      <h1 class="title">Left</h1>
-    </ion-header-bar>
+  <ion-side-menu side="left" class="backgroundGray">
     <ion-content>
+      <div style="width:100%; margin-top:60px;margin-bottom:30px;">
+        <img src="http://www.yzgeneration.com/wp-content/uploads/2013/09/Anonymous-Facebook-620x350.png" width="125px" height="125px" alt="" style="display:block;border-radius:50%;margin:0 auto;border:6px solid #181818;">
+        <p style="text-align:center; color:white;margin-top:10px">Jean-Stéphane<br><b class="colorRose">Labourre</b></p>
+      </div>
       <ion-list>
-        <ion-item menu-close ng-click="login()">
-          Login
+        <ion-item class="backgroundGray colorWhite borderColorSemiDarkGray" menu-close href="#/app/groups">
+          <i class="fa fa-key" style="width:25px;"></i> Mes trousseaux
         </ion-item>
-        <ion-item menu-close href="#/app/search">
-          Search
+        <ion-item class="backgroundGray colorWhite borderColorSemiDarkGray" menu-close href="#/app/search">
+          <i class="fa fa-rss" style="width:25px;"></i> Gestion du NFC
         </ion-item>
-        <ion-item menu-close href="#/app/browse">
-          Browse
+         <ion-item class="backgroundGray colorWhite borderColorSemiDarkGray" menu-close href="#/app/browse">
+          <i class="fa fa-bell" style="width:25px;"></i> Notifications
         </ion-item>
-        <ion-item menu-close href="#/app/playlists">
-          Playlists
+        <ion-item class="backgroundGray colorWhite borderColorSemiDarkGray" menu-close href="#/app/browse">
+          <i class="fa fa-cogs" style="width:25px;"></i> Gestion de mon profil
+        </ion-item>
+        <ion-item class="backgroundGray colorWhite borderColorSemiDarkGray" menu-close href="#/app/login">
+          <i class="fa fa-sign-out" style="width:25px;"></i> Se déconnecter
         </ion-item>
       </ion-list>
     </ion-content>

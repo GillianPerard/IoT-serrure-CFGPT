@@ -1,0 +1,52 @@
+html, body{
+	color: white !important;
+}
+
+.backgroundGray{
+	background-color: $colorDarkGray !important;
+	a{
+		background-color: $colorDarkGray !important;
+	}
+}
+
+.colorRose{
+	color: $colorRose !important;
+}
+.backgroundRose{
+	background-color: $colorRose !important;
+}
+
+.noBorder{
+	border: 0 !important;
+}
+
+.noPadding{
+	padding: 0 !important;
+}
+
+.noMargin{
+	margin: 0 !important;
+}
+
+.noBackground{
+	background: transparent !important;	
+}
+
+.colorWhite{
+	color: white !important;
+}
+
+.borderColorSemiDarkGray{
+	border-color: $colorSemiDarkGray;
+}
+
+.bar-stable .title{
+	color: white !important;
+}
+
+.bar-stable .button{
+	color:white !important;
+}
+.bar-stable .button:hover{
+	color:white !important;
+}

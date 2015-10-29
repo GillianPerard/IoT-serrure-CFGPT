@@ -29,8 +29,8 @@ module.exports.routes = {
 
 // Url de gestion des users
 'POST /app/account/new_account': 'Users.newAccount', //(email, password, firstName, lastName)
-'POST /app/account/login' : 'Users.login', //(email, password)
-'POST /app/account/logout': 'Users.logout',
+'POST /app/login' : 'AuthController.login', //(email, password)
+'POST /app/refresh': 'AuthController.refresh',
 
 // Url de gestion des objets connectés
 //[VerifAccount]
@@ -65,5 +65,7 @@ module.exports.routes = {
 '/' :{
   view: '404'
 }
+
+
 
 };
