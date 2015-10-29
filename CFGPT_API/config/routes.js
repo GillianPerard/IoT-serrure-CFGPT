@@ -29,21 +29,22 @@ module.exports.routes = {
 
 // Url de gestion des users
   'POST /app/account/new_account': 'Users.newAccount', //(email, password, firstName, lastName)
-  'POST /app/login' : 'AuthController.login', //(email, password)
-  'POST /app/refresh': 'AuthController.refresh',
+  /*DONE*/'POST /app/login' : 'AuthController.login', //(email, password)
+  /*DONE*/'POST /app/refresh': 'AuthController.refresh',
 
 // Url de gestion des objets connectés
 //[VerifAccount]
-  'GET  /app/connectedobjects/': 'ConnectedObjects.getConnectedObjects',
-  'POST /app/connectedobjects/add' : 'ConnectedObjects.add', //(tokenObject, name)
+  /*DONE*/'GET  /app/connectedobjects/': 'ConnectedObjectsController.getConnectedObjects',
+  /*DONE*/'POST /app/connectedobjects/get' : 'ConnectedObjectsController.getByToken', //(tokenObject)
+  /*DONE*/'POST /app/connectedobjects/add' : 'ConnectedObjectsController.addConnectedObject', //(tokenObject, name)
+  /*DONE*/'POST /app/connectedobjects/remove' : 'ConnectedObjectsController.removeByToken', //(tokenObject)
 
 // Url des interactions avec les objets connectés
 //[VerifAccount]
-  'POST /app/connectedobjects/:tokenObject/remove' : 'ConnectedObjects.removeByToken',
-  'POST /app/connectedobjects/:tokenObject/logs' : 'ConnectedObjects.logsByToken',
-  'POST /app/connectedobjects/:tokenObject/receiveVideoStream' : 'ConnectedObjects.receiveVideoStreamByToken',
-  'POST /app/connectedobjects/:tokenObject/sendAudioStream' : 'ConnectedObjects.sendAudioStreamByToken', //(stream)
-  'POST /app/connectedobjects/:tokenObject/changeState' : 'ConnectedObjects.changeStateByToken', //(state)
+  /*DONE*/'POST /app/connectedobjects/logs' : 'ConnectedObjectsController.logsByToken', //(tokenObject)
+  'POST /app/connectedobjects/receiveVideoStream' : 'ConnectedObjectsController.receiveVideoStreamByToken', //(tokenObject)
+  'POST /app/connectedobjects/sendAudioStream' : 'ConnectedObjectsController.sendAudioStreamByToken', //(tokenObject,stream)
+  'POST /app/connectedobjects/changeState' : 'ConnectedObjectsController.changeStateByToken', //(tokenObject,state)
 
 // Url de gestion des groupes
 //[VerifAccount]

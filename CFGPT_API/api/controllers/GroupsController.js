@@ -16,11 +16,11 @@ module.exports = {
 
 		if (!_groupId) return res.json(400,{err:'No groupId param.'});
 
-		Groups.findOne({id: _groupId}).exec(function(err, group){
+		Groups.findOneById(_groupId).exec(function(err, group){
 			if (!group) return res.json(400,{err:'No group found.'});
 			GroupUsers.find({group: group.id}).populate('user').exec(function(err, userWithGroup){
 				if (userWithGroup.length == 0) return res.json(400,{err:'No groupuser found.'});
-				res.send(userWithGroup);
+				return res.send(userWithGroup);
 			});
 		});
 	},
@@ -35,13 +35,13 @@ module.exports = {
     //Si il manque un des params "idUser" ou "groupId", on drop.
     if (!_groupId || !_userId) return res.json(400,{err:'PARAMS ERROR.'});
 
-    Groups.findById(_groupId).exec(function(err,isFound){
+    Groups.findOneById(_groupId).exec(function(err,isFound){
       if (err) return res.json(400,{err:'ERROR.'});
-      if (isFound.length == 0) return res.json(400,{err:'ERROR.'});
+      if (!isFound) return res.json(400,{err:'ERROR.'});
 
-      Users.findById(_userId).exec(function(err,isFound) {
+      Users.findOneById(_userId).exec(function(err,isFound) {
         if (err) return res.json(400,{err:'ERROR.'});
-        if (isFound.length == 0) return res.json(400,{err:'ERROR.'});
+        if (!isFound) return res.json(400,{err:'ERROR.'});
 
         GroupUsers.count({group: _groupId, user: _userId}).exec(function(err, groupUser){
           if (err) return res.json(400,{err:'ERROR.'});
@@ -69,13 +69,13 @@ module.exports = {
     //Si il manque des params, on drop.
     if (!_groupId || !_userId) return res.json(400,{err:'PARAMS ERROR.'});
 
-    Groups.findById(_groupId).exec(function(err,isFound) {
+    Groups.findOneById(_groupId).exec(function(err,isFound) {
       if (err) return res.json(400,{err:'ERROR.'});
-      if (isFound.length == 0) return res.json(400,{err:'ERROR.'});
+      if (!isFound) return res.json(400,{err:'ERROR.'});
 
-      Users.findById(_userId).exec(function (err, isFound) {
+      Users.findOneById(_userId).exec(function (err, isFound) {
         if (err) return res.json(400,{err:'ERROR.'});
-        if (isFound.length == 0) return res.json(400,{err:'ERROR.'});
+        if (!isFound) return res.json(400,{err:'ERROR.'});
 
         GroupUsers.findOne({group: _groupId, user: _userId}).exec(function (err, groupUser) {
           if (err) return res.json(400,{err:'ERROR.'});
@@ -109,6 +109,43 @@ module.exports = {
         return res.json(group.connectedobjects);
       })
 
+  },
+
+
+  // TODO - Coco
+  // Associe un connectedObject à un group (selon les params)
+  assignConnectedObjectById: function(req, res){
+    var _groupId = req.param('groupId');
+    var _conObjId = req.param('conObjId');
+
+    //Si il manque un des params "conObjId" ou "groupId", on drop.
+    if (!_groupId || !_conObjId) return res.json(400,{err:'PARAMS ERROR.'});
+
+    Groups.findOneById(_groupId).exec(function(err,isFound){
+      if (err) return res.json(400,{err:'ERROR.'});
+      if (!isFound) return res.json(400,{err:'ERROR.'});
+
+      ConnectedObjects.findOneById(_conObjId).exec(function(err,isFound) {
+        if (err) return res.json(400,{err:'ERROR.'});
+        if (!isFound) return res.json(400,{err:'ERROR.'});
+        /*
+        GroupUsers.count({group: _groupId, user: _userId}).exec(function(err, groupUser){
+          if (err) return res.json(400,{err:'ERROR.'});
+          if (groupUser > 0) return res.json(400,{err:'USER IS ALREADY IN GROUP.'});
+
+          GroupUsers.create({
+            group:_groupId,
+            user:_userId,
+            is_admin: (_isAdmin == "true"? 1 : 0),
+            is_to_call: (_isToCall == "true"? 1 : 0)
+          }).exec(function(err,finalGroupUser){
+            if (err) return res.json(400,{err:'ERROR.'});
+            return res.send(finalGroupUser);
+          });
+        });
+        */
+      });
+    });
   }
 
 };
