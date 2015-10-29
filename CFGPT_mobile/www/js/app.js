@@ -10,11 +10,10 @@ angular.module('CFGPT_Mobile', [
   'CFGPT_Mobile.controllers.AccountCtrl',
   'CFGPT_Mobile.controllers.GroupsCtrl',
   'CFGPT_Mobile.controllers.GroupCtrl',
-  'CFGPT_Mobile.services.GroupsService',
+  'CFGPT_Mobile.services.ConstantService',
   'CFGPT_Mobile.services.AccountService'])
 
   .run(function ($ionicPlatform, $rootScope) {
-    $rootScope.baseUrl = "http://localhost:1337";
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
