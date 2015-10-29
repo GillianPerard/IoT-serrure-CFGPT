@@ -4,7 +4,7 @@ module.exports = function authenticated(req, res, next) {
 	if(!token) {
 		return res.json(401,{ err: "user should be authenticated"});
 	}
-	User.findOne({token:token}, function(err,user){
+	Users.findOne({token:token}, function(err,user){
 		if (err|| !user) return res.json(401, {err : 'user should be authenticated'});
 		req.user = user;
 		req.token = token;

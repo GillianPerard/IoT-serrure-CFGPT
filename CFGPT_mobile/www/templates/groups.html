@@ -1,8 +1,11 @@
-<ion-view view-title="Playlists">
+<ion-view view-title="Mes trousseaux">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
-        {{playlist.title}}
+      <ion-item ng-repeat="group in groups" href="#/app/groups/{{group.id}}">
+        {{group.title}}
+        <div class="item-icon-right">
+            <i class="icon ion-ios-arrow-right"></i>
+        </div>
       </ion-item>
     </ion-list>
   </ion-content>

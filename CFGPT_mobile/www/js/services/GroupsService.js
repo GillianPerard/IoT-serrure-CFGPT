@@ -1,19 +1,20 @@
 angular.module('CFGPT_Mobile.services.GroupsService', [])
 
   .service('GroupsService', function () {
-    var playlists = [
-      { title: 'Reggae', id: 1 },
-      { title: 'Chill', id: 2 },
-      { title: 'Dubstep', id: 3 },
-      { title: 'Indie', id: 4 },
-      { title: 'Rap', id: 5 }
+    var groups = [
+      { title: 'Maison principale', id: 0 , type: "HOUSE"},
+      { title: 'Bureau', id: 1 , type: "JOB"},
+      { title: 'Cabanne au fond du jardin', id: 2 , type: "AUTRE"},
+      { title: 'Maison secondaire', id: 3 , type: "HOUSE"},
+      { title: 'Pied à terre', id: 4 , type: "HOUSE"},
+      { title: 'Cabanne au fond du jardin', id: 5 , type: "CASTEL"}
     ];
 
-    this.getPlaylists = function () {
-      return playlists;
+    this.getGroups = function () {
+      return groups;
     };
     
-    this.getPlaylist = function (id) {
-      return playlists[id];
+    this.getGroup = function (id) {
+      return groups[id];
     }
   });
