@@ -74,13 +74,13 @@ INSERT INTO `logs` (`connectedobject`, `user`, `date`, `state`, `content`, `id`,
 -- Export de données de la table cfgpt_db.users : ~7 rows (environ)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`firstname`, `lastname`, `email`, `password`, `id`, `createdAt`, `updatedAt`) VALUES
-	('fred', 'Bouvier', 'fred.bouvier@familys.com', '5f4dcc3b5aa765d61d8327deb882cf99', 1, '2015-10-23 14:21:11', '2015-10-23 14:20:31'),
-	('berthe', 'Bouvier', 'berthe.bouvier@familys.com', '5f4dcc3b5aa765d61d8327deb882cf99', 2, '2015-10-23 14:21:13', '2015-10-23 14:20:32'),
-	('tommy', 'Bouvier', 'tommy.bouvier@hotmail.com', '5f4dcc3b5aa765d61d8327deb882cf99', 3, '2015-10-23 14:20:14', '2015-10-23 14:21:35'),
-	('lise', 'Bouvier', 'lise.bouvier@hotmail.com', '5f4dcc3b5aa765d61d8327deb882cf99', 4, '2015-10-23 14:21:15', '2015-10-23 14:21:36'),
-	('thomas', 'Uquel', 'thomas.uquel@softperf.fr', '5f4dcc3b5aa765d61d8327deb882cf99', 5, '2015-10-23 14:21:16', '2015-10-23 14:21:37'),
-	('franck', 'Kes', 'franck.kes@softperf.fr', '5f4dcc3b5aa765d61d8327deb882cf99', 6, '2015-10-23 14:20:16', '2015-10-23 14:21:38'),
-	('vanessa', 'Sanka', 'vanessa.sanka@softperf.fr', '5f4dcc3b5aa765d61d8327deb882cf99', 7, '2015-10-23 14:21:17', '2015-10-23 14:21:39');
+	('fred', 'Bouvier', 'fred.bouvier@familys.com', '$2a$10$QMmgZKw57qNIBEtGXtMPMuV5y98HGzJiOck/EdGxUzHoqcOeEtA0C', 1, '2015-10-23 14:21:11', '2015-10-23 14:20:31'),
+	('berthe', 'Bouvier', 'berthe.bouvier@familys.com', '$2a$10$QMmgZKw57qNIBEtGXtMPMuV5y98HGzJiOck/EdGxUzHoqcOeEtA0C', 2, '2015-10-23 14:21:13', '2015-10-23 14:20:32'),
+	('tommy', 'Bouvier', 'tommy.bouvier@hotmail.com', '$2a$10$QMmgZKw57qNIBEtGXtMPMuV5y98HGzJiOck/EdGxUzHoqcOeEtA0C', 3, '2015-10-23 14:20:14', '2015-10-23 14:21:35'),
+	('lise', 'Bouvier', 'lise.bouvier@hotmail.com', '$2a$10$QMmgZKw57qNIBEtGXtMPMuV5y98HGzJiOck/EdGxUzHoqcOeEtA0C', 4, '2015-10-23 14:21:15', '2015-10-23 14:21:36'),
+	('thomas', 'Uquel', 'thomas.uquel@softperf.fr', '$2a$10$QMmgZKw57qNIBEtGXtMPMuV5y98HGzJiOck/EdGxUzHoqcOeEtA0C', 5, '2015-10-23 14:21:16', '2015-10-23 14:21:37'),
+	('franck', 'Kes', 'franck.kes@softperf.fr', '$2a$10$QMmgZKw57qNIBEtGXtMPMuV5y98HGzJiOck/EdGxUzHoqcOeEtA0C', 6, '2015-10-23 14:20:16', '2015-10-23 14:21:38'),
+	('vanessa', 'Sanka', 'vanessa.sanka@softperf.fr', '$2a$10$QMmgZKw57qNIBEtGXtMPMuV5y98HGzJiOck/EdGxUzHoqcOeEtA0C', 7, '2015-10-23 14:21:17', '2015-10-23 14:21:39');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
