@@ -2,7 +2,6 @@ angular.module('CFGPT_Mobile.services.GroupsService', [])
 
   .service('GroupsService', function () {
     var groups = [
-<<<<<<< HEAD
       { title: 'Maison principale', id: 0 , type: "HOUSE",
         subgroups: [
           { title: "Toutes les clés", id: 5, 
@@ -25,14 +24,6 @@ angular.module('CFGPT_Mobile.services.GroupsService', [])
       { title: 'Cabanne au fond du jardin', id: 2 , type: "OTHER"},
       { title: 'Maison secondaire', id: 3 , type: "HOUSE"},
       { title: 'Pied à terre', id: 4 , type: "HOUSE"}
-=======
-      { title: 'Maison principale', id: 0, type: "HOUSE" },
-      { title: 'Bureau', id: 1, type: "JOB" },
-      { title: 'Cabanne au fond du jardin', id: 2, type: "AUTRE" },
-      { title: 'Maison secondaire', id: 3, type: "HOUSE" },
-      { title: 'Pied à terre', id: 4, type: "HOUSE" },
-      { title: 'Cabanne au fond du jardin', id: 5, type: "CASTEL" }
->>>>>>> 9004ac2d23cceea59e09e37522f890bcb08a3664
     ];
 
     this.getGroups = function () {
