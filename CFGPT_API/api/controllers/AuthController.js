@@ -30,6 +30,7 @@ module.exports = {
     req.logout();
     res.send('logout successful');
   }
+
 };
 
 
