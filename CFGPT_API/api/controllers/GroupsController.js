@@ -7,6 +7,8 @@
 
 module.exports = {
 
+  /* USERS */
+
   // Récupère les informations des users du group de l'id passé en paramètre (+ les infos associées à son groupuser)
 	getUsers: function(req,res){
 		//var plop = req.query.user;
@@ -40,7 +42,7 @@ module.exports = {
     var _isToCall = req.param('isToCall');
 
     //Si il manque des params, on drop.
-      if (_groupId == undefined || _groupId == "" || _groupId == null ||
+    if (_groupId == undefined || _groupId == "" || _groupId == null ||
       _userId == undefined || _userId == "" || _userId == null ||
       _isAdmin == undefined || _isAdmin == "" || _isAdmin == null ||
       _isToCall == undefined || _isToCall == "" || _isToCall == null
@@ -132,5 +134,25 @@ module.exports = {
         return;
       }
     })
+  },
+
+
+  /* CONNECTED OBJECTS */
+
+  getConnectedObjects : function(req, res){
+    var groupId = req.param('groupId');
+
+    if (!groupId) return res.json(400,{err:'No groupId param.'});
+
+    Groups.findOne({id: groupId})
+      .populate('connectedobjects')
+      .exec(function(err, group){
+        if (!group || !group.connectedobjects)return res.json(400,{err:'No group found.'});
+
+
+        return res.json(group.connectedobjects);
+      })
+
   }
+
 };
