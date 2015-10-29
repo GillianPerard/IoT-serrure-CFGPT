@@ -30,7 +30,7 @@ module.exports.routes = {
 // Url de gestion des users
 'POST /app/account/new_account': 'Users.newAccount', //(email, password, firstName, lastName)
 'POST /app/login' : 'AuthController.login', //(email, password)
-'POST /app/logout': 'AuthController.logout',
+'POST /app/refresh': 'AuthController.refresh',
 
 // Url de gestion des objets connectés
 //[VerifAccount]

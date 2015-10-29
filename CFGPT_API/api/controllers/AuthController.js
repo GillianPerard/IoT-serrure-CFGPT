@@ -8,8 +8,64 @@
 module.exports = {
 	
   login: function (req, res) {
-    res.view();
+    var email = req.param('email');
+    var password = req.param('password');
+
+    if(!email || !password) return res.json(401,{err:'Email and password required !'});
+
+    User.findOne({email:email},function(err,user){
+        if (err){
+          console.log(err);
+          return res.json(403,{err : 'forbidden'});
+        } 
+        if(!user) return res.json(401, 'invalid email or password');
+
+        user.comparePassword(password,user, function(err,valid){
+          if (err){
+            console.log(err);
+            return res.json(403,{err : 'forbidden'});
+          } 
+          if(!valid) return res.json(401, 'invalid email or password');
+
+          token = JwtHandler.generate({email:user.email,id:user.id});
+          user.token = token;
+
+          user.save(function(err){
+            if (err) return res.json(403,{err : 'forbidden'});
+
+            return res.json({
+              user:user,
+              token : token
+            });
+          });
+        });
+    });
+
   },
+  refresh : function(req, res){
+    var user = req.user || false;
+
+    if (user){
+      var decoded = JwtHandler.decode(user.refreshToken);
+      if (decoded.email === user.email) {
+        token = JwtHandler.generate({email:user.email,id:user.id});
+        user.token = token;
+
+        user.save(function(err){
+          if (err) return res.json(403,{err : 'forbidden'});
+
+            return res.json({
+              user:user,
+              token : token
+            });
+          });
+      };
+    }
+  }
+
+};
+
+/*
   process: function(req, res){
     passport.authenticate('local', function(err, user, info) {
       if ((err) || (!user)) {
@@ -25,15 +81,7 @@ module.exports = {
         });
       });
     })(req, res);
-  },
-  logout: function (req,res){
-    req.logout();
-    res.send('logout successful');
-  }
-
-};
-
-
+  },*/
 /**
  * Sails controllers expose some logic automatically via blueprints.	
  *
@@ -49,7 +97,7 @@ module.exports = {
  * You may also override the logic and leave the routes intact by creating your own
  * custom middleware for AuthController's `find`, `create`, `update`, and/or
  * `destroy` actions.
- */
+ *
  
 module.exports.blueprints = {
  
@@ -67,4 +115,4 @@ module.exports.blueprints = {
   // (useful for prototyping)
   shortcuts: true
  
-};
+};*/
