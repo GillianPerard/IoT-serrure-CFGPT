@@ -52,15 +52,15 @@ module.exports.routes = {
 
 // Url des objets connectés dans les groupes
 //[VerifAccount]
-  'GET  /app/groups/:groupId/connectedobjects' : 'Groups.getConnectedObjects', //(groupId)
+  /*DONE*/'GET  /app/groups/:groupId/connectedobjects' : 'Groups.getConnectedObjects', //(groupId)
   'POST /app/groups/:groupId/connectedobjects/assign' : 'Groups.assignConnectedObjectById', //(groupId, tokenObjects)
   'POST /app/groups/:groupId/connectedobjects/remove' : 'Groups.removeConnectedObjectById', //(groupId, tokenObjects)
 
 // Url des users dans les groupes
 //[VerifAccount]
-  'GET  /app/groups/:groupId/users' : 'GroupsController.getUsers', //(groupId)
-  'POST /app/groups/:groupId/users/assign' : 'GroupsController.assignUserById', //(groupId, userId, isAdmin, isToCall)
-  'POST /app/groups/:groupId/users/remove' : 'GroupsController.removeUserById', //(groupId, userId)
+  /*DONE*/'GET  /app/groups/:groupId/users' : 'GroupsController.getUsers', //(groupId)
+  /*DONE*/'POST /app/groups/:groupId/users/assign' : 'GroupsController.assignUserById', //(groupId, userId, isAdmin, isToCall)
+  /*DONE*/'POST /app/groups/:groupId/users/remove' : 'GroupsController.removeUserById', //(groupId, userId)
 
   '/' :{
     view: '404'
