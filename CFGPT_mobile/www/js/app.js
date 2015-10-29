@@ -7,7 +7,10 @@
 angular.module('CFGPT_Mobile', [
   'ionic',
   'CFGPT_Mobile.controllers.AppCtrl',
-  'CFGPT_Mobile.controllers.AccountCtrl'])
+  'CFGPT_Mobile.controllers.AccountCtrl',
+  'CFGPT_Mobile.controllers.GroupsCtrl',
+  'CFGPT_Mobile.services.GroupsService',
+  'CFGPT_Mobile.services.AccountService'])
 
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -35,15 +38,6 @@ angular.module('CFGPT_Mobile', [
         controller: 'AppCtrl'
       })
 
-      .state('app.search', {
-        url: '/search',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/search.html'
-          }
-        }
-      })
-
       .state('app.browse', {
         url: '/browse',
         views: {
@@ -52,12 +46,13 @@ angular.module('CFGPT_Mobile', [
           }
         }
       })
-      .state('app.playlists', {
-        url: '/playlists',
+      
+      .state('app.groups', {
+        url: '/groups',
         views: {
           'menuContent': {
-            templateUrl: 'templates/playlists.html',
-            controller: 'AccountCtrl'
+            templateUrl: 'templates/groups.html',
+            controller: 'GroupsCtrl'
           }
         }
       })
@@ -82,6 +77,7 @@ angular.module('CFGPT_Mobile', [
           }
         }
       });
+      
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/login');
   });
