@@ -10,11 +10,38 @@ angular.module('CFGPT_Mobile', [
   'CFGPT_Mobile.controllers.AccountCtrl',
   'CFGPT_Mobile.controllers.GroupsCtrl',
   'CFGPT_Mobile.controllers.GroupCtrl',
-  'CFGPT_Mobile.services.GroupsService',
+  'CFGPT_Mobile.services.ConstantService',
   'CFGPT_Mobile.services.AccountService'])
 
   .run(function ($ionicPlatform, $rootScope) {
+
     $rootScope.baseUrl = "http://localhost:1337";
+    
+    // $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+    //   
+    //   $ionicLoading.show();
+    //   
+    //   if(toState.authenticate){
+    //     var state = toState.name;
+    //     if(toState.name == "app.graphics"){
+    //       state = "app.follow";
+    //     }
+    //     AuthService.setRedirectionAfterLogin(state, toParams);
+    //   }
+    //   
+    //   var cConfig = ConfigService.currentConfig.info;
+    //   if(toState.authenticate && !AuthService.isLoggedIn()){
+    //     event.preventDefault();
+    //     
+    //     var state = "app.eligibility";
+    //     if(cConfig.app_active){
+    //       state = cConfig.auth_type == Constants.AUTH_TYPE.PASSWORD ? "app.login" : "app.login-pin";
+    //     }
+    //     $state.go(state);
+    //   }
+    //   
+    // });
+    
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
