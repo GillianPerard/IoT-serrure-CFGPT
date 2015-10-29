@@ -39,4 +39,4 @@ angular.module('CFGPT_Mobile.controllers.AppCtrl', [])
 				$scope.closeLogin();
 			}, 1000);
 		};
-	})
+	});

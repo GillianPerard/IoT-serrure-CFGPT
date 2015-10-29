@@ -57,7 +57,7 @@ angular.module('CFGPT_Mobile', [
         views: {
           'menuContent': {
             templateUrl: 'templates/playlists.html',
-            controller: 'PlaylistsCtrl'
+            controller: 'AccountCtrl'
           }
         }
       })
@@ -67,7 +67,7 @@ angular.module('CFGPT_Mobile', [
         views: {
           'menuContent': {
             templateUrl: 'templates/playlist.html',
-            controller: 'PlaylistCtrl'
+            controller: 'AccountCtrl'
           }
         }
       })
@@ -78,7 +78,7 @@ angular.module('CFGPT_Mobile', [
         views: {
           'menuContent': {
             templateUrl: 'templates/login.html',
-            controller: 'LoginCtrl'
+            controller: 'AccountCtrl'
           }
         }
       });
