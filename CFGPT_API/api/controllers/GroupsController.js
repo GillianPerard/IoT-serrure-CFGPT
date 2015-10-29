@@ -30,8 +30,23 @@ module.exports = {
 				res.send(userWithGroup);
 			})
 		})
-	}
+	},
 
+	getConnectedObjects : function(req, res){		
+    	var groupId = req.param('groupId');
+
+    	if (!groupId) return res.json(400,{err:'No groupId param.'});
+
+		Groups.findOne({id: groupId})
+				.populate('connectedobjects')
+				.exec(function(err, group){
+			if (!group || !group.connectedobjects)return res.json(400,{err:'No group found.'});
+
+
+			return res.json(group.connectedobjects);
+		})
+
+	}
 
 
 /*

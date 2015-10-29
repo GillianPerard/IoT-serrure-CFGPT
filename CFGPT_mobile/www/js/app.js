@@ -14,8 +14,6 @@ angular.module('CFGPT_Mobile', [
   'CFGPT_Mobile.services.AccountService'])
 
   .run(function ($ionicPlatform, $rootScope) {
-
-    $rootScope.baseUrl = "http://localhost:1337";
     
     // $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
     //   
