@@ -6,25 +6,25 @@
  */
 
 module.exports = {
-	
+
   login: function (req, res) {
     var email = req.param('email');
     var password = req.param('password');
 
     if(!email || !password) return res.json(401,{err:'Email and password required !'});
 
-    User.findOne({email:email},function(err,user){
+    Users.findOne({email:email},function(err,user){
         if (err){
           console.log(err);
           return res.json(403,{err : 'forbidden'});
-        } 
+        }
         if(!user) return res.json(401, 'invalid email or password');
 
-        user.comparePassword(password,user, function(err,valid){
+         Users.comparePassword(password,user, function(err,valid){
           if (err){
             console.log(err);
             return res.json(403,{err : 'forbidden'});
-          } 
+          }
           if(!valid) return res.json(401, 'invalid email or password');
 
           token = JwtHandler.generate({email:user.email,id:user.id});
@@ -59,7 +59,7 @@ module.exports = {
               token : token
             });
           });
-      };
+      }
     }
   }
 
@@ -83,7 +83,7 @@ module.exports = {
     })(req, res);
   },*/
 /**
- * Sails controllers expose some logic automatically via blueprints.	
+ * Sails controllers expose some logic automatically via blueprints.
  *
  * Blueprints are enabled for all controllers by default, and they can be turned on or off
  * app-wide in `config/controllers.js`. The settings below are overrides provided specifically
@@ -98,21 +98,21 @@ module.exports = {
  * custom middleware for AuthController's `find`, `create`, `update`, and/or
  * `destroy` actions.
  *
- 
+
 module.exports.blueprints = {
- 
+
   // Expose a route for every method,
   // e.g.
   // `/auth/foo` =&gt; `foo: function (req, res) {}`
   actions: true,
- 
+
   // Expose a RESTful API, e.g.
   // `post /auth` =&gt; `create: function (req, res) {}`
   rest: true,
- 
+
   // Expose simple CRUD shortcuts, e.g.
   // `/auth/create` =&gt; `create: function (req, res) {}`
   // (useful for prototyping)
   shortcuts: true
- 
+
 };*/
