@@ -1,6 +1,6 @@
 angular.module('CFGPT_Mobile.controllers.AccountCtrl', [])
 
-	.controller('AccountCtrl', function ($scope, $ionicModal, $timeout) {
+	.controller('AccountCtrl', function ($scope, $ionicModal, $rootScope, $timeout) {
 
 		// With the new view caching in Ionic, Controllers are only called
 		// when they are recreated or on app start, instead of every page change.
@@ -8,7 +8,7 @@ angular.module('CFGPT_Mobile.controllers.AccountCtrl', [])
 		// listen for the $ionicView.enter event:
 		//$scope.$on('$ionicView.enter', function(e) {
 		//});
-
+		
 		// Form data for the login modal
 		$scope.loginData = {};
 
