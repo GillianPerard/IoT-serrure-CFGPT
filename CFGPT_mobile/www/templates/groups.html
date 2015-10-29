@@ -2,7 +2,8 @@
   <ion-content>
     <ion-list>
       <ion-item ng-repeat="group in groups" href="#/app/groups/{{group.id}}">
-        {{group.name}}
+        <div class="groupImg"></div>
+        <p>{{group.name}}</p>
         <div class="item-icon-right">
             <i class="icon ion-ios-arrow-right"></i>
         </div>
