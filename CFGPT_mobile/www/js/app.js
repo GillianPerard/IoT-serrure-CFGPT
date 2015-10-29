@@ -9,6 +9,7 @@ angular.module('CFGPT_Mobile', [
   'CFGPT_Mobile.controllers.AppCtrl',
   'CFGPT_Mobile.controllers.AccountCtrl',
   'CFGPT_Mobile.controllers.GroupsCtrl',
+  'CFGPT_Mobile.controllers.GroupCtrl',
   'CFGPT_Mobile.services.GroupsService',
   'CFGPT_Mobile.services.AccountService'])
 
@@ -58,11 +59,11 @@ angular.module('CFGPT_Mobile', [
       })
 
       .state('app.single', {
-        url: '/playlists/:playlistId',
+        url: '/groups/:groupId',
         views: {
           'menuContent': {
-            templateUrl: 'templates/playlist.html',
-            controller: 'AccountCtrl'
+            templateUrl: 'templates/group.html',
+            controller: 'GroupCtrl'
           }
         }
       })
