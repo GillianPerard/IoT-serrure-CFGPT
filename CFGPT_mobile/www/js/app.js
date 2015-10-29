@@ -14,7 +14,7 @@ angular.module('CFGPT_Mobile', [
   'CFGPT_Mobile.services.AccountService'])
 
   .run(function ($ionicPlatform, $rootScope) {
-<<<<<<< HEAD
+
     $rootScope.baseUrl = "http://localhost:1337";
     
     // $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
@@ -42,8 +42,6 @@ angular.module('CFGPT_Mobile', [
     //   
     // });
     
-=======
->>>>>>> 9004ac2d23cceea59e09e37522f890bcb08a3664
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)

@@ -2,10 +2,7 @@
   <ion-content>
     <ion-list>
       <ion-item ng-repeat="group in groups" href="#/app/groups/{{group.id}}">
-        <i ng-if="showHomeIcon(group.id)" class="fa fa-home" style="width:25px;"></i>
-        <i ng-if="showSuitcaseIcon(group.id)" class="fa fa-suitcase" style="width:25px;"></i>
-        <i ng-if="showRocketIcon(group.id)" class="fa fa-rocket" style="width:25px;"></i>
-        {{group.title}}
+        {{group.name}}
         <div class="item-icon-right">
             <i class="icon ion-ios-arrow-right"></i>
         </div>
