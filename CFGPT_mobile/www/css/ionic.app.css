@@ -9304,8 +9304,26 @@ html, body {
 .noBorder {
   border: 0 !important; }
 
+.noPadding {
+  padding: 0 !important; }
+
+.noMargin {
+  margin: 0 !important; }
+
+.noBackground {
+  background: transparent !important; }
+
 .colorWhite {
   color: white !important; }
 
 .borderColorSemiDarkGray {
   border-color: #333333; }
+
+.bar-stable .title {
+  color: white !important; }
+
+.bar-stable .button {
+  color: white !important; }
+
+.bar-stable .button:hover {
+  color: white !important; }
