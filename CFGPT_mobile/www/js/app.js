@@ -43,14 +43,15 @@ angular.module('CFGPT_Mobile', [
 
   .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     
-    $ionicConfigProvider.backButton.text('').icon('ion-chevron-left');
+    $ionicConfigProvider.backButton.text('').icon('ion-android-arrow-back');
     $stateProvider
 
       .state('app', {
         url: '/app',
         abstract: true,
         templateUrl: 'templates/menu.html',
-        controller: 'AppCtrl'
+        controller: 'AppCtrl',
+        authenticate: true
       })
 
       .state('app.browse', {
@@ -59,7 +60,9 @@ angular.module('CFGPT_Mobile', [
           'menuContent': {
             templateUrl: 'templates/browse.html'
           }
-        }
+        },
+        authenticate: true
+        
       })
       
       .state('app.groups', {
@@ -80,14 +83,16 @@ angular.module('CFGPT_Mobile', [
             templateUrl: 'templates/group.html',
             controller: 'GroupCtrl'
           }
-        }
+        },
+        authenticate: true
       })
 
 
       .state('login', {
         url: '/login',
         templateUrl: 'templates/login.html',
-        controller: 'AccountCtrl'
+        controller: 'AccountCtrl',
+        authenticate: false
       });
       
     // if none of the above states are matched, use this as the fallback
