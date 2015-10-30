@@ -1,6 +1,6 @@
 angular.module('CFGPT_Mobile.controllers.AccountCtrl', [])
 
-	.controller('AccountCtrl', function ($scope, $ionicModal, $timeout) {
+	.controller('AccountCtrl', function ($scope, $ionicModal, AccountService) {
 
 		// With the new view caching in Ionic, Controllers are only called
 		// when they are recreated or on app start, instead of every page change.
@@ -33,10 +33,13 @@ angular.module('CFGPT_Mobile.controllers.AccountCtrl', [])
 		$scope.doLogin = function () {
 			console.log('Doing login', $scope.loginData);
 
-			// Simulate a login delay. Remove this and replace with your login
-			// code if using a login system
-			$timeout(function () {
+			AccountService.login($scope.loginData, function (error) {
+				if (error != undefined) {
+					alert('Une erreur est survenue');
+					console.log('error on login', error);
+				}
+
 				$scope.closeLogin();
-			}, 1000);
+			})
 		};
 	});
