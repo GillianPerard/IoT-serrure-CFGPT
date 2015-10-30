@@ -5,7 +5,11 @@
       </ion-nav-back-button>
 
       <ion-nav-buttons side="left">
-        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        <button class="button button-icon button-clear ion-android-menu" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-android-add">
         </button>
       </ion-nav-buttons>
     </ion-nav-bar>
@@ -33,8 +37,8 @@
         <ion-item class="backgroundGray colorWhite borderColorSemiDarkGray" menu-close href="#/app/browse">
           <i class="fa fa-cogs" style="width:25px;"></i> Gestion de mon profil
         </ion-item>
-        <ion-item class="backgroundGray colorWhite borderColorSemiDarkGray" menu-close href="#/app/login">
-          <i class="fa fa-sign-out" style="width:25px;"></i> Se déconnecter
+        <ion-item class="backgroundGray colorWhite borderColorSemiDarkGray" ng-click="doLogout()" menu-close>
+          <i class="fa fa-sign-out" style="width:25px;"></i> Déconnexion
         </ion-item>
       </ion-list>
     </ion-content>

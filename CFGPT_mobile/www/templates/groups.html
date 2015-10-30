@@ -1,11 +1,12 @@
 <ion-view view-title="Mes trousseaux">
   <ion-content>
-    <ion-list>
+    <ion-list show-delete="false" can-swipe="true">
       <ion-item ng-repeat="group in groups" href="#/app/groups/{{group.id}}">
-        {{group.title}}
+        <p>{{group.name}}</p>
         <div class="item-icon-right">
             <i class="icon ion-ios-arrow-right"></i>
         </div>
+        <ion-option-button class="button-assertive icon ion-android-delete"></ion-option-button>
       </ion-item>
     </ion-list>
   </ion-content>

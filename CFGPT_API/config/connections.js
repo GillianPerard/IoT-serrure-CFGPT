@@ -43,9 +43,8 @@ module.exports.connections = {
   myDB: {
     adapter: 'sails-mysql',
     host: '127.0.0.1',
-    port: 8889,
     user: 'root',
-    password: 'root',
+    password: '',
     database: 'cfgpt_db'
   },
 

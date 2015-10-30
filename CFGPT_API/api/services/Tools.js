@@ -7,5 +7,6 @@ module.exports = {
 			i++;
 		}
 		return isContains;
-	}	
+	}, 
+
 };
