@@ -7,6 +7,48 @@
 
 module.exports = {
 
+
+  /* GROUPS */
+
+  //Création d'un groupe (name, parentGroupId)
+  addGroup: function (req, res) {
+    var _name = req.param('name');
+    //var _parentGroupId = req.param('parentGroupId');
+
+    //Si il manque des params, on drop.
+    if (!_name /*|| !_parentGroupId*/) return res.json(400,{err:'PARAMS ERROR.'});
+
+    /* TODO - Gestion du parentID quand il le faudra */
+
+    Groups.create({
+      name:_name,
+      //parentgroup:_parentGroupId,
+    }).exec(function(err,parentgroup){
+      if (err) return res.json(400,{err:'ERROR.'});
+      return res.send(parentgroup);
+    });
+  },
+
+
+  //Suppression d'un groupe en fonction d'un Id
+  removeByGroupId: function (req, res) {
+    var _groupId = req.param('groupId');
+    if (!_groupId) return res.json(400,{err:'PARAMS ERROR.'});
+
+    Groups.findOneById(_groupId).exec(function(err,isFound){
+      if (err) return res.json(400,{err:'ERROR.'});
+      if (!isFound) return res.json(400,{err:'ERROR.'});
+
+      //Suppression finale du groupe
+      Groups.destroy({id:_groupId}).exec(function (err, groupToDestroy){
+        if (err) return res.json(400,{err:'ERROR.'});
+
+        return res.send(groupToDestroy);
+      });
+    });
+  },
+
+
   /* USERS */
 
   // Récupère les informations des users du group de l'id passé en paramètre (+ les infos associées à son groupuser)

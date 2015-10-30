@@ -48,12 +48,12 @@ module.exports.routes = {
 
 // Url de gestion des groupes
 //[VerifAccount]
-  'POST /app/groups/new_group' : 'Groups.newGroup', //(name, groupId)
-  'POST /app/groups/remove/:groupId' : 'Groups.removeByGroupId', //(groupId)
+  'POST /app/groups/add' : 'GroupsController.addGroup', //(name, groupId)
+  'POST /app/groups/remove' : 'GroupsController.removeByGroupId', //(groupId)
 
 // Url des objets connectés dans les groupes
 //[VerifAccount]
-  /*DONE*/'GET  /app/groups/:groupId/connectedobjects' : 'Groups.getConnectedObjects', //(groupId)
+  /*DONE*/'GET  /app/groups/:groupId/connectedobjects' : 'GroupsController.getConnectedObjects', //(groupId)
   'POST /app/groups/:groupId/connectedobjects/assign' : 'Groups.assignConnectedObjectById', //(groupId, tokenObjects)
   'POST /app/groups/:groupId/connectedobjects/remove' : 'Groups.removeConnectedObjectById', //(groupId, tokenObjects)
 
