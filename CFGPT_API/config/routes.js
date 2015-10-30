@@ -24,7 +24,7 @@ module.exports.routes = {
 
 // Url spécifique des objets connectés
   'POST /connectedobjects/:tokenObject/reportState': 'ConnectedObjects.reportState', //(tokenObject, state)
-  'POST /connectedobjects/:tokenObject/checkUserValidity': 'ConnectedObjects.checkUserValidity', //(tokenObject, idUser)
+  /*DONE*/'POST /connectedobjects/:tokenObject/checkUserValidity': 'ConnectedObjects.checkUserValidity', //(tokenObject, idUser)
   'POST /connectedobjects/:tokenObject/receiveVideoStream': 'ConnectedObjects.receiveVideoStream', //(tokenObject, stream)
 
 // Url de gestion des users
