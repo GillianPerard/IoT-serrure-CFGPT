@@ -153,8 +153,6 @@ module.exports = {
 
   },
 
-
-  // TODO - Coco
   // Associe un connectedObject à un group (selon les params)
   assignConnectedObjectById: function(req, res){
     var _groupId = req.param('groupId');
@@ -163,31 +161,124 @@ module.exports = {
     //Si il manque un des params "conObjId" ou "groupId", on drop.
     if (!_groupId || !_conObjId) return res.json(400,{err:'PARAMS ERROR.'});
 
-    Groups.findOneById(_groupId).exec(function(err,isFound){
-      if (err) return res.json(400,{err:'ERROR.'});
-      if (!isFound) return res.json(400,{err:'ERROR.'});
-
-      ConnectedObjects.findOneById(_conObjId).exec(function(err,isFound) {
+    Groups.findOneById(_groupId)
+      .populate('connectedobjects')
+      .populate('parentgroup')
+      .exec(function(err,group){
         if (err) return res.json(400,{err:'ERROR.'});
-        if (!isFound) return res.json(400,{err:'ERROR.'});
-        /*
-        GroupUsers.count({group: _groupId, user: _userId}).exec(function(err, groupUser){
-          if (err) return res.json(400,{err:'ERROR.'});
-          if (groupUser > 0) return res.json(400,{err:'USER IS ALREADY IN GROUP.'});
+        if (!group) return res.json(400,{err:'ERROR.'});
 
-          GroupUsers.create({
-            group:_groupId,
-            user:_userId,
-            is_admin: (_isAdmin == "true"? 1 : 0),
-            is_to_call: (_isToCall == "true"? 1 : 0)
-          }).exec(function(err,finalGroupUser){
+        ConnectedObjects.findOneById(_conObjId)
+          .populate('groups')
+          .exec(function(err,connectedObject) {
             if (err) return res.json(400,{err:'ERROR.'});
-            return res.send(finalGroupUser);
+            if (!connectedObject) return res.json(400,{err:'ERROR.'});
+
+            // Si le group est déjà lié des COs 
+            if (group.connectedobjects.length > 0) {
+              // on va vérifier qu'il n'est pas déjà lié à celui ci
+              var alreadyLinked = false;
+              group.connectedobjects.forEach(function(obj, index){
+                if (obj.token == connectedObject.token) alreadyLinked = true;
+              });
+              if (alreadyLinked) return res.json(400,{err:'ERROR. - already linked'});
+            };
+
+            // Si le group a un parent id, le connectedObject à ajouter doit y être lié
+            if (group.parentgroup) {
+              var goodGood = false;
+              connectedobject.groups.forEach(function(obj,index){
+                if (obj.id == group.parentgroup.id) {goodGood = true};
+              });
+              if (!goodGood) return res.json(400,{err:'ERROR. - where is the link with dad'});
+            };
+
+            group.connectedobjects.add(connectedObject);
+            group.save(function(err,saved){
+              if (err) return res.json(400,{err:'ERROR.'});
+              return res.send("success");
+
+            });
+
           });
-        });
-        */
       });
-    });
+  },
+  removeConnectedObjectById: function(req,res){
+    var _groupId = req.param('groupId');
+    var _conObjId = req.param('conObjId');
+
+    //Si il manque un des params "conObjId" ou "groupId", on drop.
+    if (!_groupId || !_conObjId) return res.json(400,{err:'PARAMS ERROR.'});
+
+    Groups.findOneById(_groupId)
+      .populate('connectedobjects')
+      .populate('parentgroup')
+      .exec(function(err,group){
+        if (err) return res.json(400,{err:'ERROR.'});
+        if (!group || group.length ==0) return res.json(400,{err:'ERROR.'});
+
+        var findCO = false;
+        group.connectedobjects.forEach(function(obj, index){
+          if (obj.id == _conObjId) findCO = true;
+        });
+        // Si on ne retrouve le CO avec l'id demandé dans le groupe demandé
+        if (!findCO) return res.json(400,{err:'ERROR. - no link between this 2 entities'});
+
+        // suppresion du lien 
+        group.connectedobjects.remove(_conObjId);
+        console.log("suppresion du lien")
+
+        var finalStep = function(){
+          group.save(function(err,saved){
+              if (err) return res.json(400,{err:'ERROR.'});
+              console.log("save suppresion du lien")
+              res.send("success")
+          });
+        }
+        // Si le group est un group sans parent il faut aussi supprimer la clé, ses logs et d'éventuel sous groups
+        if (!group.parentgroup) {
+          ConnectedObjects.findOneById(_conObjId)
+            .populate("logs")
+            .populate("groups")
+            .exec(function(err, connectedObject){
+              if (err) return res.json(400,{err:'ERROR.'});
+              if (!connectedObject) return res.json(400,{err:'ERROR.'});
+                console.log("co récupéré")
+                // on va nettoyer les liens avec les autres groups
+                // il existe au moins le lien avec le group concerné par la requete
+                if (connectedObject.groups.length > 1) {
+                  connectedObject.groups.forEach(function(obj, index){
+                    // condition pour ne pas supprimer 2 fois le liens l'objet et le group de la req
+                    if (obj.parentgroup) {
+                      connectedObject.groups.remove(obj.id);
+                    }
+                  });
+                  console.log("lien avec sous group deleted")
+
+                };
+
+                // On nettoie les logs
+                if (connectedObject.logs.length > 0) {
+                  var cleanOk = LogService.cleanConnectedObjectLog(connectedObject);
+                  console.log("clLog",cleanOk)
+                  if (!cleanOk)  return res.json(400,{err:'ERROR.'});
+                };
+
+                // On supprime la clé
+                ConnectedObjects.destroy(connectedObject.id).exec(function (err, cotoDestroy){
+                      if (err) return res.json(400,{err:'ERROR.'});
+                  console.log("suppression clés")
+                });
+
+                finalStep();
+            });
+
+        }else
+        {
+          finalStep();
+        }
+
+      });
   }
 
 };
