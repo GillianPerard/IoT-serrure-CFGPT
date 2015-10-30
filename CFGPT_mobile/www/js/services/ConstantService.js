@@ -4,7 +4,7 @@ angular.module('CFGPT_Mobile.services.ConstantService', [])
 		this.baseUrl = "http://localhost:1337";
 
 		// initialisation de l'application notamment le Local Storage
-		this.initApp = function () {
+		this.InitApp = function () {
 			$localStorage.$default({
 				user: undefined
 			});
