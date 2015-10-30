@@ -1,16 +1,23 @@
 <ion-view view-title="Connexion">
-  <ion-content>
+  <ion-content class="backgroundGray">
+    <img src="img/logoTest.png" alt="" id="loginLogo">
     <form ng-submit="doLogin()">
       <div class="list">
-        <label class="item item-input">
-          <input type="text" ng-model="loginData.email" placeholder="Email">
+        <label class="item item-input noBorder noBackground loginItem">
+          <input type="text" ng-model="loginData.email" placeholder="Email" class="loginInput colorWhite">
         </label>
-        <label class="item item-input">
-          <input type="password" ng-model="loginData.password" placeholder="******">
+        <label class="item item-input noBorder noBackground loginItem">
+          <input type="password" ng-model="loginData.password" placeholder="**********" class="loginInput colorWhite">
         </label>
-        <label class="item">
-          <button class="button button-block backgroundRose noBorder colorWhite" type="submit">
-              <i class="fa fa-check" style="width:25px;"></i> Connexion
+        <label class="item noBorder noBackground loginItem">
+          <button class="button button-block backgroundMainColor noBorder colorWhite" type="submit">
+              <i class="ion ion-android-done" style="width:25px;"></i> Connexion
+          </button>
+        </label>
+       <p style="text-align:center;margin-top:15px;">OU</p>
+        <label class="item noBorder noBackground loginItem">
+          <button class="button button-block noBackground borderMainColor colorMainColor">
+              <i class="ion ion-android-clipboard" style="width:25px;"></i> Inscription
           </button>
         </label>
       </div>

@@ -9,11 +9,14 @@ html, body{
 	}
 }
 
-.colorRose{
-	color: $colorRose !important;
+.colorMainColor{
+	color: $mainColor !important;
 }
-.backgroundRose{
-	background-color: $colorRose !important;
+.backgroundMainColor{
+	background-color: $mainColor !important;
+}
+.borderMainColor{
+	border-color: $mainColor !important;
 }
 
 .noBorder{
@@ -37,7 +40,7 @@ html, body{
 }
 
 .borderColorSemiDarkGray{
-	border-color: $colorSemiDarkGray;
+	border-color: $colorSemiDarkGray !important;
 }
 
 .bar-stable .title{
@@ -52,5 +55,28 @@ html, body{
 }
 
 .item-complex .item-content{
-	padding: 25px 49px 25px 16px;
+	padding: 25px 49px 25px 16px !important;
+}
+
+.loginInput{
+	border: 1px solid $mainColor !important;
+	border-radius: 4px !important;
+	text-align: center !important;
+	padding: 5px !important;
+	margin: 0 !important;
+	height: 50px !important;
+}
+
+.loginItem{
+	width: 70% !important;
+	margin: 0 auto !important;
+	padding: 0 !important;
+	margin-top: 15px !important;
+}
+
+#loginLogo{
+	width: 200px !important;
+    margin: 0 auto !important;
+    display: block !important;
+    margin-top: 50px !important;
 }
