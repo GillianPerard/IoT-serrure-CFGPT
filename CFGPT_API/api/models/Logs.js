@@ -9,8 +9,8 @@ module.exports = {
 
   attributes: {
     connectedobject: {
-        model: 'connectedobjects'
-      },
+      model: 'connectedobjects'
+    },
     user: {
       model: 'users'
     },

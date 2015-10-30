@@ -148,7 +148,14 @@
  				});
  			});
  		});
- 	}
+ 	},
 
+ 	changeStateByToken: function(req, res){
+ 		_connectedObjectToken = req.param('tokenObject');
+ 		_connectedObjectState = req.param('stateObject');
+ 		ConnectedObjects.update({token:_connectedObjectToken},{state:_connectedObjectState}).exec(function(err, updated){
+ 			ConnectedObjectsService.changeStateByToken_afterUpdate(req, res, err, updated);
+ 		});
+ 	},
  };
 
