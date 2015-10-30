@@ -27,4 +27,4 @@ build/Release
 node_modules
 
 #ignore
-/CFGPT/CFGPT_API/config/connection.js
+CFGPT_API/config/connections.js
