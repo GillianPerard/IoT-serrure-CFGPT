@@ -6,6 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('CFGPT_Mobile', [
   'ionic',
+  'ngStorage',
   'CFGPT_Mobile.controllers.AppCtrl',
   'CFGPT_Mobile.controllers.AccountCtrl',
   'CFGPT_Mobile.controllers.GroupsCtrl',

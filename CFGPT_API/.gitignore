@@ -18,7 +18,7 @@
 ################################################
 
 #ignore
-CFGPT_API/config/connections.js
+config/connections.js
 
 
 ################################################
