@@ -23,33 +23,33 @@
 module.exports.routes = {
 
 // Url spécifique des objets connectés
-  /*DONE*/'POST /connectedobjects/reportState': 'ConnectedObjectsController.reportState', //(tokenObject, state)
-  /*DONE*/'POST /connectedobjects/checkUserValidity': 'ConnectedObjectsController.checkUserValidity', //(tokenObject, idUser)
-  'POST /connectedobjects/receiveVideoStream': 'ConnectedObjectsController.receiveVideoStream', //(tokenObject, stream)
+  /*DONE*/'POST /connectedobjects/reportState': 'ConnectedObjects.reportState', //(tokenObject, state)
+  /*DONE*/'POST /connectedobjects/checkUserValidity': 'ConnectedObjects.checkUserValidity', //(tokenObject, idUser)
+  'POST /connectedobjects/receiveVideoStream': 'ConnectedObjects.receiveVideoStream', //(tokenObject, stream)
 
 // Url de gestion des users
   'POST /app/account/new_account': 'Users.newAccount', //(email, password, firstName, lastName)
-  /*DONE*/'POST /app/login' : 'AuthController.login', //(email, password)
-  /*DONE*/'POST /app/refresh': 'AuthController.refresh',
+  /*DONE*/'POST /app/login' : 'Auth.login', //(email, password)
+  /*DONE*/'POST /app/refresh': 'Auth.refresh',
 
 // Url de gestion des objets connectés
 //[VerifAccount]
-  /*DONE*/'GET  /app/connectedobjects/': 'ConnectedObjectsController.getConnectedObjects',
-  /*DONE*/'POST /app/connectedobjects/get' : 'ConnectedObjectsController.getByToken', //(tokenObject)
-  /*DONE*/'POST /app/connectedobjects/add' : 'ConnectedObjectsController.addConnectedObject', //(tokenObject, name)
-  /*DONE*/'POST /app/connectedobjects/remove' : 'ConnectedObjectsController.removeByToken', //(tokenObject)
+  /*DONE*/'GET  /app/connectedobjects/': 'ConnectedObjects.getConnectedObjects',
+  /*DONE*/'POST /app/connectedobjects/get' : 'ConnectedObjects.getByToken', //(tokenObject)
+  /*DONE*/'POST /app/connectedobjects/add' : 'ConnectedObjects.addConnectedObject', //(tokenObject, name)
+  /*DONE*/'POST /app/connectedobjects/remove' : 'ConnectedObjects.removeByToken', //(tokenObject)
 
 // Url des interactions avec les objets connectés
 //[VerifAccount]
-  /*DONE*/'POST /app/connectedobjects/logs' : 'ConnectedObjectsController.logsByToken', //(tokenObject)
-  'POST /app/connectedobjects/receiveVideoStream' : 'ConnectedObjectsController.receiveVideoStreamByToken', //(tokenObject)
-  'POST /app/connectedobjects/sendAudioStream' : 'ConnectedObjectsController.sendAudioStreamByToken', //(tokenObject,stream)
-  /*DONE*/'POST /app/connectedobjects/changeState' : 'ConnectedObjectsController.changeStateByToken', //(tokenObject,state)
+  /*DONE*/'POST /app/connectedobjects/logs' : 'ConnectedObjects.logsByToken', //(tokenObject)
+  'POST /app/connectedobjects/receiveVideoStream' : 'ConnectedObjects.receiveVideoStreamByToken', //(tokenObject)
+  'POST /app/connectedobjects/sendAudioStream' : 'ConnectedObjects.sendAudioStreamByToken', //(tokenObject,stream)
+  /*DONE*/'POST /app/connectedobjects/changeState' : 'ConnectedObjects.changeStateByToken', //(tokenObject,state)
 
 // Url de gestion des groupes
 //[VerifAccount]
-  'POST /app/groups/add' : 'GroupsController.addGroup', //(name, groupId)
-  'POST /app/groups/remove' : 'GroupsController.removeByGroupId', //(groupId)
+  'POST /app/groups/add' : 'Groups.addGroup', //(name, groupId)
+  'POST /app/groups/remove' : 'Groups.removeByGroupId', //(groupId)
 
 // Url des objets connectés dans les groupes
 //[VerifAccount]
@@ -59,14 +59,8 @@ module.exports.routes = {
 
 // Url des users dans les groupes
 //[VerifAccount]
-  /*DONE*/'GET  /app/groups/:groupId/users' : 'GroupsController.getUsers', //(groupId)
-  /*DONE*/'POST /app/groups/:groupId/users/assign' : 'GroupsController.assignUserById', //(groupId, userId, isAdmin, isToCall)
-  /*DONE*/'POST /app/groups/:groupId/users/remove' : 'GroupsController.removeUserById', //(groupId, userId)
-
-  '/' :{
-    view: '404'
-  }
-
-
+  /*DONE*/'GET  /app/groups/:groupId/users' : 'Groups.getUsers', //(groupId)
+  /*DONE*/'POST /app/groups/:groupId/users/assign' : 'Groups.assignUserById', //(groupId, userId, isAdmin, isToCall)
+  /*DONE*/'POST /app/groups/:groupId/users/remove' : 'Groups.removeUserById' //(groupId, userId)
 
 };
