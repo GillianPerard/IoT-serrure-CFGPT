@@ -42,12 +42,4 @@ angular.module('CFGPT_Mobile.controllers.AccountCtrl', [])
 				else $state.go("app.groups");
 			})
 		};
-		
-		// Log out
-		$scope.doLogout = function(){
-			console.log('Doing logout');
-			
-			AccountService.logout();
-			$state.go("login");
-		}
 	});

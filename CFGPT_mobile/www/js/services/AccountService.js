@@ -15,7 +15,6 @@ angular.module('CFGPT_Mobile.services.AccountService', [])
     }
     
     this.logout = function () {
-      currentUser = undefined;
       $localStorage.user = undefined;
     }
 
