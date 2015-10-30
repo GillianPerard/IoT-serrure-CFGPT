@@ -105,7 +105,7 @@
  		 var _tokenObject = req.param("tokenObject");
  		 if (["Fermé","Ouvert"].contains(state)) {
  			 ConnectedObjects.update({token:_tokenObject}, {state:_state}, function(err, created){
- 				 console.log("Error when trying modify state of " + created[0].name);
+ 				 console.log(err + created[0].name);
  			 });
  		 }
  	 },
@@ -149,12 +149,6 @@
  			});
  		});
  	}
-
-
-
-
-
-
 
  };
 

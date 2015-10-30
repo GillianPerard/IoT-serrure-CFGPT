@@ -23,7 +23,7 @@
 module.exports.routes = {
 
 // Url spécifique des objets connectés
-  'POST /connectedobjects/reportState': 'ConnectedObjectsController.reportState', //(tokenObject, state)
+  /*DONE*/'POST /connectedobjects/reportState': 'ConnectedObjectsController.reportState', //(tokenObject, state)
   /*DONE*/'POST /connectedobjects/checkUserValidity': 'ConnectedObjectsController.checkUserValidity', //(tokenObject, idUser)
   'POST /connectedobjects/receiveVideoStream': 'ConnectedObjectsController.receiveVideoStream', //(tokenObject, stream)
 
