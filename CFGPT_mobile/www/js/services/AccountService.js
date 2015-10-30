@@ -1,12 +1,11 @@
 angular.module('CFGPT_Mobile.services.AccountService', [])
 
-  .service('AccountService', function ($http, ConstantService) {
-    var currentUser;
-
+  .service('AccountService', function ($http, $localStorage, ConstantService) {
+    
     this.login = function (user, callback) {
       $http.post(ConstantService.baseUrl + '/app/login', user).then(
         function successCallback(params) {
-          currentUser = params;
+          $localStorage.user = params;
           callback();
         },
         function errorCallback(params) {
@@ -15,6 +14,6 @@ angular.module('CFGPT_Mobile.services.AccountService', [])
     }
 
     this.IsConnected = function () {
-      return currentUser != undefined;
+      return $localStorage.user != undefined;
     }
   });
