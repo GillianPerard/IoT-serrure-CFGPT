@@ -1,6 +1,6 @@
 angular.module('CFGPT_Mobile.controllers.AccountCtrl', [])
 
-	.controller('AccountCtrl', function ($scope, $ionicModal, AccountService) {
+	.controller('AccountCtrl', function ($scope, $ionicModal, AccountService, $state) {
 
 		// With the new view caching in Ionic, Controllers are only called
 		// when they are recreated or on app start, instead of every page change.
@@ -39,8 +39,7 @@ angular.module('CFGPT_Mobile.controllers.AccountCtrl', [])
 					alert('Une erreur est survenue');
 					console.log('error on login', error);
 				}
-
-				$scope.closeLogin();
+				else $state.go("app.groups");
 			})
 		};
 		
@@ -49,5 +48,6 @@ angular.module('CFGPT_Mobile.controllers.AccountCtrl', [])
 			console.log('Doing logout');
 			
 			AccountService.logout();
+			$state.go("login");
 		}
 	});

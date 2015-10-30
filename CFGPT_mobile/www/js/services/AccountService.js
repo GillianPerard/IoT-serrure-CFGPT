@@ -1,10 +1,11 @@
 angular.module('CFGPT_Mobile.services.AccountService', [])
 
-  .service('AccountService', function ($http, $localStorage, ConstantService) {
+  .service('AccountService', function ($http, $localStorage, ConstantService, $ionicHistory) {
     
     this.login = function (user, callback) {
       $http.post(ConstantService.baseUrl + '/app/login', user).then(
         function successCallback(params) {
+          $ionicHistory.clearHistory();
           $localStorage.user = params.data;
           callback();
         },
@@ -14,6 +15,7 @@ angular.module('CFGPT_Mobile.services.AccountService', [])
     }
     
     this.logout = function () {
+      currentUser = undefined;
       $localStorage.user = undefined;
     }
 
