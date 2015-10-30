@@ -28,6 +28,7 @@ angular.module('CFGPT_Mobile.controllers.AccountCtrl', [])
 		$scope.login = function () {
 			$scope.modal.show();
 		};
+		
 
 		// Perform the login action when the user submits the login form
 		$scope.doLogin = function () {
@@ -42,4 +43,11 @@ angular.module('CFGPT_Mobile.controllers.AccountCtrl', [])
 				$scope.closeLogin();
 			})
 		};
+		
+		// Log out
+		$scope.doLogout = function(){
+			console.log('Doing logout');
+			
+			AccountService.logout();
+		}
 	});
