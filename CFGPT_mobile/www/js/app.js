@@ -21,8 +21,7 @@ angular.module('CFGPT_Mobile', [
 
       if (toState.authenticate) {
         if (!AccountService.IsConnected()) {
-          event.preventDefault();
-          $state.go("app.login");
+          $state.go("login");
         }
       }
     });
