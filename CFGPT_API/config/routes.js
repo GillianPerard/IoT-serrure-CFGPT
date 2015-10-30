@@ -44,7 +44,7 @@ module.exports.routes = {
   /*DONE*/'POST /app/connectedobjects/logs' : 'ConnectedObjectsController.logsByToken', //(tokenObject)
   'POST /app/connectedobjects/receiveVideoStream' : 'ConnectedObjectsController.receiveVideoStreamByToken', //(tokenObject)
   'POST /app/connectedobjects/sendAudioStream' : 'ConnectedObjectsController.sendAudioStreamByToken', //(tokenObject,stream)
-  'POST /app/connectedobjects/changeState' : 'ConnectedObjectsController.changeStateByToken', //(tokenObject,state)
+  /*DONE*/'POST /app/connectedobjects/changeState' : 'ConnectedObjectsController.changeStateByToken', //(tokenObject,state)
 
 // Url de gestion des groupes
 //[VerifAccount]
