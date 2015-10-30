@@ -23,9 +23,9 @@
 module.exports.routes = {
 
 // Url spécifique des objets connectés
-  'POST /connectedobjects/:tokenObject/reportState': 'ConnectedObjects.reportState', //(tokenObject, state)
-  /*DONE*/'POST /connectedobjects/:tokenObject/checkUserValidity': 'ConnectedObjects.checkUserValidity', //(tokenObject, idUser)
-  'POST /connectedobjects/:tokenObject/receiveVideoStream': 'ConnectedObjects.receiveVideoStream', //(tokenObject, stream)
+  'POST /connectedobjects/reportState': 'ConnectedObjectsController.reportState', //(tokenObject, state)
+  /*DONE*/'POST /connectedobjects/checkUserValidity': 'ConnectedObjectsController.checkUserValidity', //(tokenObject, idUser)
+  'POST /connectedobjects/receiveVideoStream': 'ConnectedObjectsController.receiveVideoStream', //(tokenObject, stream)
 
 // Url de gestion des users
   'POST /app/account/new_account': 'Users.newAccount', //(email, password, firstName, lastName)
