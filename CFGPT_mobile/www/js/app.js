@@ -14,32 +14,17 @@ angular.module('CFGPT_Mobile', [
   'CFGPT_Mobile.services.ConstantService',
   'CFGPT_Mobile.services.AccountService'])
 
-  .run(function ($ionicPlatform, $rootScope) {
+  .run(function ($ionicPlatform, $rootScope, AccountService, $state) {
     
-    // $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-    //   
-    //   $ionicLoading.show();
-    //   
-    //   if(toState.authenticate){
-    //     var state = toState.name;
-    //     if(toState.name == "app.graphics"){
-    //       state = "app.follow";
-    //     }
-    //     AuthService.setRedirectionAfterLogin(state, toParams);
-    //   }
-    //   
-    //   var cConfig = ConfigService.currentConfig.info;
-    //   if(toState.authenticate && !AuthService.isLoggedIn()){
-    //     event.preventDefault();
-    //     
-    //     var state = "app.eligibility";
-    //     if(cConfig.app_active){
-    //       state = cConfig.auth_type == Constants.AUTH_TYPE.PASSWORD ? "app.login" : "app.login-pin";
-    //     }
-    //     $state.go(state);
-    //   }
-    //   
-    // });
+    $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+      
+      if(toState.authenticate){
+        if(!AccountService.IsConnected()){
+          $state.go("login");
+        }
+      }
+      
+    });
     
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -56,7 +41,9 @@ angular.module('CFGPT_Mobile', [
     });
   })
 
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+    
+    $ionicConfigProvider.backButton.text('').icon('ion-chevron-left');
     $stateProvider
 
       .state('app', {
@@ -82,7 +69,8 @@ angular.module('CFGPT_Mobile', [
             templateUrl: 'templates/groups.html',
             controller: 'GroupsCtrl'
           }
-        }
+        },
+        authenticate: true
       })
 
       .state('app.single', {
@@ -96,16 +84,12 @@ angular.module('CFGPT_Mobile', [
       })
 
 
-      .state('app.login', {
+      .state('login', {
         url: '/login',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/login.html',
-            controller: 'AccountCtrl'
-          }
-        }
+        templateUrl: 'templates/login.html',
+        controller: 'AccountCtrl'
       });
       
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/login');
+    $urlRouterProvider.otherwise('/login');
   });
