@@ -8,23 +8,23 @@
 module.exports = {
 
   attributes: {
-	connectedobject: {
-  		model: 'connectedobjects'
-  	},
-	user: {
-		model: 'users'
-	},
-	date: {
-		type: 'datetime',
-		required: true
-	},
-	state: {
-	    type: 'string',
-	    enum: ['Ouvert', 'Fermé', 'Autre']
-	},
-	content: {
-		type: 'string'
-	}
+    connectedobject: {
+        model: 'connectedobjects'
+      },
+    user: {
+      model: 'users'
+    },
+    date: {
+      type: 'datetime',
+      required: true
+    },
+    state: {
+        type: 'string',
+        enum: ['Ouvert', 'Fermé', 'Autre']
+    },
+    content: {
+      type: 'string'
+    }
   }
 };
 

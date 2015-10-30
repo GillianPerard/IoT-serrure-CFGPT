@@ -9,17 +9,17 @@ module.exports = {
 
   attributes: {
   	user:{
-		model: 'users'
-	},
-	group:{
-		model: 'groups'
-	},
-	is_admin:{
-		type: 'boolean'
-	},
-	is_to_call:{
-		type: 'boolean'
-	}
+      model: 'users'
+    },
+    group:{
+      model: 'groups'
+    },
+    is_admin:{
+      type: 'boolean'
+    },
+    is_to_call:{
+      type: 'boolean'
+    }
   }
 };
 

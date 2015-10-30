@@ -30,10 +30,6 @@ gulp.task('watch', function() {
   gulp.watch(paths.sass, ['sass']);
 });
 
-gulp.task("serve", function(done) {
-  sh.exec("ionic serve CFGPT_mobile", done);
-});
-
 gulp.task('install', ['git-check'], function() {
   return bower.commands.install()
     .on('log', function(data) {

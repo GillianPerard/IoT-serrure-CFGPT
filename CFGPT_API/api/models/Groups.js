@@ -11,18 +11,18 @@ module.exports = {
 	    type: 'string',
 	    required: true,
 	    minLength: 2
-	},
-	parentgroup:{
-		model: 'groups'
-	},
-	connectedobjects:{
-		collection: 'connectedobjects',
-		via: 'groups'
-	},
-	groupusers:{
-		collection: 'groupusers',
-		via: 'group'
-	}
+    },
+    parentgroup:{
+      model: 'groups'
+    },
+    connectedobjects:{
+      collection: 'connectedobjects',
+      via: 'groups'
+    },
+    groupusers:{
+      collection: 'groupusers',
+      via: 'group'
+    }
   }
 };
 

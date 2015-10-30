@@ -12,26 +12,26 @@ module.exports = {
 	    type: 'string',
 	    required: true,
 	    minLength: 2
-	},
-	token: {
-	    type: 'string',
-	    required: true,
-	    unique: true,
-	    minLength: 2
-	},
-	state: {
-	    type: 'string',
-	    enum: ['Ouvert', 'Fermé', 'Autre'],
-	    required: true
-	},
-	logs:{
-		collection: 'logs',
-		via: 'connectedobject'
-	},
-	groups:{
-		collection: 'groups',
-		via: 'connectedobjects'
-	}
+    },
+    token: {
+        type: 'string',
+        required: true,
+        unique: true,
+        minLength: 2
+    },
+    state: {
+        type: 'string',
+        enum: ['Ouvert', 'Fermé', 'Autre'],
+        required: true
+    },
+    logs:{
+      collection: 'logs',
+      via: 'connectedobject'
+    },
+    groups:{
+      collection: 'groups',
+      via: 'connectedobjects'
+    }
   }
 };
 
