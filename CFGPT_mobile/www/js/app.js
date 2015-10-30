@@ -14,18 +14,18 @@ angular.module('CFGPT_Mobile', [
   'CFGPT_Mobile.services.ConstantService',
   'CFGPT_Mobile.services.AccountService'])
 
-  .run(function ($ionicPlatform, $rootScope, AccountService, $state) {
-    
-    $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-      
-      if(toState.authenticate){
-        if(!AccountService.IsConnected()){
+  .run(function ($ionicPlatform, $rootScope, $state, AccountService, ConstantService) {
+    ConstantService.InitApp();
+
+    $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
+
+      if (toState.authenticate) {
+        if (!AccountService.IsConnected()) {
           $state.go("login");
         }
       }
-      
     });
-    
+
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -42,7 +42,6 @@ angular.module('CFGPT_Mobile', [
   })
 
   .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-    
     $ionicConfigProvider.backButton.text('').icon('ion-android-arrow-back');
     $stateProvider
 
@@ -64,7 +63,7 @@ angular.module('CFGPT_Mobile', [
         authenticate: true
         
       })
-      
+
       .state('app.groups', {
         url: '/groups',
         views: {
