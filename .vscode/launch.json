@@ -4,6 +4,7 @@
 	"configurations": [
 		{
 			// Name of configuration; appears in the launch configuration drop down menu.
+<<<<<<< HEAD
 			"name": "Launch app.js",
 			// Type of configuration.
 			"type": "node",
@@ -11,6 +12,15 @@
 			"program": "app.js",
 			// Automatically stop program after launch.
 			"stopOnEntry": false,
+=======
+			"name": "Launch Server",
+			// Type of configuration.
+			"type": "node",
+			// Workspace relative or absolute path to the program.
+			"program": "CFGPT_API/app.js",
+			// Automatically stop program after launch.
+			"stopOnEntry": true,
+>>>>>>> 90833e6638dcfb6d17da24f4f06b70d183093511
 			// Command line arguments passed to the program.
 			"args": [],
 			// Workspace relative or absolute path to the working directory of the program being debugged. Default is the current workspace.
@@ -18,6 +28,7 @@
 			// Workspace relative or absolute path to the runtime executable to be used. Default is the runtime executable on the PATH.
 			"runtimeExecutable": null,
 			// Optional arguments passed to the runtime executable.
+<<<<<<< HEAD
 			"runtimeArgs": ["--nolazy"],
 			// Environment variables passed to the program.
 			"env": {
@@ -27,6 +38,43 @@
 			"sourceMaps": false,
 			// If JavaScript source maps are enabled, the generated code is expected in this directory.
 			"outDir": null
+=======
+			// "runtimeArgs": ["--nolazy"],
+			// Environment variables passed to the program.
+			"env": {
+				// "NODE_ENV": "development"
+			},
+			// Use JavaScript source maps (if they exist).
+			// "sourceMaps": false,
+			// If JavaScript source maps are enabled, the generated code is expected in this directory.
+			// "outDir": null
+		},
+		{
+			// Name of configuration; appears in the launch configuration drop down menu.
+			"name": "Launch App",
+			// Type of configuration.
+			"type": "node",
+			// Workspace relative or absolute path to the program.
+			"program": "CFGPT_mobile/www/js/app.js",
+			// Automatically stop program after launch.
+			"stopOnEntry": true,
+			// Command line arguments passed to the program.
+			"args": [],
+			// Workspace relative or absolute path to the working directory of the program being debugged. Default is the current workspace.
+			"cwd": ".",
+			// Workspace relative or absolute path to the runtime executable to be used. Default is the runtime executable on the PATH.
+			"runtimeExecutable": null,
+			// Optional arguments passed to the runtime executable.
+			// "runtimeArgs": ["--nolazy"],
+			// Environment variables passed to the program.
+			"env": {
+				// "NODE_ENV": "development"
+			},
+			// Use JavaScript source maps (if they exist).
+			// "sourceMaps": false,
+			// If JavaScript source maps are enabled, the generated code is expected in this directory.
+			// "outDir": null
+>>>>>>> 90833e6638dcfb6d17da24f4f06b70d183093511
 		},
 		{
 			"name": "Attach",
