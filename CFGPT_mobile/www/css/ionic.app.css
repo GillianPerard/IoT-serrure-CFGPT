@@ -9290,7 +9290,7 @@ a.button {
 .pane, .view {
   background-color: #F8F8F8 !important; }
 
-div, p, a {
+div, p, a, h1, h2, h3, h4, h5, h6, span {
   font-family: 'Roboto' !important; }
 
 .fontSize16 {
@@ -9367,3 +9367,10 @@ div, p, a {
 
 .borderLeftMainColor {
   border-left: 4px solid #48C1BE !important; }
+
+.button-positive {
+  background-color: #48C1BE !important;
+  border: 0 !important; }
+
+.popup {
+  background: #F8F8F8 !important; }

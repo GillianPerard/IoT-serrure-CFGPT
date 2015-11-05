@@ -28,7 +28,7 @@ module.exports.routes = {
   'POST /connectedobjects/receiveVideoStream': 'ConnectedObjects.receiveVideoStream', //(tokenObject, stream)
 
 // Url de gestion des users
-  'POST /app/account/new_account': 'Users.newAccount', //(email, password, firstName, lastName)
+  /*DONE*/'POST /app/account/new_account': 'Users.newAccount', //(email, password, firstName, lastName)
   /*DONE*/'POST /app/login' : 'Auth.login', //(email, password)
   /*DONE*/'POST /app/refresh': 'Auth.refresh',
   /*DONE*/'GET /app/users/groups' : 'Users.getGroupsByToken', //(tokenUser)
