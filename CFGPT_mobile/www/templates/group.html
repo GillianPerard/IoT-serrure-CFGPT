@@ -1,11 +1,11 @@
 <ion-view view-title="{{group.name}}">
   <ion-content>
     <ion-list show-delete="false" can-swipe="true">
-      <ion-item ng-repeat="key in group.connectedobjects">
+      <ion-item ng-repeat="key in group.connectedobjects" class="fontSize16">
          <i class="fa fa-key" style="width:25px;"></i> {{key.name}}
-         <ion-option-button class="button-light icon ion-android-done"></ion-option-button>
-         <ion-option-button class="button-light icon ion-android-film"></ion-option-button>
-         <ion-option-button class="button-light icon ion-android-notifications-off"></ion-option-button>
+         <ion-option-button class="button-light icon ion-android-done colorWhite backgroundGray"></ion-option-button>
+         <ion-option-button class="button-light icon ion-android-film colorWhite backgroundGray"></ion-option-button>
+         <ion-option-button class="button-light icon ion-android-notifications-off colorWhite backgroundGray"></ion-option-button>
          <ion-option-button class="button-assertive icon ion-android-delete"></ion-option-button>
       </ion-item>
     </ion-list>

@@ -9287,8 +9287,11 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
-html, body {
-  color: white !important; }
+div, p, a {
+  font-family: 'Roboto' !important; }
+
+.fontSize16 {
+  font-size: 16px !important; }
 
 .backgroundGray {
   background-color: #222222 !important; }
