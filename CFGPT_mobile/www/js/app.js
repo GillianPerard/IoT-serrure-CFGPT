@@ -15,12 +15,12 @@ angular.module('CFGPT_Mobile', [
   'CFGPT_Mobile.services.AccountService'])
 
   .run(function ($ionicPlatform, $rootScope, $state, AccountService, ConstantService) {
-    ConstantService.InitApp();
+    ConstantService.InitApp(AccountService);
 
     $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
 
       if (toState.authenticate) {
-        if (!AccountService.IsConnected()) {
+        if (!AccountService.IsConnected) {
           $state.go("login");
         }
       }
