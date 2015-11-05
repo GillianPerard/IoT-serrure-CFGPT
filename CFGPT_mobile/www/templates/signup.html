@@ -1,0 +1,29 @@
+<ion-modal-view>
+	<ion-content class="backgroundGray">
+		<button class="noBackground noBorder" style="padding:15px;" ng-click="closeSignup()"><i class="ion ion-android-close colorWhite" style="font-size:25px;"></i></button>
+		<form ng-submit="doLogin()" style="margin-top:100px;">
+			<div class="list">
+				<label class="item item-input noBorder noBackground loginItem">
+					<input type="text" placeholder="Nom" class="loginInput colorWhite">
+				</label>
+				<label class="item item-input noBorder noBackground loginItem">
+					<input type="text" placeholder="Prénom" class="loginInput colorWhite">
+				</label>
+				<label class="item item-input noBorder noBackground loginItem">
+					<input type="text" ng-model="loginData.email" placeholder="Email" class="loginInput colorWhite">
+				</label>
+				<label class="item item-input noBorder noBackground loginItem">
+					<input type="password" ng-model="loginData.password" placeholder="Mot de passe" class="loginInput colorWhite">
+				</label>
+				<label class="item item-input noBorder noBackground loginItem">
+					<input type="password" ng-model="loginData.password" placeholder="Confirmer le mot de passe" class="loginInput colorWhite">
+				</label>
+				<label class="item noBorder noBackground loginItem">
+					<button class="button button-block backgroundMainColor noBorder colorWhite" type="submit">
+						<i class="ion ion-android-clipboard" style="width:25px;"></i> Inscription
+					</button>
+				</label>
+			</div>
+		</form>
+	</ion-content>
+</ion-modal-view>

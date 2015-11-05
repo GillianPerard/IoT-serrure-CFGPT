@@ -13,19 +13,21 @@ angular.module('CFGPT_Mobile.controllers.AccountCtrl', [])
 		$scope.loginData = {};
 
 		// Create the login modal that we will use later
-		$ionicModal.fromTemplateUrl('templates/login.html', {
+		$ionicModal.fromTemplateUrl('templates/signup.html', {
 			scope: $scope
 		}).then(function (modal) {
 			$scope.modal = modal;
 		});
 
 		// Triggered in the login modal to close it
-		$scope.closeLogin = function () {
+		$scope.closeSignup = function () {
+			console.log("Hide sign up modal.");
 			$scope.modal.hide();
 		};
 
 		// Open the login modal
-		$scope.login = function () {
+		$scope.signup = function () {
+			console.log("Open sign up modal.");
 			$scope.modal.show();
 		};
 		
