@@ -42,6 +42,6 @@ angular.module('CFGPT_Mobile.controllers.AccountCtrl', [])
 					console.log('error on login', error);
 				}
 				else $state.go("app.groups");
-			})
+			});
 		};
 	});

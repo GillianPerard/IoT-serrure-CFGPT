@@ -10,7 +10,8 @@ angular.module('CFGPT_Mobile', [
   'CFGPT_Mobile.controllers.AppCtrl',
   'CFGPT_Mobile.controllers.AccountCtrl',
   'CFGPT_Mobile.controllers.GroupsCtrl',
-  'CFGPT_Mobile.controllers.GroupCtrl',
+  'CFGPT_Mobile.controllers.GroupCtrl',,
+  'CFGPT_Mobile.controllers.ConnectedObjectCtrl',
   'CFGPT_Mobile.services.APIService',
   'CFGPT_Mobile.services.ConstantService',
   'CFGPT_Mobile.services.AccountService'])
@@ -71,6 +72,20 @@ angular.module('CFGPT_Mobile', [
           'menuContent': {
             templateUrl: 'templates/groups.html',
             controller: 'GroupsCtrl'
+          }
+        },
+        authenticate: true
+      })
+      
+      .state('app.connectedObjects', {
+        url: '/connectedObjects/:objectToken',
+        // params: [
+        //   'group', 'connectedObject'
+        // ],
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/connectedObject.html',
+            controller: 'ConnectedObjectCtrl'
           }
         },
         authenticate: true
