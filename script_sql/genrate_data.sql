@@ -19,7 +19,8 @@ INSERT INTO `connectedobjects` (`name`, `token`, `state`, `id`, `createdAt`, `up
 	('Bureaux', 'uujgjjgjg5jggj4y7ky4d', 'fermé', 5, '2015-10-23 13:57:13', '2015-10-23 13:57:13'),
 	('Batiment', 'hukyubnknk4jb84yuj4', 'fermé', 6, '2015-10-23 13:57:45', '2015-10-23 13:57:45'),
 	('SalleServeur', 'gjbunkyk4kny8k4nyb8', 'fermé', 7, '2015-10-23 13:58:29', '2015-10-23 13:58:29'),
-	('PlacardSecurisé', 'unyiunkjjnynjb8jb4y8b', 'fermé', 8, '2015-10-23 13:59:07', '2015-10-23 13:59:08');
+	('PlacardSecurisé', 'unyiunkjjnynjb8jb4y8b', 'fermé', 8, '2015-10-23 13:59:07', '2015-10-23 13:59:08'),
+	('NouvelleSerrure', 'ezffsgkdzzekkdeob4y8b', 'fermé', 9, '2015-10-23 13:59:17', '2015-10-23 13:59:18');
 /*!40000 ALTER TABLE `connectedobjects` ENABLE KEYS */;
 
 -- Export de données de la table cfgpt_db.connectedobjects_groups__groups_connectedobjects : ~8 rows (environ)
