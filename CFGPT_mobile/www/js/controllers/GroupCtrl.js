@@ -3,6 +3,9 @@ angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 	'CFGPT_Mobile.services.UserGroupsService'])
 	.controller('GroupCtrl', function ($state, $scope, $stateParams, ConnectedObjectsService, UserGroupsService) {
 
+
+	
+	$scope.currentUserGroup = {group:{name: "test"}};
 		UserGroupsService.getUserGroup($stateParams.groupId, function (result, error) {
 			if (!result && error) {
 				alert(error.err);
