@@ -234,7 +234,33 @@ module.exports = {
               console.log("save suppresion du lien")
               res.send("success")
           });
-        }
+        };
+        var coRemove = function(connectedObject){
+           // On supprime la clé
+          ConnectedObjects.destroy(connectedObject.id).exec(function (err, cotoDestroy){
+                if (err) return res.json(400,{err:'ERROR.'});
+                console.log("suppression clés")
+                finalStep();
+          });
+        };
+        var logClean = function(connectedObject){
+            // On nettoie les logs
+          if (connectedObject.logs.length > 0) {
+            var logToDestroy = [];
+
+            connectedObject.logs.forEach(function(obj, index){
+              logToDestroy.push(obj.id);
+            });
+            if (logToDestroy.length > 0){}
+              Logs.destroy({id:logToDestroy}).exec(function (err, logToDestroy){
+                if (err)  return res.json(400,{err:'ERROR.'});
+                console.log("destroy ----" , err)
+                coRemove(connectedObject);
+            });
+          }else{
+            coRemove(connectedObject);
+          }
+        };
         // Si le group est un group sans parent il faut aussi supprimer la clé, ses logs et d'éventuel sous groups
         if (!group.parentgroup) {
           ConnectedObjects.findOneById(_conObjId)
@@ -249,30 +275,19 @@ module.exports = {
                 if (connectedObject.groups.length > 1) {
                   connectedObject.groups.forEach(function(obj, index){
                     // condition pour ne pas supprimer 2 fois le liens l'objet et le group de la req
-                    if (obj.parentgroup) {
-                      connectedObject.groups.remove(obj.id);
-                    }
+                    if (obj.parentgroup) connectedObject.groups.remove(obj.id);
                   });
                   console.log("lien avec sous group deleted")
-
-                };
-
-                // On nettoie les logs
-                if (connectedObject.logs.length > 0) {
-                  var cleanOk = LogService.cleanConnectedObjectLog(connectedObject);
-                  console.log("clLog",cleanOk)
-                  if (!cleanOk)  return res.json(400,{err:'ERROR.'});
-                };
-
-                // On supprime la clé
-                ConnectedObjects.destroy(connectedObject.id).exec(function (err, cotoDestroy){
+                  connectedObject.save(function(err,saved){
                       if (err) return res.json(400,{err:'ERROR.'});
-                  console.log("suppression clés")
-                });
-
-                finalStep();
+                      console.log("save suppresion du lien avec les sous groups");
+                      logClean(connectedObject);
+                  });
+                }
+                else{
+                  logClean(connectedObject);
+                };
             });
-
         }else
         {
           finalStep();
