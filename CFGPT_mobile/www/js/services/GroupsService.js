@@ -7,18 +7,18 @@ angular.module('CFGPT_Mobile.services.GroupsService', [])
       if (!this.groups) {
         $http.get(ConstantService.baseUrl + '/app/users/groups').then(
           function (success) {
-            this.groups = success.data;
-            callback(this.groups);
+            groups = success.data;
+            callback(groups);
           },
           function (error) {
             callback(undefined, error);
           });
       } else {
-        callback(this.groups);
+        callback(groups);
       }
     };
 
     this.getGroup = function (id) {
-      return this.groups[id];
+      return groups[id];
     }
   });
