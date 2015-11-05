@@ -79,5 +79,25 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 						callbackError(error.data);
 					});
 			},
+
+			add: function (groupName, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/groups/add', { name: groupName }).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
+
+			remove: function (groupId, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/groups/remove', { groupId: groupId }).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
 		};
 	});
