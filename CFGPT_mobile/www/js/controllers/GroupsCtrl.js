@@ -3,11 +3,11 @@ angular.module('CFGPT_Mobile.controllers.GroupsCtrl', [
 	.controller('GroupsCtrl', ['$scope', 'GroupsService', function ($scope, GroupsService) {
 		GroupsService.getGroups(function (result, error) {
 			if (!result && error) {
-				alert(error);
+				alert(error.data.err);
 			} else {
 				$scope.groups = result;
 			}
-		})
+		});
 		
 	}]);
 	
