@@ -9287,6 +9287,9 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+.pane, .view {
+  background-color: #F8F8F8 !important; }
+
 div, p, a {
   font-family: 'Roboto' !important; }
 
@@ -9356,3 +9359,8 @@ div, p, a {
   margin: 0 auto !important;
   display: block !important;
   margin-top: 50px !important; }
+
+.card {
+  margin: 10px !important;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1) !important;
+  padding: 0px !important; }
