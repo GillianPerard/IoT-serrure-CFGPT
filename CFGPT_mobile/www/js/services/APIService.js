@@ -16,15 +16,15 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 		};
 
 		this.connectedObjects = {
-			list: function (callbackSuccess, callbackError) {
-				$http.get(baseUrl + '/app/connectedobjects/').then(
-					function (success) {
-						callbackSuccess(success.data);
-					},
-					function (error) {
-						callbackError(error.data);
-					});
-			},
+			// list: function (callbackSuccess, callbackError) {
+			// 	$http.get(baseUrl + '/app/connectedobjects/').then(
+			// 		function (success) {
+			// 			callbackSuccess(success.data);
+			// 		},
+			// 		function (error) {
+			// 			callbackError(error.data);
+			// 		});
+			// },
 
 			getByToken: function (objectToken, callbackSuccess, callbackError) {
 				$http.post(baseUrl + '/app/connectedobjects/get', objectToken).then(

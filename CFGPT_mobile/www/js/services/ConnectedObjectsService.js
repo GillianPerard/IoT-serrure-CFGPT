@@ -23,9 +23,9 @@ angular.module('CFGPT_Mobile.services.ConnectedObjectsService', [])
 		};
 
 		this.getByToken = function (objectToken, callback) {
-			$http.post(ConstantService.baseUrl + '/app/connectedobjects/get', objectToken).then(
-				function (success) {
-					callback(success.data);
+			APIService.connectedObjects.getByToken(objectToken,
+				function (data) {
+					callback(data);
 				},
 				function (error) {
 					callback(undefined, error);
@@ -33,9 +33,9 @@ angular.module('CFGPT_Mobile.services.ConnectedObjectsService', [])
 		};
 
 		this.add = function (connectedObject, callback) {
-			$http.post(ConstantService.baseUrl + '/app/connectedobjects/add', connectedObject).then(
-				function (success) {
-					callback(success.data);
+			APIService.connectedObjects.add(connectedObject,
+				function (data) {
+					callback(data);
 				},
 				function (error) {
 					callback(undefined, error);
@@ -43,9 +43,9 @@ angular.module('CFGPT_Mobile.services.ConnectedObjectsService', [])
 		};
 
 		this.remove = function (objectToken, callback) {
-			$http.post(ConstantService.baseUrl + '/app/connectedobjects/remove', objectToken).then(
-				function (success) {
-					callback(success.data);
+			APIService.connectedObjects.remove(objectToken,
+				function (data) {
+					callback(data);
 				},
 				function (error) {
 					callback(undefined, error);
