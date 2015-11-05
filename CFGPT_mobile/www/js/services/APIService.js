@@ -1,0 +1,81 @@
+var baseUrl = "http://localhost:1337";
+angular.module('CFGPT_Mobile.services.APIService', [])
+
+	.service('APIService', function ($http) {
+
+		this.user = {
+			login: function (user, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/login', user).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
+		};
+
+		this.connectedObjects = {
+			list: function (callbackSuccess, callbackError) {
+				$http.get(baseUrl + '/app/connectedobjects/').then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
+
+			getByToken: function (objectToken, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/connectedobjects/get', objectToken).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
+
+			add: function (connectedObject, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/connectedobjects/add', connectedObject).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
+
+			remove: function (objectToken, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/connectedobjects/remove', objectToken).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
+		};
+
+		this.groups = {
+			list: function (callbackSuccess, callbackError) {
+				$http.get(baseUrl + '/app/users/groups').then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
+
+			listConnectedObject: function (groupId, callbackSuccess, callbackError) {
+				$http.get(baseUrl + '/app/groups/' + groupId + '/connectedobjects').then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
+		};
+	});

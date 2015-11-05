@@ -1,25 +1,54 @@
 angular.module('CFGPT_Mobile.services.ConnectedObjectsService', [])
 
-	.service('ConnectedObjectsService', function ($http, ConstantService) {
+	.service('ConnectedObjectsService', function (APIService) {
 
-		this.getConnectedObjects = function (groupId, callback) {
-
+		this.list = function (groupId, callback) {
 			if (groupId < 0) {
-				$http.get(ConstantService.baseUrl + '/app/connectedobjects/').then(
-				function (success) {
-					callback(success.data);
-				},
-				function (error) {
-					callback(undefined, error);
-				});
+				APIService.connectedObjects.list(
+					function (success) {
+						callback(success.data);
+					},
+					function (error) {
+						callback(undefined, error);
+					});
 			} else {
-				$http.get(ConstantService.baseUrl + '/app/groups/' + groupId + '/connectedobjects').then(
+				APIService.groups.listConnectedObject(groupId,
+					function (success) {
+						callback(success.data);
+					},
+					function (error) {
+						callback(undefined, error);
+					});
+			}
+		};
+
+		this.getByToken = function (objectToken, callback) {
+			$http.post(ConstantService.baseUrl + '/app/connectedobjects/get', objectToken).then(
 				function (success) {
 					callback(success.data);
 				},
 				function (error) {
 					callback(undefined, error);
 				});
-			}
+		};
+
+		this.add = function (connectedObject, callback) {
+			$http.post(ConstantService.baseUrl + '/app/connectedobjects/add', connectedObject).then(
+				function (success) {
+					callback(success.data);
+				},
+				function (error) {
+					callback(undefined, error);
+				});
+		};
+
+		this.remove = function (objectToken, callback) {
+			$http.post(ConstantService.baseUrl + '/app/connectedobjects/remove', objectToken).then(
+				function (success) {
+					callback(success.data);
+				},
+				function (error) {
+					callback(undefined, error);
+				});
 		};
 	});

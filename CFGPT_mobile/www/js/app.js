@@ -11,6 +11,7 @@ angular.module('CFGPT_Mobile', [
   'CFGPT_Mobile.controllers.AccountCtrl',
   'CFGPT_Mobile.controllers.GroupsCtrl',
   'CFGPT_Mobile.controllers.GroupCtrl',
+  'CFGPT_Mobile.services.APIService',
   'CFGPT_Mobile.services.ConstantService',
   'CFGPT_Mobile.services.AccountService'])
 

@@ -1,13 +1,13 @@
 angular.module('CFGPT_Mobile.services.GroupsService', [])
 
-  .service('GroupsService', function ($http, ConstantService) {
+  .service('GroupsService', function (APIService) {
     this.groups = undefined;
 
     this.getGroups = function (callback) {
       if (!this.groups) {
-        $http.get(ConstantService.baseUrl + '/app/users/groups').then(
+        APIService.groups.list(
           function (success) {
-            groups = success.data;
+            groups = success;
             callback(groups);
           },
           function (error) {
