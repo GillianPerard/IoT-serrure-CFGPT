@@ -5,16 +5,16 @@ angular.module('CFGPT_Mobile.services.ConnectedObjectsService', [])
 		this.list = function (groupId, callback) {
 			if (groupId < 0) {
 				APIService.connectedObjects.list(
-					function (success) {
-						callback(success.data);
+					function (data) {
+						callback(data);
 					},
 					function (error) {
 						callback(undefined, error);
 					});
 			} else {
 				APIService.groups.listConnectedObject(groupId,
-					function (success) {
-						callback(success.data);
+					function (data) {
+						callback(data);
 					},
 					function (error) {
 						callback(undefined, error);
