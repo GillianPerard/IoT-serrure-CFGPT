@@ -57,7 +57,7 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 			},
 		};
 
-		this.groups = {
+		this.userGroups = {
 			list: function (callbackSuccess, callbackError) {
 				$http.get(baseUrl + '/app/users/groups').then(
 					function (success) {
@@ -67,7 +67,9 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 						callbackError(error.data);
 					});
 			},
+		}
 
+		this.groups = {
 			listConnectedObject: function (groupId, callbackSuccess, callbackError) {
 				$http.get(baseUrl + '/app/groups/' + groupId + '/connectedobjects').then(
 					function (success) {

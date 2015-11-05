@@ -1,11 +1,21 @@
 angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
-	'CFGPT_Mobile.services.ConnectedObjectsService'])
-	.controller('GroupCtrl', ['$scope', '$stateParams', 'ConnectedObjectsService', function ($scope, $stateParams, ConnectedObjectsService) {
-		ConnectedObjectsService.list($stateParams.groupId, function (result, error) {
+	'CFGPT_Mobile.services.ConnectedObjectsService',
+	'CFGPT_Mobile.services.UserGroupsService'])
+	.controller('GroupCtrl', function ($scope, $stateParams, ConnectedObjectsService, UserGroupsService) {
+
+		UserGroupsService.getUserGroup($stateParams.groupId, function (result, error) {
 			if (!result && error) {
-				alert(error.data.err);
+				alert(error.err);
 			} else {
-				$scope.group = result;
+				$scope.currentUserGroup = result;
 			}
 		});
-	}]);
+
+		ConnectedObjectsService.list($stateParams.groupId, function (result, error) {
+			if (!result && error) {
+				alert(error.err);
+			} else {
+				$scope.keys = result;
+			}
+		});
+	});
