@@ -23,6 +23,10 @@ angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 		});
 
 		$scope.viewDetail = function (connectedObject) {
-			$state.go("app.connectedObjects", { objectToken: connectedObject.objectToken, group: $scope.currentUserGroup, connectedObject: connectedObject });
+			$state.go("app.connectedObjects", {
+				objectToken: connectedObject.token,
+				group: $scope.currentUserGroup,
+				connectedObject: connectedObject
+			});
 		}
 	});

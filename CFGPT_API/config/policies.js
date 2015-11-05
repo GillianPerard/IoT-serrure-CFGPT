@@ -30,9 +30,11 @@ module.exports.policies = {
 
    AuthController :  {
     'login' : []
-   },
+    },
+    
    UsersController : {
-    'create' : []
+        'newAccount' : []
+    
    }
 
   /***************************************************************************
