@@ -34,9 +34,12 @@ module.exports = {
         var _firstname = req.param("firstname");
         
         Users.create({ firstname: _firstname, lastname: _name, email: _mail, password: _password }).exec(function (err, created) { 
-            if (err)
-                res.send(400, "Error when trying add new user")
-            res.send(200, "User '" + created.firstname + " " + created.lastname + "' was created :)");
+            if (err) {
+                res.send(400, { "text" : "Error when trying add new user", "erreur" : err });
+                return;
+            }
+            res.send(200, "User '" + _firstname + " " + _name + "' was created :)");
+            return;
         });
     },
     
