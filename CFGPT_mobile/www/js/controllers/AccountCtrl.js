@@ -1,6 +1,6 @@
 angular.module('CFGPT_Mobile.controllers.AccountCtrl', [])
 
-	.controller('AccountCtrl', function ($scope, $ionicModal, AccountService, $state) {
+	.controller('AccountCtrl', function ($scope, $ionicModal, AccountService, $state, $ionicPopup) {
 
 		// With the new view caching in Ionic, Controllers are only called
 		// when they are recreated or on app start, instead of every page change.
@@ -30,6 +30,16 @@ angular.module('CFGPT_Mobile.controllers.AccountCtrl', [])
 			console.log("Open sign up modal.");
 			$scope.modal.show();
 		};
+
+		var showAlert = function () {
+			var alertPopup = $ionicPopup.alert({
+				title: 'Erreur',
+				template: "Connexion échouée : mail ou mot de passe invalide (ou les deux lol)."
+			});
+			alertPopup.then(function (res) {
+				console.log('Thank you for not eating my delicious ice cream cone');
+			});
+		};
 		
 
 		// Perform the login action when the user submits the login form
@@ -38,7 +48,7 @@ angular.module('CFGPT_Mobile.controllers.AccountCtrl', [])
 
 			AccountService.login($scope.loginData, function (error) {
 				if (error != undefined) {
-					alert('Une erreur est survenue');
+					showAlert();
 					console.log('error on login', error);
 				}
 				else $state.go("app.groups");
