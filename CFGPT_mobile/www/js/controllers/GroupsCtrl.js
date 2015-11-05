@@ -1,7 +1,7 @@
 angular.module('CFGPT_Mobile.controllers.GroupsCtrl', [
 	'CFGPT_Mobile.services.UserGroupsService'])
 	.controller('GroupsCtrl', function ($scope, UserGroupsService, APIService) {
-		var refreshGroups = UserGroupsService.getMyUserGroups(function (result, error) {
+		UserGroupsService.getMyUserGroups(function (result, error) {
 			if (!result && error) {
 				alert(error.err);
 			} else {
@@ -9,14 +9,14 @@ angular.module('CFGPT_Mobile.controllers.GroupsCtrl', [
 			}
 		});
 
-		this.newGroup = function () {
+		$scope.newGroup = function () {
 			// TODO : ajouté le code pour la fenêtre modal d'ajout 
 		};
 
-		this.addGroup = function () {
+		var addGroup = function () {
 			APIService.groups.add($scope.groupName,
 				function (data) {
-					refreshGroups();
+					// refreshGroups();
 					alert("Groupe ajouté");
 				},
 				function (error) {
@@ -24,7 +24,16 @@ angular.module('CFGPT_Mobile.controllers.GroupsCtrl', [
 				});
 		};
 
-		refreshGroups();
+		$scope.removeGroup = function (userGroup) {
+			APIService.groups.add(userGroup.group.id,
+				function (data) {
+					// refreshGroups();
+					alert("Groupe supprimé !");
+				},
+				function (error) {
+					alert(error);
+				});
+		};
 	});
 	
 	
