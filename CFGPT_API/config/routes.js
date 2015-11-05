@@ -31,6 +31,8 @@ module.exports.routes = {
   'POST /app/account/new_account': 'Users.newAccount', //(email, password, firstName, lastName)
   /*DONE*/'POST /app/login' : 'Auth.login', //(email, password)
   /*DONE*/'POST /app/refresh': 'Auth.refresh',
+  /*DONE*/'POST /app/users/groups' : 'Users.getGroupsByToken', //(tokenUser)
+  /*DONE*/'POST /app/users/getByMail' : 'Users.getUserByMail', //(tokenUser)
 
 // Url de gestion des objets connectés
 //[VerifAccount]
@@ -48,8 +50,8 @@ module.exports.routes = {
 
 // Url de gestion des groupes
 //[VerifAccount]
-  'POST /app/groups/add' : 'Groups.addGroup', //(name, groupId)
-  'POST /app/groups/remove' : 'Groups.removeByGroupId', //(groupId)
+  /*DONE*/'POST /app/groups/add' : 'Groups.addGroup', //(name, groupId)
+  /*DONE*/'POST /app/groups/remove' : 'Groups.removeByGroupId', //(groupId)
 
 // Url des objets connectés dans les groupes
 //[VerifAccount]
