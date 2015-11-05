@@ -10,22 +10,33 @@ module.exports = {
 
   /* GROUPS */
 
-  //Création d'un groupe (name, parentGroupId)
+  //Création d'un groupe (name) + ajout du user dans le groupe
   addGroup: function (req, res) {
     var _name = req.param('name');
-    //var _parentGroupId = req.param('parentGroupId');
+    var _tokenUser = req.headers.authorization;
 
     //Si il manque des params, on drop.
-    if (!_name /*|| !_parentGroupId*/) return res.json(400,{err:'PARAMS ERROR.'});
-
-    /* TODO - Gestion du parentID quand il le faudra */
+    if (!_name || !_tokenUser) return res.json(400,{err:'PARAMS ERROR.'});
 
     Groups.create({
       name:_name,
-      //parentgroup:_parentGroupId,
-    }).exec(function(err,parentgroup){
+    }).exec(function(err,newGroup){
       if (err) return res.json(400,{err:'ERROR.'});
-      return res.send(parentgroup);
+      if (newGroup){
+        Users.findOneByToken(_tokenUser).exec(function(err,theUser) {
+          if (err) return res.json(400,{err:'ERROR.'});
+          if (!theUser) return res.json(400,{err:'ERROR.'});
+          GroupUsers.create({
+            group: newGroup.id,
+            user: theUser.id,
+            is_admin: 1,
+            is_to_call: 1
+          }).exec(function(err,finalGroupUser){
+            if (err) return res.json(400,{err:'ERROR.'});
+            return res.send(finalGroupUser);
+          });
+        });
+      }
     });
   },
 
@@ -174,7 +185,7 @@ module.exports = {
             if (err) return res.json(400,{err:'ERROR.'});
             if (!connectedObject) return res.json(400,{err:'ERROR.'});
 
-            // Si le group est déjà lié des COs 
+            // Si le group est déjà lié des COs
             if (group.connectedobjects.length > 0) {
               // on va vérifier qu'il n'est pas déjà lié à celui ci
               var alreadyLinked = false;
@@ -224,7 +235,7 @@ module.exports = {
         // Si on ne retrouve le CO avec l'id demandé dans le groupe demandé
         if (!findCO) return res.json(400,{err:'ERROR. - no link between this 2 entities'});
 
-        // suppresion du lien 
+        // suppresion du lien
         group.connectedobjects.remove(_conObjId);
         console.log("suppresion du lien")
 

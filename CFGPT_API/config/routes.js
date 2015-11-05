@@ -43,6 +43,7 @@ module.exports.routes = {
 
 // Url des interactions avec les objets connectés
 //[VerifAccount]
+  'POST app/connectedobjects/ringring' : 'ConnectedObjects.ringring', //(tokenObject)
   /*DONE*/'POST /app/connectedobjects/logs' : 'ConnectedObjects.logsByToken', //(tokenObject)
   'POST /app/connectedobjects/receiveVideoStream' : 'ConnectedObjects.receiveVideoStreamByToken', //(tokenObject)
   'POST /app/connectedobjects/sendAudioStream' : 'ConnectedObjects.sendAudioStreamByToken', //(tokenObject,stream)
@@ -50,7 +51,7 @@ module.exports.routes = {
 
 // Url de gestion des groupes
 //[VerifAccount]
-  /*DONE*/'POST /app/groups/add' : 'Groups.addGroup', //(name, groupId)
+  /*DONE*/'POST /app/groups/add' : 'Groups.addGroup', //(name)
   /*DONE*/'POST /app/groups/remove' : 'Groups.removeByGroupId', //(groupId)
 
 // Url des objets connectés dans les groupes
