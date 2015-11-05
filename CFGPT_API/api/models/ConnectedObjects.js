@@ -21,7 +21,7 @@ module.exports = {
     },
     state: {
         type: 'string',
-        enum: ['Ouvert', 'Fermé', 'Autre'],
+        enum: ['Ouvert', 'Fermé', 'Sonne', 'Autre'],
         required: true
     },
     logs:{

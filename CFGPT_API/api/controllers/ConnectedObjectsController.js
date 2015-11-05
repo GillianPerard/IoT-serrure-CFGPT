@@ -151,11 +151,38 @@
  	},
 
  	changeStateByToken: function(req, res){
- 		_connectedObjectToken = req.param('tokenObject');
- 		_connectedObjectState = req.param('stateObject');
+    var _connectedObjectToken = req.param('tokenObject');
+    var _connectedObjectState = req.param('stateObject');
+
+    //Si il manque le param, on drop.
+    if (!_connectedObjectToken || !_connectedObjectState) return res.json(400,{err:'PARAMS ERROR.'});
+
  		ConnectedObjects.update({token:_connectedObjectToken},{state:_connectedObjectState}).exec(function(err, updated){
  			ConnectedObjectsService.changeStateByToken_afterUpdate(req, res, err, updated);
  		});
  	},
+
+   //Action appelée dès lors qu'un utilisateur sonne à une sonnette
+   ringring: function (req, res) {
+     var _tokenObject = req.param('tokenObject');
+
+     //Si il manque le param, on drop.
+     if (!_tokenObject) return res.json(400,{err:'PARAMS ERROR.'});
+
+     ConnectedObjects.update({token:_tokenObject},{state: 'Sonne'}).exec(function(err,connObjectUpdated) {
+       if (err) cb(err);
+       if (connObjectUpdated.length == 0) return res.json(400,{err:'ERROR.'});
+
+       Logs.create({
+         connectedobject:connObjectUpdated[0].id,
+         date: new Date(),
+         state: connObjectUpdated[0].state,
+         content: 'Un visiteur vient de sonner à la serrure "' + connObjectUpdated[0].name + '".'
+       }).exec(function(err, log){
+         if (err) return res.json(400, {err: 'ERROR.'});
+         return res.send(connObjectUpdated);
+       });
+     });
+   }
  };
 

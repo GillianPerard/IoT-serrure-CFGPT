@@ -43,7 +43,7 @@ module.exports.routes = {
 
 // Url des interactions avec les objets connectés
 //[VerifAccount]
-  'POST app/connectedobjects/ringring' : 'ConnectedObjects.ringring', //(tokenObject)
+  /*DONE*/'POST /app/connectedobjects/ringring' : 'ConnectedObjects.ringring', //(tokenObject)
   /*DONE*/'POST /app/connectedobjects/logs' : 'ConnectedObjects.logsByToken', //(tokenObject)
   'POST /app/connectedobjects/receiveVideoStream' : 'ConnectedObjects.receiveVideoStreamByToken', //(tokenObject)
   'POST /app/connectedobjects/sendAudioStream' : 'ConnectedObjects.sendAudioStreamByToken', //(tokenObject,stream)
