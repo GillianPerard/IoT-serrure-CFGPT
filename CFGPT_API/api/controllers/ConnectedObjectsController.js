@@ -103,7 +103,7 @@ module.exports = {
     reportState: function (req, res) {
         var _state = req.param("state");
         var _tokenObject = req.param("tokenObject");
-        if (["Fermé", "Ouvert"].contains(state)) {
+        if (["Fermé", "Ouvert", "Sonne"].contains(state)) {
             ConnectedObjects.update({ token: _tokenObject }, { state: _state }, function (err, created) {
                 console.log(err + created[0].name);
             });
