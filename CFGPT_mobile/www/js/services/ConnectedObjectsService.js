@@ -32,10 +32,16 @@ angular.module('CFGPT_Mobile.services.ConnectedObjectsService', [])
 				});
 		};
 
-		this.add = function (connectedObject, callback) {
+		this.add = function (groupId, connectedObject, callback) {
 			APIService.connectedObjects.add(connectedObject,
 				function (data) {
-					callback(data);
+					APIService.connectedObjects.assignToGroup(groupId, data.id,
+						function (success) {
+							callback(data);
+						},
+						function (error) {
+							callback(undefined, error);
+						});
 				},
 				function (error) {
 					callback(undefined, error);

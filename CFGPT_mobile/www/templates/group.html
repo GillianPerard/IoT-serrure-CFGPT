@@ -2,6 +2,10 @@
   <ion-nav-title>
      {{currentUserGroup.group.name}}
   </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear ion-android-add" ng-click="newKey()">
+    </button>
+  </ion-nav-buttons>
   <ion-content>
     <ion-list show-delete="false" can-swipe="true">
       <ion-item ng-repeat="key in keys" class="fontSize16 borderLeftMainColor card">
