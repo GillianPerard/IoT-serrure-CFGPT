@@ -1,6 +1,9 @@
 angular.module('CFGPT_Mobile.controllers.GroupsCtrl', [
 	'CFGPT_Mobile.services.UserGroupsService'])
-	.controller('GroupsCtrl', function ($scope, UserGroupsService, APIService, $ionicPopup, $state, $window) {
+	.controller('GroupsCtrl', function ($scope, UserGroupsService, APIService, $ionicPopup, $state, $window, AccountService) {
+		
+		$scope.AccountSerice = AccountService;
+		
 		UserGroupsService.getMyUserGroups(function (result, error) {
 			if (!result && error) {
 				alert(error.err);
