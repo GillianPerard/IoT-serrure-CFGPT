@@ -25,7 +25,7 @@ module.exports = {
     //Creation d'un nouvel utilisateur
     newAccount: function (req, res) {
         var _password = req.param("password");
-        var _mail = req.param("mail");
+        var _mail = req.param("email");
         var _name = req.param("lastname");
         var _firstname = req.param("firstname");
         
