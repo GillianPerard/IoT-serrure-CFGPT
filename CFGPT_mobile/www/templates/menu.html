@@ -18,7 +18,11 @@
     <ion-content>
       <div style="width:100%; margin-top:60px;margin-bottom:30px;">
         <img src="http://www.yzgeneration.com/wp-content/uploads/2013/09/Anonymous-Facebook-620x350.png" width="125px" height="125px" alt="" style="display:block;border-radius:50%;margin:0 auto;border:6px solid #181818;">
-        <p style="text-align:center; color:white;margin-top:10px">Jean-Stéphane<br><b class="colorMainColor">Labourre</b></p>
+        <p style="text-align:center; color:white;margin-top:10px">
+          {{AccountService.user.user.firstname}}
+          <b class="colorMainColor"> {{AccountService.user.user.lastname}}</b>
+          <br>{{AccountService.user.user.email}}  
+        </p>
       </div>
       <ion-list>
         <ion-item class="backgroundGray colorWhite borderColorSemiDarkGray" menu-close href="#/app/groups">
