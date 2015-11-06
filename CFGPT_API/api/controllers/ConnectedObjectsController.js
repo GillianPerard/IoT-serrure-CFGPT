@@ -158,20 +158,21 @@ module.exports = {
         console.log("subscribe call")
         var _token = req.param('userToken');
         ConnectedObjects.query(
-        'SELECT co.id, co.token ' + 
-        'FROM connectedobjects co ' +
-        'LEFT JOIN connectedobjects_groups__groups_connectedobjects cog ON (co.id = cog.connectedobjects_groups) ' +
-        'LEFT JOIN groups g ON (cog.groups_connectedobjects = g.id) ' +
-        'LEFT JOIN groupusers gu ON (g.id = gu.`group`) ' +
-        'LEFT JOIN users u ON (gu.`user` = u.id) ' +
-        'WHERE u.token = "' + _token + '" AND gu.is_to_call = True' , 
-        function(err, result) {
-            if (err) return res.json(400,{err:'error occured when connect to object'});
-            console.log("subscribe successfull")
-            ConnectedObjects.subscribe(req, _.pluck(result,'id'),['update']);
-            return res.json(result);
-        }
-      );
+            'SELECT co.id, co.token ' + 
+            'FROM connectedobjects co ' +
+            'LEFT JOIN connectedobjects_groups__groups_connectedobjects cog ON (co.id = cog.connectedobjects_groups) ' +
+            'LEFT JOIN groups g ON (cog.groups_connectedobjects = g.id) ' +
+            'LEFT JOIN groupusers gu ON (g.id = gu.`group`) ' +
+            'LEFT JOIN users u ON (gu.`user` = u.id) ' +
+            'WHERE u.token = "' + _token + '" AND gu.is_to_call = True' , 
+            function(err, result) {
+                if (err) return res.json(400,{err:'error occured when connect to object'});
+                console.log("subscribe successfull")
+                ConnectedObjects.subscribe(req, _.pluck(result,'id'),['update']);
+                return res.json(result);
+            }
+        )
+    },
 
     //Action appelée dès lors qu'un utilisateur veut répondre à une sonnette qui sonne
     changeStateAfterRing: function (req, res) {
