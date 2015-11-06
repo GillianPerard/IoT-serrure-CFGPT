@@ -31,7 +31,7 @@ module.exports = {
         
         if (!_mail || !_password || !_name || !_firstname) return res.json(400, { 'STATE': 'Params error.' });
         Users.create({ firstname: _firstname, lastname: _name, email: _mail, password: _password }).exec(function (err, created) { 
-            if (err)  return res.send(400, { "STATE" : "Error when trying add new user", "ERROR" : err });
+            if (err)  return res.send(400, { "state" : "Error when trying add new user", "error" : err });
             return res.send(200, "User '" + _firstname + " " + _name + "' was created :)");
         });
     },
