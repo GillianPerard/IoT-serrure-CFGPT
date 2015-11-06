@@ -1,22 +1,22 @@
 <ion-modal-view>
 	<ion-content class="backgroundGray">
 		<button class="noBackground noBorder" style="padding:15px;" ng-click="closeSignup()"><i class="ion ion-android-close colorWhite" style="font-size:25px;"></i></button>
-		<form ng-submit="doLogin()" style="margin-top:100px;">
+		<form ng-submit="doSignUp()" style="margin-top:100px;">
 			<div class="list">
 				<label class="item item-input noBorder noBackground loginItem">
-					<input type="text" placeholder="Nom" class="loginInput colorWhite">
+					<input type="text" ng-model="signupData.firstname" placeholder="Prénom" class="loginInput colorWhite">
 				</label>
 				<label class="item item-input noBorder noBackground loginItem">
-					<input type="text" placeholder="Prénom" class="loginInput colorWhite">
+					<input type="text" ng-model="signupData.lastname" placeholder="Nom" class="loginInput colorWhite">
 				</label>
 				<label class="item item-input noBorder noBackground loginItem">
-					<input type="text" ng-model="loginData.email" placeholder="Email" class="loginInput colorWhite">
+					<input type="text" ng-model="signupData.email" placeholder="Email" class="loginInput colorWhite">
 				</label>
 				<label class="item item-input noBorder noBackground loginItem">
-					<input type="password" ng-model="loginData.password" placeholder="Mot de passe" class="loginInput colorWhite">
+					<input type="password" ng-model="signupData.password" placeholder="Mot de passe" class="loginInput colorWhite">
 				</label>
 				<label class="item item-input noBorder noBackground loginItem">
-					<input type="password" ng-model="loginData.password" placeholder="Confirmer le mot de passe" class="loginInput colorWhite">
+					<input type="password" ng-model="signupData.repeatpassword" placeholder="Confirmer le mot de passe" class="loginInput colorWhite">
 				</label>
 				<label class="item noBorder noBackground loginItem">
 					<button class="button button-block backgroundMainColor noBorder colorWhite" type="submit">

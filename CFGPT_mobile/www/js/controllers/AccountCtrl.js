@@ -1,16 +1,10 @@
 angular.module('CFGPT_Mobile.controllers.AccountCtrl', [])
 
 	.controller('AccountCtrl', function ($scope, $ionicModal, AccountService, $state, $ionicPopup) {
+		
+		/* Signup section */
 
-		// With the new view caching in Ionic, Controllers are only called
-		// when they are recreated or on app start, instead of every page change.
-		// To listen for when this page is active (for example, to refresh data),
-		// listen for the $ionicView.enter event:
-		//$scope.$on('$ionicView.enter', function(e) {
-		//});
-
-		// Form data for the login modal
-		$scope.loginData = {};
+		$scope.signupData = {};
 
 		// Create the login modal that we will use later
 		$ionicModal.fromTemplateUrl('templates/signup.html', {
@@ -19,28 +13,64 @@ angular.module('CFGPT_Mobile.controllers.AccountCtrl', [])
 			$scope.modal = modal;
 		});
 
-		// Triggered in the login modal to close it
-		$scope.closeSignup = function () {
-			console.log("Hide sign up modal.");
-			$scope.modal.hide();
-		};
-
 		// Open the login modal
 		$scope.signup = function () {
 			console.log("Open sign up modal.");
 			$scope.modal.show();
 		};
 
-		var showAlert = function () {
-			var alertPopup = $ionicPopup.alert({
-				title: 'Erreur',
-				template: "Connexion échouée : mail ou mot de passe invalide (ou les deux lol)."
-			});
-			alertPopup.then(function (res) {
-				console.log('Thank you for not eating my delicious ice cream cone');
-			});
+		// Triggered in the login modal to close it
+		$scope.closeSignup = function () {
+			console.log("Hide sign up modal.");
+			$scope.modal.hide();
+		};
+
+		$scope.doSignUp = function () {
+			var user = $scope.signupData
+			var formIsValid = true;
+			var content = "Les champs suivants ne sont pas valides :\r\n"
+			if (!user.lastname) {
+				content += "• Nom\r\n";
+				formIsValid = false;
+			}
+
+			if (!user.firstname) {
+				content += "• Prénom\r\n";
+				formIsValid = false;
+			}
+
+			if (!user.email) {
+				content += "• E-mail\r\n";
+				formIsValid = false;
+			}
+
+			if (!user.password) {
+				content += "• Password\r\n";
+				formIsValid = false;
+			}
+
+			if (!user.repeatpassword || user.repeatpassword != user.password) {
+				content += "\r\n Les mots de passe saisis ne sont pas identiques !";
+				formIsValid = false;
+			}
+
+			if (!formIsValid) {
+				showAlert("Informations incomplètes !", content);
+			} else {
+				AccountService.signup(user, function (error) {
+					if (!error) {
+						$scope.modal.hide();
+					} else {
+						showAlert('Une erreur est survenue', error);
+					}
+				});
+			}
 		};
 		
+		
+		/* Login section */
+
+		$scope.loginData = {};
 
 		// Perform the login action when the user submits the login form
 		$scope.doLogin = function () {
@@ -48,10 +78,23 @@ angular.module('CFGPT_Mobile.controllers.AccountCtrl', [])
 
 			AccountService.login($scope.loginData, function (error) {
 				if (error != undefined) {
-					showAlert();
+					showAlert('Erreur', 'Connexion échouée : mail ou mot de passe invalide (ou les deux lol).');
 					console.log('error on login', error);
 				}
 				else $state.go("app.groups");
 			});
 		};
+		
+		/* Utils section */
+
+		var showAlert = function (title, content) {
+			var alertPopup = $ionicPopup.alert({
+				title: title,
+				template: content
+			});
+			// alertPopup.then(function (res) {
+			// 	console.log('Thank you for not eating my delicious ice cream cone');
+			// });
+		};
+
 	});

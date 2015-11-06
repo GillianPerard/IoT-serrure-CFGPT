@@ -13,6 +13,16 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 						callbackError(error.data);
 					});
 			},
+			
+			signup : function (user, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/account/new_account', user).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			}
 		};
 
 		this.connectedObjects = {
