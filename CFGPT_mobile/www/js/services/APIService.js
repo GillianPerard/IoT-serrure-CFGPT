@@ -13,8 +13,8 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 						callbackError(error.data);
 					});
 			},
-			
-			signup : function (user, callbackSuccess, callbackError) {
+
+			signup: function (user, callbackSuccess, callbackError) {
 				$http.post(baseUrl + '/app/account/new_account', user).then(
 					function (success) {
 						callbackSuccess(success.data);
@@ -47,7 +47,7 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 			},
 
 			add: function (connectedObject, callbackSuccess, callbackError) {
-				$http.post(baseUrl + '/app/connectedobjects/add', connectedObject).then(
+				$http.post(baseUrl + '/app/connectedobjects/add', { name: connectedObject.name, tokenObject: connectedObject.token }).then(
 					function (success) {
 						callbackSuccess(success.data);
 					},
@@ -65,6 +65,26 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 						callbackError(error.data);
 					});
 			},
+
+			assignToGroup: function (groupId, connectedObjectId, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/groups/' + groupId + '/connectedobjects/assign', { conObjId: connectedObjectId }).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
+
+			removeFromGroup: function (groupId, connectedObjectId, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/groups/' + groupId + '/connectedobjects/remove', { conObjId: connectedObjectId }).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			}
 		};
 
 		this.userGroups = {
@@ -110,4 +130,5 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 					});
 			},
 		};
+		
 	});

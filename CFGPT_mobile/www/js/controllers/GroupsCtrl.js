@@ -1,6 +1,9 @@
 angular.module('CFGPT_Mobile.controllers.GroupsCtrl', [
 	'CFGPT_Mobile.services.UserGroupsService'])
-	.controller('GroupsCtrl', function ($scope, UserGroupsService, APIService, $ionicPopup, $state, $window) {
+	.controller('GroupsCtrl', function ($scope, UserGroupsService, APIService, $ionicPopup, $state, $window, AccountService) {
+		
+		$scope.AccountSerice = AccountService;
+		
 		UserGroupsService.getMyUserGroups(function (result, error) {
 			if (!result && error) {
 				alert(error.err);
@@ -25,7 +28,6 @@ angular.module('CFGPT_Mobile.controllers.GroupsCtrl', [
 						type: 'button-positive',
 						onTap: function (e) {
 							if (!$scope.data.groupName) {
-								//don't allow the user to close unless he enters wifi password
 								e.preventDefault();
 							} else {
 								addGroup($scope.data.groupName);
@@ -39,7 +41,12 @@ angular.module('CFGPT_Mobile.controllers.GroupsCtrl', [
 		var addGroup = function (groupName) {
 			APIService.groups.add(groupName,
 				function (data) {
-					$window.location.reload(true)
+					//$window.location.reload(true)
+					var group = {};
+					group.group = {name: groupName, id: data.group};
+
+					console.dir(group);
+					$scope.groups.push(group);
 					console.log("Groupe ajouté !");
 				},
 				function (error) {
