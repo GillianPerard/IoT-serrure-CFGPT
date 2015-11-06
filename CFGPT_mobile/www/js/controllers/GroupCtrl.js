@@ -57,5 +57,10 @@ angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 				group: $scope.currentUserGroup,
 				connectedObject: connectedObject
 			});
+		}
+		
+		$scope.isOpen = function(state){
+			if(state == "Ouvert") return true;
+			else if(state == "Fermé") return false;
 		};
 	});
