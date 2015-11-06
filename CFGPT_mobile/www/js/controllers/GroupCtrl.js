@@ -18,7 +18,7 @@ angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 				$scope.keys = result;
 			}
 		});
-
+		
 		$scope.viewDetail = function (connectedObject) {
 			$state.go("app.connectedObjects", {
 				objectToken: connectedObject.token,
@@ -26,4 +26,9 @@ angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 				connectedObject: connectedObject
 			});
 		}
+		
+		$scope.isOpen = function(state){
+			if(state == "Ouvert") return true;
+			else if(state == "Fermé") return false;	
+		};
 	});

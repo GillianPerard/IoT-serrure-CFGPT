@@ -110,4 +110,5 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 					});
 			},
 		};
+		
 	});
