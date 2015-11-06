@@ -60,6 +60,7 @@ angular.module('CFGPT_Mobile.controllers.AccountCtrl', [])
 				AccountService.signup(user, function (error) {
 					if (!error) {
 						$scope.modal.hide();
+						$state.go("app.groups");
 					} else {
 						showAlert('Une erreur est survenue', error);
 					}

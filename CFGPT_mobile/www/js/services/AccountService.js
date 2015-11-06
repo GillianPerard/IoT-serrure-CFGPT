@@ -4,7 +4,7 @@ angular.module('CFGPT_Mobile.services.AccountService', [])
 
     this.IsConnected = false;
 
-    this.login = function (user, callback) {
+    var loginPrivate = function (user, callback) {
       APIService.user.login(user,
         function (success) {
           $ionicHistory.clearHistory();
@@ -18,6 +18,7 @@ angular.module('CFGPT_Mobile.services.AccountService', [])
           callback(error);
         });
     };
+    this.login = loginPrivate;
 
     this.logout = function () {
       this.IsConnected = false;
@@ -28,8 +29,8 @@ angular.module('CFGPT_Mobile.services.AccountService', [])
     this.signup = function (user, callback) {
       APIService.user.signup(user,
         function (data) {
-          this.login({ email: user.email, password: user.password }, function (error) {
-             (error);
+          loginPrivate({ email: user.email, password: user.password }, function (error) {
+            callback(error);
           })
         },
         function (error) {
