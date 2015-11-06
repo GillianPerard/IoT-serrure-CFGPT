@@ -35,7 +35,10 @@ module.exports.policies = {
    UsersController : {
         'newAccount' : []
     
-   }
+   },
+   ConnectedObjectsController : {
+        'ringring' : []
+   } 
 
   /***************************************************************************
   *                                                                          *

@@ -1,6 +1,6 @@
 angular.module('CFGPT_Mobile.controllers.AccountCtrl', [])
 
-	.controller('AccountCtrl', function ($scope, $ionicModal, AccountService, $state, $ionicPopup) {
+	.controller('AccountCtrl', function ($scope, $ionicModal, AccountService, $state, $ionicPopup,$localStorage) {
 		
 		/* Signup section */
 
@@ -82,7 +82,18 @@ angular.module('CFGPT_Mobile.controllers.AccountCtrl', [])
 					showAlert('Erreur', 'Connexion échouée : mail ou mot de passe invalide (ou les deux lol).');
 					console.log('error on login', error);
 				}
-				else $state.go("app.groups");
+				else{
+					$state.go("app.groups");    				
+					io.socket.get('/app/ConnectedObject/subscribe/'+ $localStorage.user.token, function(data,jwres){
+					        console.log(data)
+					        console.log(jwres)
+				      });
+				      io.socket.on('connectedobjects',function(msg){
+				        console.log(msg)
+
+				        // TODO : insérer la logique de notification après un ringring
+				      });
+				}
 			});
 		};
 		
