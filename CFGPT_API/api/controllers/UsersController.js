@@ -30,7 +30,7 @@ module.exports = {
     newAccount: function (req, res) {
         var _password = req.param("password");
         var _mail = req.param("mail");
-        var _name = req.param("name");
+        var _name = req.param("lastname");
         var _firstname = req.param("firstname");
         
         Users.create({ firstname: _firstname, lastname: _name, email: _mail, password: _password }).exec(function (err, created) { 
