@@ -99,17 +99,17 @@ module.exports = {
         var _token = req.headers.authorization;
         var _tokenObject = req.param("tokenObject");
         
-        if (!_token || !_tokenObject) return res.send(400, { "state": "Params missing" });
+        if (!_token || !_tokenObject) return res.serverError({ "state": "Params missing" });
         
         ConnectedObjects.query('SELECT co.token ' + 
-                                'FROM connectedobjects co ' +
-                                'LEFT JOIN connectedobjects_groups__groups_connectedobjects cog ON (co.id = cog.connectedobjects_groups) ' +
-                                'LEFT JOIN groups g ON (cog.groups_connectedobjects = g.id) ' +
-                                'LEFT JOIN groupusers gu ON (g.id = gu.`group`) ' +
-                                'LEFT JOIN users u ON (gu.`user` = u.id) ' +
-                                'WHERE u.token = "' + _token + '"', 
-                                function (err, results) {
-            if (err) return res.send(400, { "state" : "Erreur when getting information on database", "error" : err });
+'FROM connectedobjects co ' +
+'LEFT JOIN connectedobjects_groups__groups_connectedobjects cog ON (co.id = cog.connectedobjects_groups) ' +
+'LEFT JOIN groups g ON (cog.groups_connectedobjects = g.id) ' +
+'LEFT JOIN groupusers gu ON (g.id = gu.`group`) ' +
+'LEFT JOIN users u ON (gu.`user` = u.id) ' +
+'WHERE u.token = "' + _token + '"', 
+function (err, results) {
+            if (err) return res.serverError({ "state" : "Erreur when getting information on database", "error" : err });
             var listToken = [];
             results.forEach(function (factor, index) {
                 listToken.push(factor.token);
@@ -122,20 +122,18 @@ module.exports = {
         var _connectedObjectToken = req.param('tokenObject');
         var _connectedObjectState = req.param('stateObject');
         
-        //Si il manque le param, on drop.
-        if (!_connectedObjectToken ||  !_connectedObjectState) return res.json(400, { err: 'PARAMS ERROR.' });
+        if (!_connectedObjectToken ||  !_connectedObjectState) return res.json(400, { err: 'PARAMS ERROR.' });          //Si il manque le param, on drop.
         
         ConnectedObjects.update({ token: _connectedObjectToken }, { state: _connectedObjectState }).exec(function (err, updated) {
-            ConnectedObjectsService.changeStateByToken_afterUpdate(req, res, err, updated);
+            if (err) return res.serverError({ "state": "Error when trying update database", "error": err });
+            return res.ok('Success Updated Element ' + updated);
         });
     },
     
-    //Action appelée dès lors qu'un utilisateur sonne à une sonnette
-    ringring: function (req, res) {
+    ringring: function (req, res) {         //Action appelée dès lors qu'un utilisateur sonne à une sonnette
         var _tokenObject = req.param('tokenObject');
         
-        //Si il manque le param, on drop.
-        if (!_tokenObject) return res.json(400, { err: 'PARAMS ERROR.' });
+        if (!_tokenObject) return res.serverError({ "state": "Params error" });        //Si il manque le param, on drop.
         
         ConnectedObjects.update({ token: _tokenObject }, { state: 'Sonne' }).exec(function (err, connObjectUpdated) {
             if (err) cb(err);
@@ -180,23 +178,20 @@ module.exports = {
         var _newState = req.param('newState');
         var _tokenUser = req.headers.authorization;
         
-        //Si il manque le param, on drop.
-        if (!_tokenObject || !_newState) return res.json(400, { err: 'PARAMS ERROR.' });
+        if (!_tokenObject || !_newState) return res.serverError({ "state": "Params error" });        //Si il manque le param, on drop.
         
-        //Je cherche le connectedObject with Token
-        ConnectedObjects.findOneByToken(_tokenObject).exec(function (err, connObject) {
-            if (err) return res.json(400, { err: 'ERROR.' });
-            if (!connObject) return res.json(400, { err: 'ERROR.' });
+        ConnectedObjects.findOneByToken(_tokenObject).exec(function (err, connObject) {         //Je cherche le connectedObject with Token
+            if (err) return res.serverError({ "state": "Error when trying access to database", "error" : err });
+            if (!connObject) return res.serverError({ "state": "The connected object doesn't exist" });
             
             if (connObject.state == 'Sonne') {
-                
                 Users.findOneByToken(_tokenUser).exec(function (err, theUser) {
-                    if (err) return res.json(400, { err: 'ERROR.' });
-                    if (!theUser) return res.json(400, { err: 'ERROR.' });
+                    if (err) return res.serverError({ "state": "Error when trying access database", "error": err });
+                    if (!theUser) return res.serverError({ "state": "The is no user to call" });
                     
                     ConnectedObjects.update({ token: _tokenObject }, { state: _newState }).exec(function (err, connObjectUpdated) {
                         if (err) cb(err);
-                        if (connObjectUpdated.length == 0) return res.json(400, { err: 'ERROR.' });
+                        if (connObjectUpdated.length == 0) return res.serverError({ "state" : "Error when trying update database" });
                         
                         Logs.create({
                             user: theUser.id,
@@ -205,13 +200,13 @@ module.exports = {
                             state: connObjectUpdated[0].state,
                             content: 'Un utilisateur vient de modifier le statut de la serrure "' + connObjectUpdated[0].name + '".'
                         }).exec(function (err, log) {
-                            if (err) return res.json(400, { err: 'ERROR.' });
-                            return res.send(connObjectUpdated);
+                            if (err) return res.serverError({ "state": "Error when trying create log", "error": err });
+                            return res.ok(connObjectUpdated);
                         });
                     });
                 });
             } else { // if "Ouvert" ou "Ferme"
-                return res.send('Another user already managed this notification.');
+                return res.ok('Another user already managed this notification.');
             }
         });
     }
