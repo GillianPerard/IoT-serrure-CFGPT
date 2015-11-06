@@ -9,8 +9,8 @@ angular.module('CFGPT_Mobile.services.AccountService', [])
       APIService.user.login(user,
         function (data) {
           $ionicHistory.clearHistory();
-          $localStorage.user = data.user;
-          this.user = $localStorage.user;
+          $localStorage.user = data;
+          this.user = data.user;
           $http.defaults.headers.common['Authorization'] = data.token;
           this.IsConnected = true;
           callback();
@@ -43,7 +43,7 @@ angular.module('CFGPT_Mobile.services.AccountService', [])
     this.init = function () {
       if ($localStorage.user) {
         this.IsConnected = true;
-        this.user = $localStorage.user;
+        this.user = $localStorage.user.user;
         $http.defaults.headers.common['Authorization'] = $localStorage.user.token;
       }
     };
