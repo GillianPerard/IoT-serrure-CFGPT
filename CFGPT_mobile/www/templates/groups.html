@@ -1,12 +1,16 @@
 <ion-view view-title="Mes trousseaux">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear ion-android-add" ng-click="newGroup()">
+    </button>
+  </ion-nav-buttons>
   <ion-content>
     <ion-list show-delete="false" can-swipe="true">
       <ion-item ng-repeat="group in groups" href="#/app/groups/{{group.group.id}}" class="fontSize16 card borderLeftMainColor">
         {{group.group.name}}
         <div class="item-icon-right">
-            <i class="icon ion-ios-arrow-right"></i>
+          <i class="icon ion-ios-arrow-right"></i>
         </div>
-        <ion-option-button class="button-assertive icon ion-android-delete"></ion-option-button>
+        <ion-option-button class="button-assertive icon ion-android-delete" ng-click="removeGroup({{group.group.id}})"></ion-option-button>
       </ion-item>
     </ion-list>
   </ion-content>
