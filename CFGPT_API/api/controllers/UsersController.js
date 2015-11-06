@@ -33,6 +33,8 @@ module.exports = {
         var _name = req.param("lastname");
         var _firstname = req.param("firstname");
         
+        if (!_mail || !_password || !_name || !_firstname) return res.json(400, { err: 'PARAMS ERROR.' });
+
         Users.create({ firstname: _firstname, lastname: _name, email: _mail, password: _password }).exec(function (err, created) { 
             if (err) {
                 res.send(400, { "text" : "Error when trying add new user", "erreur" : err });
