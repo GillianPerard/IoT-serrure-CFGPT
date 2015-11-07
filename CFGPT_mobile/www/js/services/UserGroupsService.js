@@ -22,13 +22,35 @@ angular.module('CFGPT_Mobile.services.UserGroupsService', [])
       if (!this.myUserGroups) {
         this.getMyUserGroups(function (result, error) {
           if (!error && result) {
-            callback(result[id - 1]);
+            callback(result.find(function (group) { return group.group.id == id; }));
           } else {
             callback(undefined, error);
           }
         });
       } else {
-        callback(myUserGroups[id - 1]);
+        callback(result.find(function (group) { return group.group.id == id; }));
       }
     }
+
+    this.newGroup = function (groupName, callback) {
+      APIService.groups.add(groupName,
+        function (userGroup) {
+          myUserGroups.push(userGroup);
+          callback();
+        },
+        function (error) {
+          callback(error);
+        });
+    };
+    
+    this.removeUserGroup = function (userGroup, callback) {
+      APIService.groups.remove(userGroup.group.id,
+        function (success) {
+          myUserGroups.pop(userGroup);
+          callback();
+        },
+        function (error) {
+          callback(error);
+        });
+    };
   });
