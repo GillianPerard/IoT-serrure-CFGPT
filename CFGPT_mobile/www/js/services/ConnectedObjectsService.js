@@ -48,8 +48,8 @@ angular.module('CFGPT_Mobile.services.ConnectedObjectsService', [])
 				});
 		};
 
-		this.remove = function (objectToken, callback) {
-			APIService.connectedObjects.remove(objectToken,
+		this.remove = function (connectedObject, callback) {
+			APIService.connectedObjects.remove(connectedObject.token,
 				function (data) {
 					callback(data);
 				},

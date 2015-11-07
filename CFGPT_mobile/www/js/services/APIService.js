@@ -57,7 +57,7 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 			},
 
 			remove: function (objectToken, callbackSuccess, callbackError) {
-				$http.post(baseUrl + '/app/connectedobjects/remove', objectToken).then(
+				$http.post(baseUrl + '/app/connectedobjects/remove', { tokenObject: objectToken }).then(
 					function (success) {
 						callbackSuccess(success.data);
 					},
