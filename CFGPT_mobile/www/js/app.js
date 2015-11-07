@@ -10,7 +10,7 @@ angular.module('CFGPT_Mobile', [
   'CFGPT_Mobile.controllers.AppCtrl',
   'CFGPT_Mobile.controllers.AccountCtrl',
   'CFGPT_Mobile.controllers.GroupsCtrl',
-  'CFGPT_Mobile.controllers.GroupCtrl',,
+  'CFGPT_Mobile.controllers.GroupCtrl',
   'CFGPT_Mobile.controllers.ConnectedObjectCtrl',
   'CFGPT_Mobile.services.APIService',
   'CFGPT_Mobile.services.ConstantService',
@@ -43,8 +43,19 @@ angular.module('CFGPT_Mobile', [
     });
   })
 
-  .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpProvider) {
     $ionicConfigProvider.backButton.text('').icon('ion-android-arrow-back');
+
+    if (!$httpProvider.defaults.headers.get) {
+      $httpProvider.defaults.headers.get = {};
+    }
+    
+    $httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
+    // extra
+    $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
+    $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
+
+
     $stateProvider
 
       .state('app', {
@@ -63,7 +74,7 @@ angular.module('CFGPT_Mobile', [
           }
         },
         authenticate: true
-        
+
       })
 
       .state('app.groups', {
@@ -76,12 +87,12 @@ angular.module('CFGPT_Mobile', [
         },
         authenticate: true
       })
-      
+
       .state('app.connectedObjects', {
         url: '/connectedObjects/:objectToken',
         params: {
-          group:'',
-          connectedObject:''
+          group: '',
+          connectedObject: ''
         },
         views: {
           'menuContent': {
