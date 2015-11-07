@@ -33,7 +33,6 @@ angular.module('CFGPT_Mobile.controllers.GroupsCtrl', [
 								UserGroupsService.newGroup($scope.data.groupName,
 									function (error) {
 										if (!error) {
-											refresh();
 											myPopup.close();
 										} else {
 											alert(error);
@@ -60,9 +59,7 @@ angular.module('CFGPT_Mobile.controllers.GroupsCtrl', [
 						onTap: function (e) {
 							UserGroupsService.removeUserGroup(userGroup,
 								function (error) {
-									if (!error) {
-										refresh();
-									} else {
+									if (error) {
 										alert(error);
 									}
 								});

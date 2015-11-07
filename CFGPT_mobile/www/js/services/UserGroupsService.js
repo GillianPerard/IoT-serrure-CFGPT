@@ -1,10 +1,10 @@
 angular.module('CFGPT_Mobile.services.UserGroupsService', [])
 
   .service('UserGroupsService', function (APIService) {
-    this.myUserGroups = undefined;
+    var myUserGroups = undefined;
 
     this.getMyUserGroups = function (callback) {
-      if (!this.myUserGroups) {
+      if (!myUserGroups) {
         APIService.userGroups.list(
           function (success) {
             myUserGroups = success;
@@ -19,7 +19,7 @@ angular.module('CFGPT_Mobile.services.UserGroupsService', [])
     };
 
     this.getUserGroup = function (id, callback) {
-      if (!this.myUserGroups) {
+      if (!myUserGroups) {
         this.getMyUserGroups(function (result, error) {
           if (!error && result) {
             callback(result.find(function (group) { return group.group.id == id; }));
@@ -28,7 +28,7 @@ angular.module('CFGPT_Mobile.services.UserGroupsService', [])
           }
         });
       } else {
-        callback(result.find(function (group) { return group.group.id == id; }));
+        callback(myUserGroups.find(function (group) { return group.group.id == id; }));
       }
     }
 
