@@ -57,4 +57,17 @@ angular.module('CFGPT_Mobile.services.ConnectedObjectsService', [])
 					callback(undefined, error);
 				});
 		};
+
+		this.changeStateAfterRing = function(tokenObject, newState, callback){
+			APIService.connectedObjects.changeStateAfterRing(tokenObject, newState,
+				function (data) {
+					callback(data);
+				},
+				function (error) {
+					callback(undefined, error);
+				}
+			);
+		}
+
+
 	});
