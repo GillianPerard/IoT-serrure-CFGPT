@@ -104,7 +104,15 @@ div, p, a, h1, h2, h3, h4, h5, h6, span{
 }
 
 .borderLeftDoorClosedColor{
-	border-left: 4px solid $doorClosedColor !important;
+	border-left: 4px solid $redColor !important;
+}
+
+.borderLeftGreenColor{
+	border-left: 4px solid $greenColor !important;
+}
+
+.borderLeftYellowColor{
+	border-left: 4px solid $yellowColor !important;
 }
 
 .button-positive{

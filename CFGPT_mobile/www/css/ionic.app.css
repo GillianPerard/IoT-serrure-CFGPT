@@ -9374,6 +9374,12 @@ div, p, a, h1, h2, h3, h4, h5, h6, span {
 .borderLeftDoorClosedColor {
   border-left: 4px solid #FF6E6E !important; }
 
+.borderLeftGreenColor {
+  border-left: 4px solid #88E67C !important; }
+
+.borderLeftYellowColor {
+  border-left: 4px solid #FFE46B !important; }
+
 .button-positive {
   background-color: #48C1BE !important;
   border: 0 !important; }

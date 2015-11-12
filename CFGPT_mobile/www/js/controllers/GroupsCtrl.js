@@ -12,7 +12,6 @@ angular.module('CFGPT_Mobile.controllers.GroupsCtrl', [
 			});
 		};
 		
-		UserGroupsService.init();
 		refresh();
 		
 		$scope.newGroup = function () {

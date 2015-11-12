@@ -15,7 +15,7 @@ angular.module('CFGPT_Mobile.controllers.GroupUsersCtrl', [
 				if (!result && error) {
 					alert(error.err);
 				} else {
-					$scope.keys = result;
+					$scope.users = result;
 				}
 			});
 		};
