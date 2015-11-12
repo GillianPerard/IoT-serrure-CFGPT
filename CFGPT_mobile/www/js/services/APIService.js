@@ -143,7 +143,7 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 						callbackError(error.data);
 					});
 			},
-			
+
 			getGroupUsers: function (groupId, callbackSuccess, callbackError) {
 				$http.get(baseUrl + '/app/groups/' + groupId + '/users').then(
 					function (success) {
@@ -153,9 +153,9 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 						callbackError(error.data);
 					});
 			},
-			
+
 			assignUserToGroup: function (groupId, userInfo, callbackSuccess, callbackError) {
-				$http.post(baseUrl + '/app/groups/' + groupId + '/users/assign', userInfo).then(
+				$http.post(baseUrl + '/app/groups/' + groupId + '/users/assign', { userId: 0, isAdmin: false, isToCall: false }).then(
 					function (success) {
 						callbackSuccess(success.data);
 					},
@@ -163,9 +163,19 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 						callbackError(error.data);
 					});
 			},
-			
+
 			removeUserFromGroup: function (groupId, userId, callbackSuccess, callbackError) {
 				$http.post(baseUrl + '/app/groups/' + groupId + '/users/remove', { userId: userId }).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
+
+			searchUser: function (email, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/users/getByMail', { email: email }).then(
 					function (success) {
 						callbackSuccess(success.data);
 					},

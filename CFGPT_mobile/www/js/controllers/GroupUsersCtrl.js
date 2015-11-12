@@ -1,6 +1,6 @@
 angular.module('CFGPT_Mobile.controllers.GroupUsersCtrl', [
 	'CFGPT_Mobile.services.UserGroupsService'])
-	.controller('GroupUsersCtrl', function ($state, $scope, $stateParams, $ionicModal, $ionicPopup, UserGroupsService) {
+	.controller('GroupUsersCtrl', function ($state, $scope, $stateParams, $ionicModal, $ionicPopup, UserGroupsService, APIService) {
 
 		var refresh = function () {
 			UserGroupsService.getUserGroup($stateParams.groupId, function (result, error) {
@@ -24,6 +24,7 @@ angular.module('CFGPT_Mobile.controllers.GroupUsersCtrl', [
 
 
 		$scope.assignUserData = {
+			email: "",
 			userId: 0,
 			isAdmin: false,
 			isToCall: false
@@ -44,7 +45,15 @@ angular.module('CFGPT_Mobile.controllers.GroupUsersCtrl', [
 		};
 
 		$scope.searchUser = function () {
-			
+			APIService.searchUser($scope.email,
+				function (data, error) {
+					if (data && !error) {
+						$scope.returnUser = data;
+						$scope.assignUserData.email = "";
+					} else {
+						alert(error);
+					}
+				});
 		};
 
 		$scope.doAssign = function () {
