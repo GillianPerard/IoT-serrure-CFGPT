@@ -16,8 +16,8 @@ angular.module('CFGPT_Mobile.controllers.GroupsCtrl', [
 			$scope.data = {}
 			// An elaborate, custom popup
 			var myPopup = $ionicPopup.show({
-				template: '<input type="text" ng-model="data.groupName" placeholder="Nom" style="border: 1px solid #EEE;padding:5px">',
-				title: 'Nouveau groupe',
+				template: '<div class="list list-inset"><label class="item item-input"><input type="text" ng-model="data.groupName" placeholder="Nom"></label></div>',
+				title: 'Nouveau trousseau',
 				scope: $scope,
 				buttons: [
 					{ text: 'Annuler',
@@ -71,11 +71,11 @@ angular.module('CFGPT_Mobile.controllers.GroupsCtrl', [
 				template: 'Êtes-vous sûr de vouloir supprimer ce trousseau ?',
 				buttons: [
 					{ text: 'Non',
-					  type: 'noBackground'
+					  type: 'noBackground button '
 					},
 					{
 						text: '<b>Oui</b>',
-						type: 'button-positive',
+						type: 'button-positive button-full',
 						onTap: function (e) {
 							deleteGroup(groupId);
 						}

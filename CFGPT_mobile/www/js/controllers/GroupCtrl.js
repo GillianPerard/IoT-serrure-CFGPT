@@ -22,7 +22,7 @@ angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 		$scope.newKey = function () {
 			$scope.data = {};
 			var popup = $ionicPopup.show({
-				template: '<input type="text" ng-model="data.name" placeholder="Nom" style="border: 1px solid #EEE;padding:5px"><input type="text" ng-model="data.token" placeholder="Id de la clé" style="border: 1px solid #EEE;padding:5px">',
+				template: '<div class="list list-inset"><label class="item item-input"><input type="text" ng-model="data.name" placeholder="Nom"></label><label class="item item-input"><input type="text" ng-model="data.token" placeholder="Clé ID"></label></div>',
 				title: 'Nouvelle clé',
 				scope: $scope,
 				buttons: [
@@ -63,4 +63,5 @@ angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 			if(state == "Ouvert") return true;
 			else if(state == "Fermé") return false;
 		};
+		
 	});

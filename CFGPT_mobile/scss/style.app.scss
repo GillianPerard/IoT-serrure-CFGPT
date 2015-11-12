@@ -95,6 +95,10 @@ div, p, a, h1, h2, h3, h4, h5, h6, span{
 	padding: 0px !important;
 }
 
+.list-inset{
+	margin: 0px !important;
+}
+
 .borderLeftMainColor{
 	border-left: 4px solid $mainColor !important;
 }
@@ -110,4 +114,9 @@ div, p, a, h1, h2, h3, h4, h5, h6, span{
 
 .popup{
 	background: #F8F8F8 !important;
+	border-radius: 2px !important;
+}
+
+.popup-body{
+	padding: 10px 10px 0 10px !important;
 }
