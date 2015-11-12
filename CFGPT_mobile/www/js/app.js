@@ -113,6 +113,16 @@ angular.module('CFGPT_Mobile', [
         },
         authenticate: true
       })
+      
+      .state('app.groupUsers', {
+        url: '/groups/:groupId/users',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/groupUsers.html',
+            controller: 'GroupUsersCtrl'
+          }
+        }
+      })
 
 
       .state('login', {
