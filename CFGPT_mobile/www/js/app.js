@@ -14,6 +14,7 @@ angular.module('CFGPT_Mobile', [
   'CFGPT_Mobile.controllers.ConnectedObjectCtrl',
   'CFGPT_Mobile.services.APIService',
   'CFGPT_Mobile.services.ConstantService',
+  'CFGPT_Mobile.services.ConnectedObjectsService',
   'CFGPT_Mobile.services.AccountService'])
 
   .run(function ($ionicPlatform, $rootScope, $state, AccountService, ConstantService) {

@@ -84,7 +84,22 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 					function (error) {
 						callbackError(error.data);
 					});
-			}
+			},
+
+			changeStateAfterRing: function (tokenObject, newState, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/connectedobjects/changeStateAfterRing', {
+					tokenObject: tokenObject,
+					newState: newState
+				}).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					}
+				);
+			},
+
 		};
 
 		this.userGroups = {
