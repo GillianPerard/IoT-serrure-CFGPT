@@ -16,23 +16,23 @@ module.exports = {
         var _tokenUser = req.headers.authorization;
         
         //Si il manque des params, on drop.
-        if (!_name || !_tokenUser) return res.json(400, { err: 'PARAMS ERROR.' });
+        if (!_name || !_tokenUser) return res.serverError({ 'state': 'PARAMS ERROR.' });
         
         Groups.create({
             name: _name,
         }).exec(function (err, newGroup) {
-            if (err) return res.json(400, { err: 'ERROR.' });
+            if (err) return res.serverError({ 'state': 'Error when trying update database', 'error': err });
             if (newGroup) {
                 Users.findOneByToken(_tokenUser).exec(function (err, theUser) {
-                    if (err) return res.json(400, { err: 'ERROR.' });
-                    if (!theUser) return res.json(400, { err: 'ERROR.' });
+                    if (err) return res.serverError({ 'state': 'Error when trying access database', 'error': err });
+                    if (!theUser) return res.serverError({ 'state': 'There are no result' });
                     GroupUsers.create({
                         group: newGroup.id,
                         user: theUser.id,
                         is_admin: 1,
                         is_to_call: 1
                     }).exec(function (err, finalGroupUser) {
-                        if (err) return res.json(400, { err: 'ERROR.' });
+                        if (err) return res.serverError({ 'state': 'Error when trying update database', 'error' : err });
                         
                         GroupUsers.findOne(finalGroupUser).populate('group').exec(function findOneCB(err, found) {
                             return res.ok(found);
@@ -48,7 +48,7 @@ module.exports = {
     //Suppression d'un groupe en fonction d'un Id
     removeByGroupId: function (req, res) {
         var _groupId = req.param('groupId');
-        if (!_groupId) return res.json(400, { err: 'PARAMS ERROR.' });
+        if (!_groupId) return res.serverError({ 'state': 'PARAMS ERROR.' });
         
         Groups.findOneById(_groupId).exec(function (err, isFound) {
             if (err) return res.json(400, { err: 'ERROR.' });
