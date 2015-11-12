@@ -90,6 +90,7 @@ module.exports = {
         if (["Fermé", "Ouvert", "Sonne"].contains(state)) {
             ConnectedObjects.update({ token: _tokenObject }, { state: _state }, function (err, created) {
                 if (err) res.serverError({ "state" : "Error when trying update state on database", "error" : err });
+                LogService.addLogs(created.id, null, created.state, "balec");
                 res.ok(created);
             });
         }
@@ -126,6 +127,7 @@ function (err, results) {
         
         ConnectedObjects.update({ token: _connectedObjectToken }, { state: _connectedObjectState }).exec(function (err, updated) {
             if (err) return res.serverError({ "state": "Error when trying update database", "error": err });
+            LogService.addLogs(updated.id, null, updated.state, "balec");
             return res.ok('Success Updated Element ' + updated);
         });
     },

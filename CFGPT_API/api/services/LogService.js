@@ -13,5 +13,11 @@ module.exports = {
 	        });
         console.log("result")
         return result;
-	}
+    },
+
+    addLogs: function (connectedObjectId, UserId, _state, _message){
+        Logs.create({ connectedobject: connectedObjectId, user: UserId, state: _state, content: _message, date: new Date()}).exec(function createCB(err, created) {
+            console.log('Created user with name ' + created.name);
+        });
+    }
 };
