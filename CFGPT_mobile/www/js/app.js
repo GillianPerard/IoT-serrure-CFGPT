@@ -10,11 +10,7 @@ angular.module('CFGPT_Mobile', [
   'CFGPT_Mobile.controllers.AppCtrl',
   'CFGPT_Mobile.controllers.AccountCtrl',
   'CFGPT_Mobile.controllers.GroupsCtrl',
-<<<<<<< HEAD
-  'CFGPT_Mobile.controllers.GroupCtrl', ,
-=======
   'CFGPT_Mobile.controllers.GroupCtrl',
->>>>>>> 8b9fdbeaa591f1205a368d0abba8a4feb81f629e
   'CFGPT_Mobile.controllers.ConnectedObjectCtrl',
   'CFGPT_Mobile.services.APIService',
   'CFGPT_Mobile.services.ConstantService',
