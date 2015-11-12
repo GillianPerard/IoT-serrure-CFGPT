@@ -10,7 +10,11 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 						callbackSuccess(success.data);
 					},
 					function (error) {
-						callbackError(error.data);
+						if (!error.data) {
+							callbackError({ status: "Une erreur esst survenue. Vérifiez vos paramètres réseaux", err: error.data });
+						} else {
+							callbackError(error.data);
+						}
 					});
 			},
 
