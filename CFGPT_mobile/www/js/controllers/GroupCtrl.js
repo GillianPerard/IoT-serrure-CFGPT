@@ -3,22 +3,26 @@ angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 	'CFGPT_Mobile.services.UserGroupsService'])
 	.controller('GroupCtrl', function ($state, $scope, $stateParams, $ionicPopup, ConnectedObjectsService, UserGroupsService) {
 
-		UserGroupsService.getUserGroup($stateParams.groupId, function (result, error) {
-			if (!result && error) {
-				alert(error.err);
-			} else {
-				$scope.currentUserGroup = result;
-			}
-		});
+		var refresh = function () {
+			UserGroupsService.getUserGroup($stateParams.groupId, function (result, error) {
+				if (!result && error) {
+					alert(error.err);
+				} else {
+					$scope.currentUserGroup = result;
+				}
+			});
 
-		ConnectedObjectsService.list($stateParams.groupId, function (result, error) {
-			if (!result && error) {
-				alert(error.err);
-			} else {
-				$scope.keys = result;
-			}
-		});
-		
+			ConnectedObjectsService.list($stateParams.groupId, function (result, error) {
+				if (!result && error) {
+					alert(error.err);
+				} else {
+					$scope.keys = result;
+				}
+			});
+		};
+
+		refresh();
+
 		$scope.newKey = function () {
 			$scope.data = {};
 			var popup = $ionicPopup.show({
@@ -26,8 +30,9 @@ angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 				title: 'Nouvelle clé',
 				scope: $scope,
 				buttons: [
-					{ text: 'Annuler',
-					  type: 'noBackground'
+					{
+						text: 'Annuler',
+						type: 'noBackground'
 					},
 					{
 						text: '<b>Ajouter</b>',
@@ -48,7 +53,34 @@ angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 						}
 					}
 				]
-			}); 
+			});
+		};
+
+		$scope.removeKey = function (key) {
+			$ionicPopup.confirm({
+				title: 'Suppression de la clé',
+				template: 'Êtes-vous sûr de vouloir supprimer cette clé ?',
+				buttons: [
+					{
+						text: 'Non',
+						type: 'noBackground'
+					},
+					{
+						text: '<b>Oui</b>',
+						type: 'button-positive',
+						onTap: function (e) {
+							ConnectedObjectsService.remove(key,
+								function (data, error) {
+									if (!error) {
+										$scope.keys.pop(key);
+									} else {
+										alert(error);
+									}
+								});
+						}
+					}
+				]
+			});
 		};
 
 		$scope.viewDetail = function (connectedObject) {
@@ -57,11 +89,11 @@ angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 				group: $scope.currentUserGroup,
 				connectedObject: connectedObject
 			});
-		}
-		
-		$scope.isOpen = function(state){
-			if(state == "Ouvert") return true;
-			else if(state == "Fermé") return false;
+		};
+
+		$scope.isOpen = function (state) {
+			if (state == "Ouvert") return true;
+			else if (state == "Fermé") return false;
 		};
 		
 	});

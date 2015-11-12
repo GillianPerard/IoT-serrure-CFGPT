@@ -1,10 +1,10 @@
 angular.module('CFGPT_Mobile.services.UserGroupsService', [])
 
   .service('UserGroupsService', function (APIService) {
-    this.myUserGroups = undefined;
+    var myUserGroups = undefined;
 
     this.getMyUserGroups = function (callback) {
-      if (!this.myUserGroups) {
+      if (!myUserGroups) {
         APIService.userGroups.list(
           function (success) {
             myUserGroups = success;
@@ -19,16 +19,38 @@ angular.module('CFGPT_Mobile.services.UserGroupsService', [])
     };
 
     this.getUserGroup = function (id, callback) {
-      if (!this.myUserGroups) {
+      if (!myUserGroups) {
         this.getMyUserGroups(function (result, error) {
           if (!error && result) {
-            callback(result[id - 1]);
+            callback(result.find(function (group) { return group.group.id == id; }));
           } else {
             callback(undefined, error);
           }
         });
       } else {
-        callback(myUserGroups[id - 1]);
+        callback(myUserGroups.find(function (group) { return group.group.id == id; }));
       }
     }
+
+    this.newGroup = function (groupName, callback) {
+      APIService.groups.add(groupName,
+        function (userGroup) {
+          myUserGroups.push(userGroup);
+          callback();
+        },
+        function (error) {
+          callback(error);
+        });
+    };
+    
+    this.removeUserGroup = function (userGroup, callback) {
+      APIService.groups.remove(userGroup.group.id,
+        function (success) {
+          myUserGroups.pop(userGroup);
+          callback();
+        },
+        function (error) {
+          callback(error);
+        });
+    };
   });

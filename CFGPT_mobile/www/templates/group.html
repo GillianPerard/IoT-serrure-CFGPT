@@ -16,7 +16,7 @@
         <ion-option-button class="button-light icon ion-android-film colorWhite backgroundGray" ng-if="currentUserGroup.is_to_call"></ion-option-button>
         <ion-option-button class="button-light icon ion-android-notifications-off colorWhite backgroundGray" ng-if="currentUserGroup.is_to_call"></ion-option-button>
         <ion-option-button class="button-light icon ion-information-circled colorWhite backgroundGray" ng-click="viewDetail(key)"></ion-option-button>
-        <ion-option-button class="button-assertive icon ion-android-delete" ng-if="currentUserGroup.is_admin"></ion-option-button>
+        <ion-option-button class="button-assertive icon ion-android-delete" ng-if="currentUserGroup.is_admin" ng-click="removeKey(key)"></ion-option-button>
       </ion-item>
     </ion-list>
   </ion-content>

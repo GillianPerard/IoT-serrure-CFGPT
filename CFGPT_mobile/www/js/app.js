@@ -10,7 +10,11 @@ angular.module('CFGPT_Mobile', [
   'CFGPT_Mobile.controllers.AppCtrl',
   'CFGPT_Mobile.controllers.AccountCtrl',
   'CFGPT_Mobile.controllers.GroupsCtrl',
+<<<<<<< HEAD
   'CFGPT_Mobile.controllers.GroupCtrl', ,
+=======
+  'CFGPT_Mobile.controllers.GroupCtrl',
+>>>>>>> 8b9fdbeaa591f1205a368d0abba8a4feb81f629e
   'CFGPT_Mobile.controllers.ConnectedObjectCtrl',
   'CFGPT_Mobile.services.APIService',
   'CFGPT_Mobile.services.ConstantService',
@@ -43,8 +47,19 @@ angular.module('CFGPT_Mobile', [
     });
   })
 
-  .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpProvider) {
     $ionicConfigProvider.backButton.text('').icon('ion-android-arrow-back');
+
+    if (!$httpProvider.defaults.headers.get) {
+      $httpProvider.defaults.headers.get = {};
+    }
+    
+    $httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
+    // extra
+    $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
+    $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
+
+
     $stateProvider
 
       .state('app', {
