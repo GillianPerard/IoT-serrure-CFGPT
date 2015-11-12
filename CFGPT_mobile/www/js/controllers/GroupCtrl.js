@@ -3,6 +3,8 @@ angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 	'CFGPT_Mobile.services.UserGroupsService'])
 	.controller('GroupCtrl', function ($state, $scope, $stateParams, $ionicPopup, ConnectedObjectsService, UserGroupsService) {
 
+		var keys = [];
+
 		var refresh = function () {
 			UserGroupsService.getUserGroup($stateParams.groupId, function (result, error) {
 				if (!result && error) {
@@ -16,7 +18,8 @@ angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 				if (!result && error) {
 					alert(error.err);
 				} else {
-					$scope.keys = result;
+					keys = result;
+					$scope.keys = keys;
 				}
 			});
 		};
@@ -73,6 +76,7 @@ angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 								function (data, error) {
 									if (!error) {
 										$scope.keys.pop(key);
+										keys = $scope.keys;
 									} else {
 										alert(error);
 									}
@@ -91,9 +95,21 @@ angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 			});
 		};
 
+
 		$scope.isOpen = function (state) {
 			if (state == "Ouvert") return true;
 			else if (state == "Fermé") return false;
+		};
+
+
+		$scope.changeState = function (_idKey, _state) {
+			keys.forEach(function (element, index, array) {
+				if (element['id'] == _idKey){
+					element.state = _state;
+				}
+			});
+			$scope.keys = keys; //push({name:'test'});
+			return;
 		};
 		
 	});
