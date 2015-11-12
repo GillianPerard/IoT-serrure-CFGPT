@@ -53,4 +53,14 @@ angular.module('CFGPT_Mobile.services.UserGroupsService', [])
           callback(error);
         });
     };
+    
+    this.getGroupUsers = function (groupId, callback) {
+      APIService.groups.getGroupUsers(groupId,
+        function (data) {
+          callback(data);
+        },
+        function (error) {
+          callback(undefined, error);
+        });
+    }
   });

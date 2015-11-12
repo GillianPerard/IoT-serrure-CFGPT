@@ -88,7 +88,17 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 					function (error) {
 						callbackError(error.data);
 					});
-			}
+			},
+
+			changeState: function (objectToken, state, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/connectedobjects/changeState', { tokenObject: objectToken, state: state }).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
 		};
 
 		this.userGroups = {
@@ -126,6 +136,16 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 
 			remove: function (groupId, callbackSuccess, callbackError) {
 				$http.post(baseUrl + '/app/groups/remove', { groupId: groupId }).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
+			
+			getGroupUsers: function (groupId, callbackSuccess, callbackError) {
+				$http.get(baseUrl + '/app/groups/' + groupId + '/users').then(
 					function (success) {
 						callbackSuccess(success.data);
 					},
