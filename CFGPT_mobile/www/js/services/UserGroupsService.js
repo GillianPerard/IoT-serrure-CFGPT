@@ -42,7 +42,7 @@ angular.module('CFGPT_Mobile.services.UserGroupsService', [])
           callback(error);
         });
     };
-    
+
     this.removeUserGroup = function (userGroup, callback) {
       APIService.groups.remove(userGroup.group.id,
         function (success) {
@@ -53,7 +53,7 @@ angular.module('CFGPT_Mobile.services.UserGroupsService', [])
           callback(error);
         });
     };
-    
+
     this.getGroupUsers = function (groupId, callback) {
       APIService.groups.getGroupUsers(groupId,
         function (data) {
@@ -62,5 +62,25 @@ angular.module('CFGPT_Mobile.services.UserGroupsService', [])
         function (error) {
           callback(undefined, error);
         });
-    }
+    };
+
+    this.assignUserToGroup = function (groupId, userInfo, callback) {
+      APIService.groups.assignUserToGroup(groupId, userInfo,
+        function (data) {
+          callback(data);
+        },
+        function (error) {
+          callback(undefined, error);
+        });
+    };
+
+    this.removeUserFromGroup = function (groupId, userId, callback) {
+      APIService.groups.removeUserFromGroup(groupId, userId,
+        function (data) {
+          callback(data);
+        },
+        function (error) {
+          callback(undefined, error);
+        });
+    };
   });

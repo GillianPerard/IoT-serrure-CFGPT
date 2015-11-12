@@ -153,6 +153,26 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 						callbackError(error.data);
 					});
 			},
+			
+			assignUserToGroup: function (groupId, userInfo, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/groups/' + groupId + '/users/assign', userInfo).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
+			
+			removeUserFromGroup: function (groupId, userId, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/groups/' + groupId + '/users/remove', { userId: userId }).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
 		};
 
 	});
