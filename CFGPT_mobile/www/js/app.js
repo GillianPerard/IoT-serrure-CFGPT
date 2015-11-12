@@ -46,14 +46,14 @@ angular.module('CFGPT_Mobile', [
   .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpProvider) {
     $ionicConfigProvider.backButton.text('').icon('ion-android-arrow-back');
 
-    if (!$httpProvider.defaults.headers.get) {
-      $httpProvider.defaults.headers.get = {};
-    }
+    // if (!$httpProvider.defaults.headers.get) {
+    //   $httpProvider.defaults.headers.get = {};
+    // }
     
-    $httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
-    // extra
-    $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
-    $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
+    // $httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
+    // // extra
+    // $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
+    // $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
 
 
     $stateProvider
