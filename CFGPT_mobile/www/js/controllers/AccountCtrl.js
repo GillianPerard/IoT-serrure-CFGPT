@@ -87,6 +87,7 @@ angular.module('CFGPT_Mobile.controllers.AccountCtrl', [
 					console.log('error on login', error);
 				}
 				else{
+					AccountService.init();
 					$state.go("app.groups");
 					//Dès qu'on reçoit une notif web-socket
 					io.socket.get('/app/ConnectedObject/subscribe/'+ $localStorage.user.token, function(data,jwres){

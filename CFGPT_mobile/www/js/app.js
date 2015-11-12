@@ -12,6 +12,7 @@ angular.module('CFGPT_Mobile', [
   'CFGPT_Mobile.controllers.GroupsCtrl',
   'CFGPT_Mobile.controllers.GroupCtrl',
   'CFGPT_Mobile.controllers.ConnectedObjectCtrl',
+  'CFGPT_Mobile.controllers.GroupUsersCtrl',
   'CFGPT_Mobile.services.APIService',
   'CFGPT_Mobile.services.ConstantService',
   'CFGPT_Mobile.services.ConnectedObjectsService',
@@ -113,6 +114,16 @@ angular.module('CFGPT_Mobile', [
           }
         },
         authenticate: true
+      })
+      
+      .state('app.groupUsers', {
+        url: '/groups/:groupId/users',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/groupUsers.html',
+            controller: 'GroupUsersCtrl'
+          }
+        }
       })
 
 

@@ -1,0 +1,21 @@
+<ion-view view-title="Informations">
+  <ion-nav-buttons side="right">
+    <button ng-if="currentUserGroup.is_admin" class="button button-icon button-clear ion-android-add" ng-click="">
+    </button>
+  </ion-nav-buttons>
+  <ion-content>
+    <ion-list show-delete="false" can-swipe="true">
+      <ion-item ng-repeat="user in users" class="fontSize16 card" ng-class="{
+      'borderLeftMainColor': user.is_admin && user.is_to_call, 
+      'borderLeftDoorClosedColor': !user.is_admin && !user.is_to_call,
+      'borderLeftGreenColor': user.is_admin && !user.is_to_call,
+      'borderLeftYellowColor': !user.is_admin && user.is_to_call
+      }">
+        {{user.user.firstname}} {{user.user.lastname}}
+        <ion-option-button class="button-assertive backgroundGray icon" ng-class="{'ion-android-sad': user.is_admin, 'ion-android-happy': !user.is_admin}" ng-if="currentUserGroup.is_admin"></ion-option-button>
+        <ion-option-button class="button-assertive backgroundGray icon" ng-class="{'ion-android-notifications-off': user.is_to_call, 'ion-android-notifications': !user.is_to_call}" ng-if="currentUserGroup.is_admin"></ion-option-button>
+        <ion-option-button class="button-assertive icon ion-android-delete" ng-if="currentUserGroup.is_admin" ng-click="removeGroup(group)"></ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view

@@ -10,11 +10,7 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 						callbackSuccess(success.data);
 					},
 					function (error) {
-						if (!error.data) {
-							callbackError({ status: "Une erreur esst survenue. Vérifiez vos paramètres réseaux", err: error.data });
-						} else {
-							callbackError(error.data);
-						}
+						callbackError(error.data);
 					});
 			},
 
@@ -88,30 +84,6 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 					function (error) {
 						callbackError(error.data);
 					});
-			},
-
-			changeStateAfterRing: function (tokenObject, newState, callbackSuccess, callbackError) {
-				$http.post(baseUrl + '/app/connectedobjects/changeStateAfterRing', {
-					tokenObject: tokenObject,
-					newState: newState
-				}).then(
-					function (success) {
-						callbackSuccess(success.data);
-					},
-					function (error) {
-						callbackError(error.data);
-					}
-				);
-			},
-			
-			changeState: function (objectToken, state, callbackSuccess, callbackError) {
-				$http.post(baseUrl + '/app/connectedobjects/changeState', { tokenObject: objectToken, state: state }).then(
-					function (success) {
-						callbackSuccess(success.data);
-					},
-					function (error) {
-						callbackError(error.data);
-					});
 			}
 		};
 
@@ -124,7 +96,7 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 					function (error) {
 						callbackError(error.data);
 					});
-			}
+			},
 		}
 
 		this.groups = {
@@ -157,46 +129,6 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 						callbackError(error.data);
 					});
 			},
-
-			getGroupUsers: function (groupId, callbackSuccess, callbackError) {
-				$http.get(baseUrl + '/app/groups/' + groupId + '/users').then(
-					function (success) {
-						callbackSuccess(success.data);
-					},
-					function (error) {
-						callbackError(error.data);
-					});
-			},
-
-			assignUserToGroup: function (groupId, userInfo, callbackSuccess, callbackError) {
-				$http.post(baseUrl + '/app/groups/' + groupId + '/users/assign', { userId: 0, isAdmin: false, isToCall: false }).then(
-					function (success) {
-						callbackSuccess(success.data);
-					},
-					function (error) {
-						callbackError(error.data);
-					});
-			},
-
-			removeUserFromGroup: function (groupId, userId, callbackSuccess, callbackError) {
-				$http.post(baseUrl + '/app/groups/' + groupId + '/users/remove', { userId: userId }).then(
-					function (success) {
-						callbackSuccess(success.data);
-					},
-					function (error) {
-						callbackError(error.data);
-					});
-			},
-
-			searchUser: function (email, callbackSuccess, callbackError) {
-				$http.post(baseUrl + '/app/users/getByMail', { email: email }).then(
-					function (success) {
-						callbackSuccess(success.data);
-					},
-					function (error) {
-						callbackError(error.data);
-					});
-			}
 		};
 
 	});

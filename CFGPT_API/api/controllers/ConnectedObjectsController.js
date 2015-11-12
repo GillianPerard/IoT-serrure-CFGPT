@@ -39,7 +39,7 @@ module.exports = {
             token: _tokenObject,
             state: 'Fermé'
         }).exec(function (err, createdConnObj) {
-            if (err) return res.serverError({ "State": 'Error when trying add connected object on database', "error": err });
+            if (err) return res.serverError({ "state": 'Error when trying add connected object on database', "error": err });
             return res.ok(createdConnObj);
         });
     },
@@ -90,6 +90,7 @@ module.exports = {
         if (["Fermé", "Ouvert", "Sonne"].contains(state)) {
             ConnectedObjects.update({ token: _tokenObject }, { state: _state }, function (err, created) {
                 if (err) res.serverError({ "state" : "Error when trying update state on database", "error" : err });
+                LogService.addLogs(created.id, null, created.state, "balec");
                 res.ok(created);
             });
         }
@@ -122,10 +123,11 @@ module.exports = {
         var _connectedObjectToken = req.param('tokenObject');
         var _connectedObjectState = req.param('stateObject');
 
-        if (!_connectedObjectToken ||  !_connectedObjectState) return res.json(400, { err: 'PARAMS ERROR.' });          //Si il manque le param, on drop.
+        if (!_connectedObjectToken ||  !_connectedObjectState) return res.serverError({ "state": 'PARAMS ERROR.' });          //Si il manque le param, on drop.
 
         ConnectedObjects.update({ token: _connectedObjectToken }, { state: _connectedObjectState }).exec(function (err, updated) {
             if (err) return res.serverError({ "state": "Error when trying update database", "error": err });
+            LogService.addLogs(updated.id, null, updated.state, "balec");
             if (updated.length == 0) return res.json(400, { err: 'ERROR.' });
 
             ConnectedObjects.findOneById(updated[0].id).populate('groups').exec(function (err, connObjUpdated) {
@@ -152,7 +154,7 @@ module.exports = {
 
         ConnectedObjects.update({ token: _tokenObject }, { state: 'Sonne' }).exec(function (err, connObjectUpdated) {
             if (err) cb(err);
-            if (connObjectUpdated.length == 0) return res.json(400, { err: 'ERROR.' });
+            if (connObjectUpdated.length == 0) return res.serverError({"state": 'ERROR.' });
 
             ConnectedObjects.findOneById(connObjectUpdated[0].id).populate('groups').exec(function (err, connObjUpdated) {
               if (err) cb(err);
@@ -171,7 +173,7 @@ module.exports = {
                 state: connObjUpdated.state,
                 content: 'Un visiteur vient de sonner à la serrure "' + connObjUpdated.name + '".'
               }).exec(function (err, log) {
-                if (err) return res.json(400, {err: 'ERROR.'});
+                if (err) return res.serverError({"state": 'ERROR.' });
 
                 return res.send(connObjUpdated);
               });
@@ -194,10 +196,10 @@ module.exports = {
             'LEFT JOIN users u ON (gu.`user` = u.id) ' +
             'WHERE u.token = "' + _token + '" AND gu.is_to_call = True' ,
             function(err, result) {
-                if (err) return res.json(400,{err:'error occured when connect to object'});
+                if (err) return res.serverError({"state": "error occured when connect to object", "error" : err});
                 console.log("subscribe successfull")
                 ConnectedObjects.subscribe(req, _.pluck(result,'id'),['update']);
-                return res.json(result);
+                return res.ok(result);
             }
         )
     },

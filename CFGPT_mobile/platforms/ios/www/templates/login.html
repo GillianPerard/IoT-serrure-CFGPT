@@ -1,25 +1,26 @@
-<ion-modal-view>
-  <ion-header-bar>
-    <h1 class="title">Login</h1>
-    <div class="buttons">
-      <button class="button button-clear" ng-click="closeLogin()">Close</button>
-    </div>
-  </ion-header-bar>
-  <ion-content>
+<ion-view view-title="Connexion">
+  <ion-content class="backgroundGray">
+    <img src="img/logoTest.png" alt="" id="loginLogo">
     <form ng-submit="doLogin()">
       <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Username</span>
-          <input type="text" ng-model="loginData.username">
+        <label class="item item-input noBorder noBackground loginItem">
+          <input type="text" ng-model="loginData.email" placeholder="Email" class="loginInput colorWhite">
         </label>
-        <label class="item item-input">
-          <span class="input-label">Password</span>
-          <input type="password" ng-model="loginData.password">
+        <label class="item item-input noBorder noBackground loginItem">
+          <input type="password" ng-model="loginData.password" placeholder="**********" class="loginInput colorWhite">
         </label>
-        <label class="item">
-          <button class="button button-block button-positive" type="submit">Log in</button>
+        <label class="item noBorder noBackground loginItem">
+          <button class="button button-block backgroundMainColor noBorder colorWhite" type="submit">
+            <i class="ion ion-android-done" style="width:25px;"></i> Connexion
+          </button>
         </label>
       </div>
     </form>
+    <p style="text-align:center;margin-top:15px;" class="colorWhite">OU</p>
+    <label class="item noBorder noBackground loginItem">
+      <button class="button button-block noBackground borderMainColor colorMainColor" ng-click="signup()">
+        <i class="ion ion-android-clipboard" style="width:25px;"></i> Inscription
+      </button>
+    </label>
   </ion-content>
-</ion-modal-view>
+</ion-view>
