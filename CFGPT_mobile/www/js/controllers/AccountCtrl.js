@@ -79,7 +79,7 @@ angular.module('CFGPT_Mobile.controllers.AccountCtrl', [
 
 		// Perform the login action when the user submits the login form
 		$scope.doLogin = function () {
-			console.log('Doing login', $scope.loginData);
+            console.log('Doing login', $scope.loginData);
 
 			AccountService.login($scope.loginData, function (error) {
 				if (error != undefined) {
@@ -98,44 +98,46 @@ angular.module('CFGPT_Mobile.controllers.AccountCtrl', [
 					io.socket.on('connectedobjects',function(websock){
 						if (websock.verb == 'updated'){
                             refreshChangeState($state, websock, websock.data['state']);
-							if (websock.data['notif']){ //Si c'est une pop-up de notif ouvert/fermé.
-								$ionicPopup.confirm({
-									title: 'Quelqu\'un sonne !',
-									template: 'La serrure nommée "'+websock.data['name']+'" demande votre attention. Qu\'allez-vous faire ?',
-									buttons: [{
-										text: 'Fermer',
-										type: 'noBackground',
-										onTap: function (e) {
-											ConnectedObjectsService.changeStateAfterRing(
-												websock.data['token'],
-												'Fermé',
-												function (data, error) {
-													if (!error) {
-														if (data['id'] == undefined) { //Action déjà effectuée par un autre utilisateur
-                                                            showAlert('Trop tard !', 'Un autre utilisateur a répondu avant vous.');
-														} //Sinon, rien à faire.
-													}
-												}
-											);
-										}},{
-										text: '<b>Ouvrir</b>',
-										type: 'button-positive',
-										onTap: function (e) {
-											ConnectedObjectsService.changeStateAfterRing(
-												websock.data['token'],
-												'Ouvert',
-												function (data, error) {
-													if (!error) {
-														if (data['id'] == undefined) { //Action déjà effectuée par un autre utilisateur
-                                                            showAlert('Trop tard !', 'Un autre utilisateur a répondu avant vous.');
-														} //Sinon, rien à faire.
-													}
-												}
-											);
-										}}
-									]
-								});
-							}
+                            if (!ConstantService.contains(AccountService.getMuteConnectedObjectsId(), websock.data['token'])){
+                                if (websock.data['notif']){ //Si c'est une pop-up de notif ouvert/fermé.
+                                    $ionicPopup.confirm({
+                                        title: 'Quelqu\'un sonne !',
+                                        template: 'La serrure nommée "'+websock.data['name']+'" demande votre attention. Qu\'allez-vous faire ?',
+                                        buttons: [{
+                                            text: 'Fermer',
+                                            type: 'noBackground',
+                                            onTap: function (e) {
+                                                ConnectedObjectsService.changeStateAfterRing(
+                                                    websock.data['token'],
+                                                    'Fermé',
+                                                    function (data, error) {
+                                                        if (!error) {
+                                                            if (data['id'] == undefined) { //Action déjà effectuée par un autre utilisateur
+                                                                showAlert('Trop tard !', 'Un autre utilisateur a répondu avant vous.');
+                                                            } //Sinon, rien à faire.
+                                                        }
+                                                    }
+                                                );
+                                            }},{
+                                            text: '<b>Ouvrir</b>',
+                                            type: 'button-positive',
+                                            onTap: function (e) {
+                                                ConnectedObjectsService.changeStateAfterRing(
+                                                    websock.data['token'],
+                                                    'Ouvert',
+                                                    function (data, error) {
+                                                        if (!error) {
+                                                            if (data['id'] == undefined) { //Action déjà effectuée par un autre utilisateur
+                                                                showAlert('Trop tard !', 'Un autre utilisateur a répondu avant vous.');
+                                                            } //Sinon, rien à faire.
+                                                        }
+                                                    }
+                                                );
+                                            }}
+                                        ]
+                                    });
+                                }
+                            }
 						}
 					});
 				}

@@ -1,7 +1,10 @@
 angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 	'CFGPT_Mobile.services.ConnectedObjectsService',
 	'CFGPT_Mobile.services.UserGroupsService'])
-	.controller('GroupCtrl', function ($state, $scope, $stateParams, $ionicPopup, ConnectedObjectsService, UserGroupsService) {
+	.controller('GroupCtrl', function (
+		$state, $scope, $stateParams, $ionicPopup,
+		ConnectedObjectsService, UserGroupsService, ConstantService, AccountService
+	){
 
 		var keys = [];
 
@@ -107,6 +110,24 @@ angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 			else return false;
 		}
 
+
+		// Indique si l'object connecté est ou non "mute" => on ne reçoit plus les notifications
+		$scope.isMute = function(tokenObject){
+			return ConstantService.contains(AccountService.getMuteConnectedObjectsId(), tokenObject);
+		}
+		// Indiquer un object connecté comme "Mute"
+		$scope.muteConnectedObjects = function (tokenObject) {
+			console.log("Mute de l'objet : "+tokenObject);
+			AccountService.addMuteConnectedObjects(tokenObject);
+		};
+		// Retirer le mode "Mute" d'un objet connecté
+		$scope.unmuteConnectedObjects = function (tokenObject) {
+			console.log("Unmute de l'objet : "+tokenObject);
+			AccountService.removeMuteConnectedObjects(tokenObject);
+		};
+
+
+		//Ouverture de la porte
 		$scope.openDoor = function (connectedObject) {
 			ConnectedObjectsService.openDoor(connectedObject, function (result, error) {
 				if (!result && error) {
@@ -118,6 +139,7 @@ angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 			});	
 		};
 
+		//Fermeture de la porte
 		$scope.closeDoor = function (connectedObject) {
 			ConnectedObjectsService.closeDoor(connectedObject, function (result, error) {
 				if (!result && error) {
@@ -128,7 +150,8 @@ angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 				}
 			});	
 		};
-		
+
+		//Changement d'état de la porte
 		$scope.changeState = function (_idKey, _state) {
 			keys.forEach(function (element, index, array) {
 				if (element['id'] == _idKey){
