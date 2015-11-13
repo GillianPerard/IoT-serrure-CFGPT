@@ -15,7 +15,7 @@ angular.module('CFGPT_Mobile.controllers.GroupUsersCtrl', [
 				if (!result && error) {
 					alert(error.err);
 				} else {
-					$scope.users = result;
+					$scope.groupUsers = result;
 				}
 			});
 		};
@@ -60,7 +60,7 @@ angular.module('CFGPT_Mobile.controllers.GroupUsersCtrl', [
 			UserGroupsService.assignUserToGroup($scope.currentUserGroup.group.id,
 				function (data, error) {
 					if (data && !error) {
-						$scope.users.push(data);
+						$scope.groupUsers.push(data);
 						$scope.assignUserData = {};
 					} else {
 						alert(error);
@@ -69,7 +69,7 @@ angular.module('CFGPT_Mobile.controllers.GroupUsersCtrl', [
 		};
 
 
-		$scope.removeUser = function (user) {
+		$scope.removeGroupUser = function (groupUser) {
 			$ionicPopup.confirm({
 				title: 'Suppression du partage',
 				template: 'Êtes-vous sûr de vouloir retirer cette personne de ce trousseau ?',
@@ -82,10 +82,10 @@ angular.module('CFGPT_Mobile.controllers.GroupUsersCtrl', [
 						text: '<b>Oui</b>',
 						type: 'button-positive',
 						onTap: function (e) {
-							UserGroupsService.removeUserFromGroup($scope.currentUserGroup.group.id, user.id,
+							UserGroupsService.removeUserFromGroup($scope.currentUserGroup.group.id, groupUser.user.id,
 								function (data, error) {
 									if (!error) {
-										$scope.users.pop(user);
+										$scope.groupUsers.pop(groupUser);
 									} else {
 										alert(error);
 									}
