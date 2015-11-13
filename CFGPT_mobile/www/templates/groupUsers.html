@@ -12,8 +12,8 @@
       'borderLeftYellowColor': !groupUser.is_admin && groupUser.is_to_call
       }">
         {{groupUser.user.firstname}} {{groupUser.user.lastname}}
-        <ion-option-button class="button-assertive backgroundGray icon" ng-class="{'ion-android-sad': groupUser.is_admin, 'ion-android-happy': !groupUser.is_admin}" ng-if="currentUserGroup.is_admin"></ion-option-button>
-        <ion-option-button class="button-assertive backgroundGray icon" ng-class="{'ion-android-notifications-off': groupUser.is_to_call, 'ion-android-notifications': !groupUser.is_to_call}" ng-if="currentUserGroup.is_admin"></ion-option-button>
+        <ion-option-button class="button-assertive backgroundGray icon" ng-class="{'ion-android-sad': groupUser.is_admin, 'ion-android-happy': !groupUser.is_admin}" ng-if="currentUserGroup.is_admin" ng-click="toggleIsAdmin(groupUser)"></ion-option-button>
+        <ion-option-button class="button-assertive backgroundGray icon" ng-class="{'ion-android-notifications-off': groupUser.is_to_call, 'ion-android-notifications': !groupUser.is_to_call}" ng-if="currentUserGroup.is_admin" ng-click="toggleIsToCall(groupUser)"></ion-option-button>
         <ion-option-button class="button-assertive icon ion-android-delete" ng-if="currentUserGroup.is_admin" ng-click="removeGroupUser(groupUser)"></ion-option-button>
       </ion-item>
     </ion-list>

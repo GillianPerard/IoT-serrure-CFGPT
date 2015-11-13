@@ -74,6 +74,16 @@ angular.module('CFGPT_Mobile.services.UserGroupsService', [])
         });
     };
 
+    this.updateUserFromGroup = function (groupId, groupUser, callback) {
+      APIService.groups.updateUserFromGroup(groupId, groupUser,
+        function (data) {
+          callback(data);
+        },
+        function (error) {
+          callback(undefined, error);
+        });
+    };
+
     this.removeUserFromGroup = function (groupId, userId, callback) {
       APIService.groups.removeUserFromGroup(groupId, userId,
         function (data) {

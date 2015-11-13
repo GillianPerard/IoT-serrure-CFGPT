@@ -197,6 +197,16 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 						callbackError(error.data);
 					});
 			},
+			
+			updateUserFromGroup: function (groupId, userInfo, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/groups/' + groupId + '/users/update', { userId: userInfo.userId, isAdmin: userInfo.isAdmin, isToCall: userInfo.isToCall }).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
 
 			searchUser: function (email, callbackSuccess, callbackError) {
 				$http.post(baseUrl + '/app/users/getByMail', { email: email }).then(
