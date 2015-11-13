@@ -90,6 +90,20 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 					});
 			},
 
+			changeStateAfterRing: function (tokenObject, newState, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/connectedobjects/changeStateAfterRing', {
+					tokenObject: tokenObject,
+					newState: newState
+				}).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					}
+				);
+			},
+			
 			changeState: function (objectToken, state, callbackSuccess, callbackError) {
 				$http.post(baseUrl + '/app/connectedobjects/changeState', { tokenObject: objectToken, state: state }).then(
 					function (success) {
@@ -98,7 +112,7 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 					function (error) {
 						callbackError(error.data);
 					});
-			},
+			}
 		};
 
 		this.userGroups = {
@@ -110,7 +124,7 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 					function (error) {
 						callbackError(error.data);
 					});
-			},
+			}
 		}
 
 		this.groups = {
@@ -182,7 +196,7 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 					function (error) {
 						callbackError(error.data);
 					});
-			},
+			}
 		};
 
 	});
