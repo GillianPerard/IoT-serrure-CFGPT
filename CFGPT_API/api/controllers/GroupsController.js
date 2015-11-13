@@ -111,7 +111,10 @@ module.exports = {
                         is_to_call: (_isToCall == "true"? 1 : 0)
                     }).exec(function (err, finalGroupUser) {
                         if (err) return res.json(400, { err: 'ERROR.' });
-                        return res.send(finalGroupUser,user);
+
+                        GroupUsers.findOne(finalGroupUser).populate('user').exec(function (err, found) {
+                            return res.ok(found);
+                        });
                     });
                 });
             });
