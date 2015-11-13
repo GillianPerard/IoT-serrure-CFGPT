@@ -103,6 +103,10 @@ angular.module('CFGPT_Mobile.controllers.GroupUsersCtrl', [
 		};
 
 		$scope.toggleIsAdmin = function (groupUser) {
+			if (groupUser.id == $scope.currentUserGroup.id) {
+				return;
+			}
+			
 			UserGroupsService.updateUserFromGroup($scope.currentUserGroup.group.id, { userId: groupUser.user.id, isAdmin: !groupUser.is_admin, isToCall: groupUser.is_to_call },
 				function (data, error) {
 					if (data && !error) {
