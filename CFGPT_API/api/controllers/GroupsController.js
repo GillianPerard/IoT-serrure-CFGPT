@@ -71,13 +71,13 @@ module.exports = {
         //var plop = req.query.user;
         var _groupId = req.param('groupId');
         
-        if (!_groupId) return res.json(400, { err: 'No groupId param.' });
+        if (!_groupId) return res.serverError({ 'state': 'Error with args :(' });
         
         Groups.findOneById(_groupId).exec(function (err, group) {
-            if (!group) return res.json(400, { err: 'No group found.' });
+            if (!group) return res.serverError({ 'state': 'There is no group :(' });
             GroupUsers.find({ group: group.id }).populate('user').exec(function (err, userWithGroup) {
-                if (userWithGroup.length == 0) return res.json(400, { err: 'No groupuser found.' });
-                return res.send(userWithGroup);
+                if (userWithGroup.length == 0) return res.serverError({ 'state': 'Error when tryng find groupUsers :(', 'error': err });
+                return res.ok(userWithGroup);
             });
         });
     },
