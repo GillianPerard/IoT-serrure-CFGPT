@@ -59,6 +59,16 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 						callbackError(error.data);
 					});
 			},
+			
+			getLog: function (objectToken, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/connectedobjects/logs', { tokenObject: objectToken }).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
 
 			remove: function (objectToken, callbackSuccess, callbackError) {
 				$http.post(baseUrl + '/app/connectedobjects/remove', { tokenObject: objectToken }).then(

@@ -32,6 +32,16 @@ angular.module('CFGPT_Mobile.services.ConnectedObjectsService', [])
 				});
 		};
 
+		this.getLog = function (objectToken, callback) {
+			APIService.connectedObjects.getByToken(objectToken,
+				function (data) {
+					callback(data);
+				},
+				function (error) {
+					callback(undefined, error);
+				});
+		};
+
 		this.add = function (groupId, connectedObject, callback) {
 			APIService.connectedObjects.add(connectedObject,
 				function (data) {
