@@ -102,7 +102,26 @@ angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 			else if (state == "Fermé") return false;
 		};
 
+		$scope.openDoor = function (connectedObject) {
+			ConnectedObjectsService.openDoor(connectedObject, function (result, error) {
+				if (!result && error) {
+					alert(error.err);
+				} else {
+					console.log("open door");
+				}
+			});	
+		};
 
+		$scope.closeDoor = function (connectedObject) {
+			ConnectedObjectsService.closeDoor(connectedObject, function (result, error) {
+				if (!result && error) {
+					alert(error.err);
+				} else {
+					console.log("close door");
+				}
+			});	
+		};
+		
 		$scope.changeState = function (_idKey, _state) {
 			keys.forEach(function (element, index, array) {
 				if (element['id'] == _idKey){

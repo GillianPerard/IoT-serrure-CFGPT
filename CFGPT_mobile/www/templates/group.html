@@ -11,8 +11,8 @@
       <ion-item ng-repeat="key in keys" ng-class="{'borderLeftMainColor': isOpen(key.state), 'borderLeftDoorClosedColor': !isOpen(key.state)}"
       class="fontSize16 card">
         <i class="fa fa-key" style="width:25px;"></i> {{key.name}}
-        <ion-option-button ng-if="isOpen(key.state)" class="button-light icon ion-android-lock colorWhite backgroundGray"></ion-option-button>
-        <ion-option-button ng-if="!isOpen(key.state)" class="button-light icon ion-android-unlock colorWhite backgroundGray"></ion-option-button>
+        <ion-option-button ng-if="isOpen(key.state)" class="button-light icon ion-android-lock colorWhite backgroundGray" ng-click="closeDoor(key)"></ion-option-button>
+        <ion-option-button ng-if="!isOpen(key.state)" class="button-light icon ion-android-unlock colorWhite backgroundGray" ng-click="openDoor(key)"></ion-option-button>
         <ion-option-button class="button-light icon ion-android-film colorWhite backgroundGray" ng-if="currentUserGroup.is_to_call"></ion-option-button>
         <ion-option-button class="button-light icon ion-android-notifications-off colorWhite backgroundGray" ng-if="currentUserGroup.is_to_call"></ion-option-button>
         <ion-option-button class="button-light icon ion-information-circled colorWhite backgroundGray" ui-sref="app.connectedObjects({ objectToken: key.token, group: currentUserGroup, key: connectedObject })"></ion-option-button>
