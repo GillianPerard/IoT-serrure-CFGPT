@@ -105,7 +105,7 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 			},
 			
 			changeState: function (objectToken, state, callbackSuccess, callbackError) {
-				$http.post(baseUrl + '/app/connectedobjects/changeState', { tokenObject: objectToken, state: state }).then(
+				$http.post(baseUrl + '/app/connectedobjects/changeState', { tokenObject: objectToken, stateObject: state }).then(
 					function (success) {
 						callbackSuccess(success.data);
 					},

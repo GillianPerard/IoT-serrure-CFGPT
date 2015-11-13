@@ -72,7 +72,7 @@ angular.module('CFGPT_Mobile.services.ConnectedObjectsService', [])
 
 
 		this.openDoor = function (connectedObject, callback) {
-			APIService.connectedObjects.changeState(connectedObject.token, "Fermé",
+			APIService.connectedObjects.changeState(connectedObject.token, "Ouvert",
 				function (data) {
 					callback(data);
 				},
@@ -82,7 +82,7 @@ angular.module('CFGPT_Mobile.services.ConnectedObjectsService', [])
 		};
 
 		this.closeDoor = function (connectedObject, callback) {
-			APIService.connectedObjects.changeState(connectedObject.token, "Ouvert",
+			APIService.connectedObjects.changeState(connectedObject.token, "Fermé",
 				function (data) {
 					callback(data);
 				},
