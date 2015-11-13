@@ -9390,3 +9390,7 @@ div, p, a, h1, h2, h3, h4, h5, h6, span {
 
 .popup-body {
   padding: 10px 10px 0 10px !important; }
+
+.checkbox input:checked:before, .checkbox input:checked + .checkbox-icon:before {
+  background: #48C1BE;
+  border-color: #48C1BE; }
