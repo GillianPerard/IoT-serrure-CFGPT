@@ -42,8 +42,7 @@ module.exports = {
     	type : 'text'
     },
     imagePath: {
-      type: 'string',
-      required: true
+      type: 'string'
     },
     toJSON: function() {
       var obj = this.toObject();
