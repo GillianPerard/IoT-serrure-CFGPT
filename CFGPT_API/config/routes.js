@@ -62,6 +62,7 @@ module.exports.routes = {
   /*DONE*/'GET  /app/groups/:groupId/connectedobjects' : 'Groups.getConnectedObjects', //(groupId)
   /*DONE*/'POST /app/groups/:groupId/connectedobjects/assign' : 'Groups.assignConnectedObjectById', //(groupId, tokenObjects)
   /*DONE*/'POST /app/groups/:groupId/connectedobjects/remove' : 'Groups.removeConnectedObjectById', //(groupId, tokenObjects)
+  /*DONE*/'POST /app/groups/:groupId/connectedobjects/update' : 'Groups.updateUserById', //(groupId, tokenObjects)
 
 // Url des users dans les groupes
 //[VerifAccount]
