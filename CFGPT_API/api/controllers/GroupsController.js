@@ -194,17 +194,17 @@ module.exports = {
     getConnectedObjects : function (req, res) {
         var groupId = req.param('groupId');
         
-        if (!groupId) return res.json(400, { err: 'No groupId param.' });
+        if (!groupId) return res.serverError({ 'state': 'Error with arguments :(' });
         
         Groups.findOne({ id: groupId })
       .populate('connectedobjects')
       .exec(function (err, group) {
-            if (!group) return res.json(400, { err: 'No group found.' });
+            if (!group) return res.serverError({ 'state': 'Error when trying find Groups :(', 'error': err });
             /*
         if (group.connectedobjects.length == 0) return res.json(400,{err:'No connectedobjects found.'});
         */
 
-        return res.json(group.connectedobjects);
+        return res.ok(group.connectedobjects);
         })
 
     },
