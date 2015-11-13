@@ -165,23 +165,23 @@ module.exports = {
         var _userId = req.param('userId');
         
         //Si il manque des params, on drop.
-        if (!_groupId || !_userId) return res.json(400, { err: 'PARAMS ERROR.' });
+        if (!_groupId || !_userId) return res.serverError({ 'state': 'Error with arguments :(' });
         
         Groups.findOneById(_groupId).exec(function (err, isFound) {
-            if (err) return res.json(400, { err: 'ERROR.' });
-            if (!isFound) return res.json(400, { err: 'ERROR.' });
+            if (err) return res.serverError({ 'state': 'Error when trying find groups :(', 'error': err });
+            if (!isFound) return res.serverError({ 'state': 'There is no groups :(' });
             
             Users.findOneById(_userId).exec(function (err, isFound) {
-                if (err) return res.json(400, { err: 'ERROR.' });
-                if (!isFound) return res.json(400, { err: 'ERROR.' });
+                if (err) return res.serverError({ 'state': 'Error when trying find users :(', 'error': err });
+                if (!isFound) return res.serverError({ 'state': 'There is no Users :(' });
                 
                 GroupUsers.findOne({ group: _groupId, user: _userId }).exec(function (err, groupUser) {
-                    if (err) return res.json(400, { err: 'ERROR.' });
-                    if (!groupUser) return res.json(400, { err: 'USER IS NOT IN GROUP.' });
+                    if (err) return res.serverError({ 'state': 'Error when trying find groupUsers :(', 'error': err });
+                    if (!groupUser) return res.serverError({ 'state': 'There is no GroupUser :(' });
                     
                     GroupUsers.destroy({ id: groupUser.id }).exec(function (err, groupToDestroy) {
-                        if (err) return res.json(400, { err: 'ERROR.' });
-                        return res.send(groupToDestroy);
+                        if (err) return serverError({ 'state': 'Error when trying delete GroupUser :(', 'error': err });
+                        return res.ok(groupToDestroy);
                     });
                 });
             });
