@@ -5,16 +5,16 @@
   </ion-nav-buttons>
   <ion-content>
     <ion-list show-delete="false" can-swipe="true">
-      <ion-item ng-repeat="user in users" class="fontSize16 card" ng-class="{
-      'borderLeftMainColor': user.is_admin && user.is_to_call, 
-      'borderLeftDoorClosedColor': !user.is_admin && !user.is_to_call,
-      'borderLeftGreenColor': user.is_admin && !user.is_to_call,
-      'borderLeftYellowColor': !user.is_admin && user.is_to_call
+      <ion-item ng-repeat="groupUser in groupUsers" class="fontSize16 card" ng-class="{
+      'borderLeftMainColor': groupUser.is_admin && groupUser.is_to_call, 
+      'borderLeftDoorClosedColor': !groupUser.is_admin && !groupUser.is_to_call,
+      'borderLeftGreenColor': groupUser.is_admin && !groupUser.is_to_call,
+      'borderLeftYellowColor': !groupUser.is_admin && groupUser.is_to_call
       }">
-        {{user.user.firstname}} {{user.user.lastname}}
-        <ion-option-button class="button-assertive backgroundGray icon" ng-class="{'ion-android-sad': user.is_admin, 'ion-android-happy': !user.is_admin}" ng-if="currentUserGroup.is_admin"></ion-option-button>
-        <ion-option-button class="button-assertive backgroundGray icon" ng-class="{'ion-android-notifications-off': user.is_to_call, 'ion-android-notifications': !user.is_to_call}" ng-if="currentUserGroup.is_admin"></ion-option-button>
-        <ion-option-button class="button-assertive icon ion-android-delete" ng-if="currentUserGroup.is_admin" ng-click="removeGroup(group)"></ion-option-button>
+        {{groupUser.user.firstname}} {{groupUser.user.lastname}}
+        <ion-option-button class="button-assertive backgroundGray icon" ng-class="{'ion-android-sad': groupUser.is_admin, 'ion-android-happy': !groupUser.is_admin}" ng-if="currentUserGroup.is_admin"></ion-option-button>
+        <ion-option-button class="button-assertive backgroundGray icon" ng-class="{'ion-android-notifications-off': groupUser.is_to_call, 'ion-android-notifications': !groupUser.is_to_call}" ng-if="currentUserGroup.is_admin"></ion-option-button>
+        <ion-option-button class="button-assertive icon ion-android-delete" ng-if="currentUserGroup.is_admin" ng-click="removeGroupUser(groupUser)"></ion-option-button>
       </ion-item>
     </ion-list>
   </ion-content>
