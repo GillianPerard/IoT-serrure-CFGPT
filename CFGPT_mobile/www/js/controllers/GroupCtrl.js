@@ -112,6 +112,7 @@ angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 				if (!result && error) {
 					alert(error.err);
 				} else {
+					connectedObject.state = result.state;
 					console.log("open door");
 				}
 			});	
@@ -122,6 +123,7 @@ angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 				if (!result && error) {
 					alert(error.err);
 				} else {
+					connectedObject.state = result.state;
 					console.log("close door");
 				}
 			});	

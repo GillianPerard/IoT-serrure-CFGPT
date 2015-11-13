@@ -169,7 +169,7 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 			},
 
 			assignUserToGroup: function (groupId, userInfo, callbackSuccess, callbackError) {
-				$http.post(baseUrl + '/app/groups/' + groupId + '/users/assign', { userId: 0, isAdmin: false, isToCall: false }).then(
+				$http.post(baseUrl + '/app/groups/' + groupId + '/users/assign', { userId: userInfo.userId, isAdmin: userInfo.isAdmin, isToCall: userInfo.isToCall }).then(
 					function (success) {
 						callbackSuccess(success.data);
 					},
