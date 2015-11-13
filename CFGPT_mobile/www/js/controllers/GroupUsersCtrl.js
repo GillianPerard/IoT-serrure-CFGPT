@@ -26,6 +26,7 @@ angular.module('CFGPT_Mobile.controllers.GroupUsersCtrl', [
 		$scope.assignUserData = {
 			email: "",
 			userId: 0,
+			user: undefined,
 			isAdmin: false,
 			isToCall: false
 		};
@@ -45,23 +46,22 @@ angular.module('CFGPT_Mobile.controllers.GroupUsersCtrl', [
 		};
 
 		$scope.searchUser = function () {
-			APIService.searchUser($scope.email,
+			APIService.groups.searchUser($scope.assignUserData.email,
 				function (data, error) {
 					if (data && !error) {
-						$scope.returnUser = data;
-						$scope.assignUserData.email = "";
-					} else {
-						alert(error);
+						$scope.assignUserData.user = data;
+						$scope.assignUserData.userId = data.id;
 					}
 				});
 		};
 
 		$scope.doAssign = function () {
-			UserGroupsService.assignUserToGroup($scope.currentUserGroup.group.id,
+			UserGroupsService.assignUserToGroup($scope.currentUserGroup.group.id, $scope.assignUserData,
 				function (data, error) {
 					if (data && !error) {
 						$scope.groupUsers.push(data);
 						$scope.assignUserData = {};
+						$scope.modal.hide();
 					} else {
 						alert(error);
 					}
