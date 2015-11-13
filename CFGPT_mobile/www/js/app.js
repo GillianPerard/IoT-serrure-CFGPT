@@ -91,9 +91,9 @@ angular.module('CFGPT_Mobile', [
       })
 
       .state('app.connectedObjects', {
-        url: '/connectedObjects/:objectToken',
+        url: '/groups/:groupId/connectedObjects/:objectToken',
         params: {
-          group: '',
+          userGroup: '',
           connectedObject: ''
         },
         views: {

@@ -59,6 +59,16 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 						callbackError(error.data);
 					});
 			},
+			
+			getLog: function (objectToken, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/connectedobjects/logs', { tokenObject: objectToken }).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
 
 			remove: function (objectToken, callbackSuccess, callbackError) {
 				$http.post(baseUrl + '/app/connectedobjects/remove', { tokenObject: objectToken }).then(
@@ -180,6 +190,16 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 
 			removeUserFromGroup: function (groupId, userId, callbackSuccess, callbackError) {
 				$http.post(baseUrl + '/app/groups/' + groupId + '/users/remove', { userId: userId }).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
+			
+			updateUserFromGroup: function (groupId, userInfo, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/groups/' + groupId + '/users/update', { userId: userInfo.userId, isAdmin: userInfo.isAdmin, isToCall: userInfo.isToCall }).then(
 					function (success) {
 						callbackSuccess(success.data);
 					},
