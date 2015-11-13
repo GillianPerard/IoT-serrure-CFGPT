@@ -107,8 +107,8 @@ module.exports = {
                     GroupUsers.create({
                         group: _groupId,
                         user: _userId,
-                        is_admin: (_isAdmin == "true"? 1 : 0),
-                        is_to_call: (_isToCall == "true"? 1 : 0)
+                        is_admin: _isAdmin,
+                        is_to_call: _isToCall
                     }).exec(function (err, finalGroupUser) {
                         if (err) return res.json(400, { err: 'ERROR.' });
 

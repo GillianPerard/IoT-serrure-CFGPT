@@ -60,7 +60,13 @@ angular.module('CFGPT_Mobile.controllers.GroupUsersCtrl', [
 				function (data, error) {
 					if (data && !error) {
 						$scope.groupUsers.push(data);
-						$scope.assignUserData = {};
+						$scope.assignUserData = {
+							email: "",
+							userId: 0,
+							user: undefined,
+							isAdmin: false,
+							isToCall: false
+						};
 						$scope.modal.hide();
 					} else {
 						alert(error);
