@@ -96,9 +96,9 @@ module.exports = {
             if (err) return res.json(400, { err: 'ERROR.' });
             if (!isFound) return res.json(400, { err: 'ERROR.' });
             
-            Users.findOneById(_userId).exec(function (err, isFound) {
+            Users.findOneById(_userId).exec(function (err, user) {
                 if (err) return res.json(400, { err: 'ERROR.' });
-                if (!isFound) return res.json(400, { err: 'ERROR.' });
+                if (!user) return res.json(400, { err: 'ERROR.' });
                 
                 GroupUsers.count({ group: _groupId, user: _userId }).exec(function (err, groupUser) {
                     if (err) return res.json(400, { err: 'ERROR.' });
@@ -111,7 +111,7 @@ module.exports = {
                         is_to_call: (_isToCall == "true"? 1 : 0)
                     }).exec(function (err, finalGroupUser) {
                         if (err) return res.json(400, { err: 'ERROR.' });
-                        return res.send(finalGroupUser);
+                        return res.send(finalGroupUser,user);
                     });
                 });
             });
