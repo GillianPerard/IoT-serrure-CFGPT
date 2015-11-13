@@ -57,4 +57,24 @@ angular.module('CFGPT_Mobile.services.ConnectedObjectsService', [])
 					callback(undefined, error);
 				});
 		};
+
+		this.openDoor = function (connectedObject, callback) {
+			APIService.connectedObjects.changeState(connectedObject.token, "Fermé",
+				function (data) {
+					callback(data);
+				},
+				function (error) {
+					callback(undefined, error);
+				});
+		};
+
+		this.closeDoor = function (connectedObject, callback) {
+			APIService.connectedObjects.changeState(connectedObject.token, "Ouvert",
+				function (data) {
+					callback(data);
+				},
+				function (error) {
+					callback(undefined, error);
+				});
+		};
 	});
