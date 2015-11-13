@@ -51,12 +51,12 @@ module.exports = {
         if (!_groupId) return res.serverError({ 'state': 'PARAMS ERROR.' });
         
         Groups.findOneById(_groupId).exec(function (err, isFound) {
-            if (err) return res.serverError({ 'state': 'Error when tryng find groups :(', 'error': err });
+            if (err) return res.serverError({ 'state': 'Error when trying find groups :(', 'error': err });
             if (!isFound) return res.serverError({ 'state': 'No result :(' });
             
             //Suppression finale du groupe
             Groups.destroy({ id: _groupId }).exec(function (err, groupToDestroy) {
-                if (err) return res.serverError({ 'state': 'Error when tryng delete groups :(', 'error': err });
+                if (err) return res.serverError({ 'state': 'Error when trying delete groups :(', 'error': err });
                 
                 return res.ok(groupToDestroy);
             });
@@ -76,7 +76,7 @@ module.exports = {
         Groups.findOneById(_groupId).exec(function (err, group) {
             if (!group) return res.serverError({ 'state': 'There is no group :(' });
             GroupUsers.find({ group: group.id }).populate('user').exec(function (err, userWithGroup) {
-                if (userWithGroup.length == 0) return res.serverError({ 'state': 'Error when tryng find groupUsers :(', 'error': err });
+                if (userWithGroup.length == 0) return res.serverError({ 'state': 'Error when trying find groupUsers :(', 'error': err });
                 return res.ok(userWithGroup);
             });
         });
@@ -90,19 +90,19 @@ module.exports = {
         var _isToCall = req.param('isToCall');
         
         //Si il manque un des params "idUser" ou "groupId", on drop.
-        if (!_groupId || !_userId) return res.json(400, { err: 'PARAMS ERROR.' });
+        if (!_groupId || !_userId) return res.serverError({ 'state': 'Error with arguments :(', 'error': err });
         
         Groups.findOneById(_groupId).exec(function (err, isFound) {
-            if (err) return res.json(400, { err: 'ERROR.' });
-            if (!isFound) return res.json(400, { err: 'ERROR.' });
+            if (err) return res.serverError({ 'state': 'Error when trying find groups :(', 'error': err });
+            if (!isFound) return res.serverError({ 'state': 'There is no result :(' });
             
             Users.findOneById(_userId).exec(function (err, user) {
-                if (err) return res.json(400, { err: 'ERROR.' });
-                if (!user) return res.json(400, { err: 'ERROR.' });
+                if (err) return res.serverError({ 'state': 'Error when trying find Users :(', 'error': err });
+                if (!user) return res.serverError({ 'state': 'There is no results :(' });
                 
                 GroupUsers.count({ group: _groupId, user: _userId }).exec(function (err, groupUser) {
-                    if (err) return res.json(400, { err: 'ERROR.' });
-                    if (groupUser > 0) return res.json(400, { err: 'USER IS ALREADY IN GROUP.' });
+                    if (err) return res.serverError({ 'state': 'Error when trying find GroupUsers :(', 'error': err });
+                    if (groupUser > 0) return res.serverError({ 'state': 'User already in group :(' });
                     
                     GroupUsers.create({
                         group: _groupId,
@@ -110,7 +110,7 @@ module.exports = {
                         is_admin: _isAdmin,
                         is_to_call: _isToCall
                     }).exec(function (err, finalGroupUser) {
-                        if (err) return res.json(400, { err: 'ERROR.' });
+                        if (err) return res.serverError({ 'state': 'Error when trying create groupUsers :(', 'error': err });
                         
                         GroupUsers.findOne(finalGroupUser).populate('user').exec(function (err, found) {
                             return res.ok(found);
