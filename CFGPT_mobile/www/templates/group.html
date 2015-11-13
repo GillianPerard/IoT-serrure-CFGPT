@@ -8,9 +8,9 @@
   </ion-nav-buttons>
   <ion-content>
     <ion-list show-delete="false" can-swipe="true">
-      <ion-item ng-repeat="key in keys" ng-class="{'borderLeftMainColor': isOpen(key.state), 'borderLeftDoorClosedColor': !isOpen(key.state)}"
+      <ion-item ng-repeat="key in keys" ng-class="{'borderLeftMainColor': isOpen(key.state) && !isRinging(key.state), 'borderLeftDoorClosedColor': !isOpen(key.state) && !isRinging(key.state), 'borderLeftYellowColor': isRinging(key.state)}"
       class="fontSize16 card">
-        <i class="fa fa-key" style="width:25px;"></i> {{key.name}}
+        <i class="ion" ng-class="{'ion-android-unlock': isOpen(key.state) && !isRinging(key.state), 'ion-android-lock': !isOpen(key.state) && !isRinging(key.state), 'ion-android-notifications': isRinging(key.state)}" style="width:25px;"></i> {{key.name}}
         <ion-option-button ng-if="isOpen(key.state)" class="button-light icon ion-android-lock colorWhite backgroundGray" ng-click="closeDoor(key)"></ion-option-button>
         <ion-option-button ng-if="!isOpen(key.state)" class="button-light icon ion-android-unlock colorWhite backgroundGray" ng-click="openDoor(key)"></ion-option-button>
         <ion-option-button class="button-light icon ion-android-film colorWhite backgroundGray" ng-if="currentUserGroup.is_to_call"></ion-option-button>

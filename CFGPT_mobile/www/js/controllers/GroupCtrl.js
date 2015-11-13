@@ -101,6 +101,11 @@ angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 			if (state == "Ouvert") return true;
 			else if (state == "Fermé") return false;
 		};
+		
+		$scope.isRinging = function(state){
+			if(state == "Sonne") return true;
+			else return false;
+		}
 
 		$scope.openDoor = function (connectedObject) {
 			ConnectedObjectsService.openDoor(connectedObject, function (result, error) {
