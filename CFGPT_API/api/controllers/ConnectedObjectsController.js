@@ -141,7 +141,7 @@ module.exports = {
                 name: connObjUpdated.name,
                 notif: false
               });
-              return res.ok('Success Updated Element ' + connObjUpdated);
+              return res.ok(connObjUpdated);
             });
         });
     },
