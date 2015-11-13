@@ -120,26 +120,26 @@ module.exports = {
             });
         });
     },
-    updateUserById : function(req, res){
+    updateUserById : function (req, res) {
         var _groupId = req.param('groupId');
         var _userId = req.param('userId');
         var _isAdmin = req.param('isAdmin');
         var _isToCall = req.param('isToCall');
         
         //Si il manque un des params "idUser" ou "groupId", on drop.
-        if (!_groupId || !_userId) return res.json(400, { err: 'PARAMS ERROR.' });
+        if (!_groupId || !_userId) return res.serverError({ 'state': 'Error with arguments :(' });
         
         Groups.findOneById(_groupId).exec(function (err, isFound) {
-            if (err) return res.json(400, { err: 'ERROR.' });
-            if (!isFound) return res.json(400, { err: 'ERROR.' });
+            if (err) return res.serverError({ 'state': 'Error when trying find groups :(', 'error': err });
+            if (!isFound) return res.serverError({ 'state': 'There is no group :(' });
             
             Users.findOneById(_userId).exec(function (err, user) {
-                if (err) return res.json(400, { err: 'ERROR.' });
-                if (!user) return res.json(400, { err: 'ERROR.' });
+                if (err) return res.serverError({ 'state': 'Error when trying find Users :(', 'error': err });
+                if (!user) return res.serverError({ 'state': 'No users found :(' });
                 
                 GroupUsers.find({ group: _groupId, user: _userId }).exec(function (err, groupUser) {
-                    if (err) return res.json(400, { err: 'ERROR.' });
-                    if (groupUser == 0) return res.json(400, { err: 'USER IS NOT IN GROUP.' });
+                    if (err) return res.serverError({ 'state': 'Error when trying find GroupUsers :(', 'error': err });
+                    if (groupUser == 0) return res.serverError({ 'state': 'No groupUser found :(' });
                     
                     GroupUsers.update({
                         group: _groupId,
@@ -149,7 +149,7 @@ module.exports = {
                         is_admin: _isAdmin,
                         is_to_call: _isToCall
                     }).exec(function (err, finalGroupUser) {
-                        if (err) return res.json(400, { err: 'ERROR.' });
+                        if (err) return res.serverError({ 'state': 'Error when trying update groupUser :(', 'error': err });
                         
                         GroupUsers.findOne(finalGroupUser).populate('user').exec(function (err, found) {
                             return res.ok(found);
