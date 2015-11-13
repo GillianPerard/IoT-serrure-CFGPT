@@ -264,21 +264,21 @@ module.exports = {
         var _conObjId = req.param('conObjId');
         
         //Si il manque un des params "conObjId" ou "groupId", on drop.
-        if (!_groupId || !_conObjId) return res.json(400, { err: 'PARAMS ERROR.' });
+        if (!_groupId || !_conObjId) return res.serverError({ 'state': 'Error with arguments :(' });
         
         Groups.findOneById(_groupId)
       .populate('connectedobjects')
       .populate('parentgroup')
       .exec(function (err, group) {
-            if (err) return res.json(400, { err: 'ERROR.' });
-            if (!group || group.length == 0) return res.json(400, { err: 'ERROR.' });
+            if (err) return res.serverError({ 'state': 'Error when trying find groups :(', 'error': err });
+            if (!group || group.length == 0) return res.serverError({ 'state': 'No groups found :(' });
             
             var findCO = false;
             group.connectedobjects.forEach(function (obj, index) {
                 if (obj.id == _conObjId) findCO = true;
             });
             // Si on ne retrouve le CO avec l'id demandé dans le groupe demandé
-            if (!findCO) return res.json(400, { err: 'ERROR. - no link between this 2 entities' });
+            if (!findCO) return res.serverError({ 'state': 'No link beetween this 2 entities :(', 'error': err });
             
             // suppresion du lien
             group.connectedobjects.remove(_conObjId);
@@ -286,15 +286,15 @@ module.exports = {
             
             var finalStep = function () {
                 group.save(function (err, saved) {
-                    if (err) return res.json(400, { err: 'ERROR.' });
+                    if (err) return res.serverError({ 'state': 'Error when trying save group :(', 'error': err });
                     console.log("save suppresion du lien")
-                    res.send("success")
+                    res.ok(saved)
                 });
             };
             var coRemove = function (connectedObject) {
                 // On supprime la clé
                 ConnectedObjects.destroy(connectedObject.id).exec(function (err, cotoDestroy) {
-                    if (err) return res.json(400, { err: 'ERROR.' });
+                    if (err) return res.serverError({ 'state': 'Error when trying delete connectedObject :(', 'error': err });
                     console.log("suppression clés")
                     finalStep();
                 });
@@ -309,7 +309,7 @@ module.exports = {
                     });
                     if (logToDestroy.length > 0) { }
                     Logs.destroy({ id: logToDestroy }).exec(function (err, logToDestroy) {
-                        if (err) return res.json(400, { err: 'ERROR.' });
+                        if (err) return res.serverError({ 'state': 'Error when trying delete logs :(', 'error': err });
                         console.log("destroy ----" , err)
                         coRemove(connectedObject);
                     });
@@ -323,8 +323,8 @@ module.exports = {
             .populate("logs")
             .populate("groups")
             .exec(function (err, connectedObject) {
-                    if (err) return res.json(400, { err: 'ERROR.' });
-                    if (!connectedObject) return res.json(400, { err: 'ERROR.' });
+                    if (err) return res.serverError({ 'state': 'Error when trying find ConnectObject :(', 'error': err });
+                    if (!connectedObject) return res.serverError({ 'state': 'No connectedObject found :(' });
                     console.log("co récupéré")
                     // on va nettoyer les liens avec les autres groups
                     // il existe au moins le lien avec le group concerné par la requete
@@ -335,7 +335,7 @@ module.exports = {
                         });
                         console.log("lien avec sous group deleted")
                         connectedObject.save(function (err, saved) {
-                            if (err) return res.json(400, { err: 'ERROR.' });
+                            if (err) return res.serverError({ 'state': 'Error when trying save connectedObject :(', 'error': err });
                             console.log("save suppresion du lien avec les sous groups");
                             logClean(connectedObject);
                         });
