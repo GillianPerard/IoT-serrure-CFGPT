@@ -51,14 +51,14 @@ module.exports = {
         if (!_groupId) return res.serverError({ 'state': 'PARAMS ERROR.' });
         
         Groups.findOneById(_groupId).exec(function (err, isFound) {
-            if (err) return res.json(400, { err: 'ERROR.' });
-            if (!isFound) return res.json(400, { err: 'ERROR.' });
+            if (err) return res.serverError({ 'state': 'Error when tryng find groups :(', 'error': err });
+            if (!isFound) return res.serverError({ 'state': 'No result :(' });
             
             //Suppression finale du groupe
             Groups.destroy({ id: _groupId }).exec(function (err, groupToDestroy) {
-                if (err) return res.json(400, { err: 'ERROR.' });
+                if (err) return res.serverError({ 'state': 'Error when tryng delete groups :(', 'error': err });
                 
-                return res.send(groupToDestroy);
+                return res.ok(groupToDestroy);
             });
         });
     },
@@ -111,7 +111,7 @@ module.exports = {
                         is_to_call: (_isToCall == "true"? 1 : 0)
                     }).exec(function (err, finalGroupUser) {
                         if (err) return res.json(400, { err: 'ERROR.' });
-
+                        
                         GroupUsers.findOne(finalGroupUser).populate('user').exec(function (err, found) {
                             return res.ok(found);
                         });
