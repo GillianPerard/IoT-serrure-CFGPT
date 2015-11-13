@@ -215,20 +215,20 @@ module.exports = {
         var _conObjId = req.param('conObjId');
         
         //Si il manque un des params "conObjId" ou "groupId", on drop.
-        if (!_groupId || !_conObjId) return res.json(400, { err: 'PARAMS ERROR.' });
+        if (!_groupId || !_conObjId) return res.serverError({ 'state': 'Error with arguments :(' });
         
         Groups.findOneById(_groupId)
       .populate('connectedobjects')
       .populate('parentgroup')
       .exec(function (err, group) {
-            if (err) return res.json(400, { err: 'ERROR.' });
-            if (!group) return res.json(400, { err: 'ERROR.' });
+            if (err) return res.serverError({ 'state': 'Error when trying find groups :(', 'error': err });
+            if (!group) return res.serverError({ 'state': 'No group found :(' });
             
             ConnectedObjects.findOneById(_conObjId)
           .populate('groups')
           .exec(function (err, connectedObject) {
-                if (err) return res.json(400, { err: 'ERROR.' });
-                if (!connectedObject) return res.json(400, { err: 'ERROR.' });
+                if (err) return res.serverError({ 'state': 'Error when trying find ConnectedObject :(', 'error': err });
+                if (!connectedObject) return res.serverError({ 'state': 'No connectedObject found :(' });
                 
                 // Si le group est déjà lié des COs
                 if (group.connectedobjects.length > 0) {
@@ -237,7 +237,7 @@ module.exports = {
                     group.connectedobjects.forEach(function (obj, index) {
                         if (obj.token == connectedObject.token) alreadyLinked = true;
                     });
-                    if (alreadyLinked) return res.json(400, { err: 'ERROR. - already linked' });
+                    if (alreadyLinked) return res.serverError({ 'state': 'Group already connected to this connectedObject ;)' });
                 };
                 
                 // Si le group a un parent id, le connectedObject à ajouter doit y être lié
@@ -246,13 +246,13 @@ module.exports = {
                     connectedobject.groups.forEach(function (obj, index) {
                         if (obj.id == group.parentgroup.id) { goodGood = true };
                     });
-                    if (!goodGood) return res.json(400, { err: 'ERROR. - where is the link with dad' });
+                    if (!goodGood) return res.serverError({ 'state': 'Error, there is no parent link with this group :(' });
                 };
                 
                 group.connectedobjects.add(connectedObject);
                 group.save(function (err, saved) {
-                    if (err) return res.json(400, { err: 'ERROR.' });
-                    return res.send("success");
+                    if (err) return res.serverError({ 'state': 'Error when trying save groups :(', 'error': err });
+                    return res.ok(saved);
 
                 });
 
