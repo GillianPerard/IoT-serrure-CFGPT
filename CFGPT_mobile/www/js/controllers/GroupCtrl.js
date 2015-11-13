@@ -89,6 +89,7 @@ angular.module('CFGPT_Mobile.controllers.GroupCtrl', [
 
 		$scope.viewDetail = function (connectedObject) {
 			$state.go("app.connectedObjects", {
+				groupId: $scope.currentUserGroup.group.id,
 				objectToken: connectedObject.token,
 				userGroup: $scope.currentUserGroup,
 				connectedObject: connectedObject
