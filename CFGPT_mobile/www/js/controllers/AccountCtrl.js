@@ -97,6 +97,7 @@ angular.module('CFGPT_Mobile.controllers.AccountCtrl', [
 					//Gestion WebSocket pour les connectedobjects
 					io.socket.on('connectedobjects',function(websock){
 						if (websock.verb == 'updated'){
+                            refreshChangeState($state, websock, websock.data['state']);
 							if (websock.data['notif']){ //Si c'est une pop-up de notif ouvert/fermé.
 								$ionicPopup.confirm({
 									title: 'Quelqu\'un sonne !',
@@ -111,7 +112,7 @@ angular.module('CFGPT_Mobile.controllers.AccountCtrl', [
 												function (data, error) {
 													if (!error) {
 														if (data['id'] == undefined) { //Action déjà effectuée par un autre utilisateur
-                                                            showAlertBis('Trop tard !', 'Un autre utilisateur a répondu avant vous.');
+                                                            showAlert('Trop tard !', 'Un autre utilisateur a répondu avant vous.');
 														} //Sinon, rien à faire.
 													}
 												}
@@ -126,7 +127,7 @@ angular.module('CFGPT_Mobile.controllers.AccountCtrl', [
 												function (data, error) {
 													if (!error) {
 														if (data['id'] == undefined) { //Action déjà effectuée par un autre utilisateur
-                                                            showAlertBis('Trop tard !', 'Un autre utilisateur a répondu avant vous.');
+                                                            showAlert('Trop tard !', 'Un autre utilisateur a répondu avant vous.');
 														} //Sinon, rien à faire.
 													}
 												}
@@ -134,8 +135,6 @@ angular.module('CFGPT_Mobile.controllers.AccountCtrl', [
 										}}
 									]
 								});
-							} else {
-								refreshChangeState($state, websock, websock.data['state']);
 							}
 						}
 					});
@@ -153,13 +152,6 @@ angular.module('CFGPT_Mobile.controllers.AccountCtrl', [
 			// 	console.log('Thank you for not eating my delicious ice cream cone');
 			// });
 		};
-
-        var showAlertBis = function (title, content) {
-            $ionicPopup.alert({
-                title: title,
-                template: content
-            });
-        };
 
 		//Quand il y a un changement d'état, on doit rafraichir le design
 		var refreshChangeState = function (_state, _websket, _newState){
