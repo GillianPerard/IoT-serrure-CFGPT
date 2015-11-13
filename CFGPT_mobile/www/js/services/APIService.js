@@ -60,7 +60,7 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 					});
 			},
 			
-			getLog: function (objectToken, callbackSuccess, callbackError) {
+			getLogs: function (objectToken, callbackSuccess, callbackError) {
 				$http.post(baseUrl + '/app/connectedobjects/logs', { tokenObject: objectToken }).then(
 					function (success) {
 						callbackSuccess(success.data);

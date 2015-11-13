@@ -17,15 +17,32 @@ angular.module('CFGPT_Mobile.controllers.ConnectedObjectCtrl', [])
 
 			if ($stateParams.userGroup && $stateParams.userGroup != "") {
 				$scope.userGroup = $stateParams.userGroup;
+				getLogs();
 			} else {
 				UserGroupsService.getUserGroup($stateParams.groupId, function (result, error) {
 					if (!result && error) {
 						alert(error.err);
 					} else {
 						$scope.userGroup = result;
+						getLogs();
 					}
 				});
 			}
+		};
+		
+		var getLogs = function () {
+			if (!$scope.userGroup.is_admin) {
+				return;
+			}
+			
+			ConnectedObjectsService.getLogs($stateParams.objectToken,
+				function (logs, error) {
+					if (!logs && error) {
+						alert(error.err);
+					} else {
+						$scope.logs = logs;
+					}
+				});
 		};
 
 		init();

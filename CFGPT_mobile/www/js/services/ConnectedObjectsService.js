@@ -32,8 +32,8 @@ angular.module('CFGPT_Mobile.services.ConnectedObjectsService', [])
 				});
 		};
 
-		this.getLog = function (objectToken, callback) {
-			APIService.connectedObjects.getByToken(objectToken,
+		this.getLogs = function (objectToken, callback) {
+			APIService.connectedObjects.getLogs(objectToken,
 				function (data) {
 					callback(data);
 				},
