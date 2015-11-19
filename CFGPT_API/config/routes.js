@@ -38,7 +38,8 @@ module.exports.routes = {
 
 // Url de gestion des objets connectés
 //[VerifAccount]
-  /*DONE*/'GET  /app/connectedobjects/': 'ConnectedObjects.getConnectedObjects',
+  /*DONE'*/'GET  /app/connectedobjects/': 'ConnectedObjects.getConnectedObjects',
+
   /*DONE*/'POST /app/connectedobjects/get' : 'ConnectedObjects.getByToken', //(tokenObject)
   /*DONE*/'POST /app/connectedobjects/add' : 'ConnectedObjects.addConnectedObject', //(tokenObject, name)
   /*DONE*/'POST /app/connectedobjects/remove' : 'ConnectedObjects.removeByToken', //(tokenObject)
@@ -71,5 +72,16 @@ module.exports.routes = {
   /*DONE*/'POST /app/groups/:groupId/users/assign' : 'Groups.assignUserById', //(groupId, userId, isAdmin, isToCall)
   /*DONE*/'POST /app/groups/:groupId/users/remove' : 'Groups.removeUserById', //(groupId, userId)
   /*DONE*/'POST /app/groups/:groupId/users/update' : 'Groups.updateUserById', //(groupId, userId)
+
+
+  /*EXEMPLE VUES*/
+  '/': {
+    view: 'homepage'
+  },
+  'GET  /app/connectedobjects/': {
+    view: 'connectedobjects/test',
+    controller: 'ConnectedObjects',
+    action: 'getConnectedObjects'
+  },
 
 };
