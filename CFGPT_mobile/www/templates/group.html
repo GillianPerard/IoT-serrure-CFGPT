@@ -13,8 +13,8 @@
         <div class="item-icon-right">
           <i class="ion icon" class="fontSize16" ng-class="{'ion-android-unlock': isOpen(key.state) && !isRinging(key.state), 'ion-android-lock': !isOpen(key.state) && !isRinging(key.state), 'ion-android-notifications': isRinging(key.state)}"></i>{{key.name}}
         </div>
-        <ion-option-button ng-if="isOpen(key.state)" class="button-light icon ion-android-lock colorWhite backgroundGray" ng-click="closeDoor(key)"></ion-option-button>
-        <ion-option-button ng-if="!isOpen(key.state)" class="button-light icon ion-android-unlock colorWhite backgroundGray" ng-click="openDoor(key)"></ion-option-button>
+        <ion-option-button ng-if="isOpen(key.state) || isRinging(key.state)" class="button-light icon ion-android-lock colorWhite backgroundGray" ng-click="closeDoor(key)"></ion-option-button>
+        <ion-option-button ng-if="!isOpen(key.state) || isRinging(key.state)" class="button-light icon ion-android-unlock colorWhite backgroundGray" ng-click="openDoor(key)"></ion-option-button>
         <ion-option-button class="button-light icon ion-android-film colorWhite backgroundGray" ng-if="currentUserGroup.is_to_call"></ion-option-button>
         <ion-option-button class="button-light icon ion-android-notifications-off colorWhite backgroundGray" ng-if="currentUserGroup.is_to_call && !isMute(key.token)" ng-click="muteConnectedObjects(key.token)"></ion-option-button>
         <ion-option-button class="button-light icon ion-android-notifications-off" ng-if="currentUserGroup.is_to_call && isMute(key.token)" ng-click="unmuteConnectedObjects(key.token)"></ion-option-button>
