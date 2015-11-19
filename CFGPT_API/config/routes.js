@@ -26,6 +26,8 @@ module.exports.routes = {
   /*DONE*/'POST /connectedobjects/reportState': 'ConnectedObjects.reportState', //(tokenObject, state)
   /*DONE*/'POST /connectedobjects/checkUserValidity': 'ConnectedObjects.checkUserValidity', //(tokenObject, idUser)
   'POST /connectedobjects/receiveVideoStream': 'ConnectedObjects.receiveVideoStream', //(tokenObject, stream)
+  /*DONE*/'POST /connectedobjects/connectedObjectSubscribe': 'ConnectedObjects.connectedObjectSubscribe', //(tokenUser)
+
 
 // Url de gestion des users
   /*DONE*/'POST /app/account/new_account': 'Users.newAccount', //(email, password, firstName, lastName)

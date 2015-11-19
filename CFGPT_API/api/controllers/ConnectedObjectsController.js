@@ -276,6 +276,26 @@ module.exports = {
                 return res.ok('Another user already managed this notification.');
             }
         });
+    },
+
+
+    // méthode appelée par un connectedObject pour souscrire aux modifications le concernant
+    connectedObjectSubscribe : function(req,res){
+      var _token = req.param('userToken');
+
+      //Si il manque le param, on drop.
+      if (!_tokenObject) return res.serverError({ "state": "Params error" });
+
+      //Je cherche le connectedObject with Token
+      ConnectedObjects.findOneByToken(_tokenObject).exec(function (err, connObject) {
+        if (err) return res.serverError({"state": "Error when trying access to database", "error": err});
+        if (!connObject) return res.serverError({"state": "The connected object doesn't exist"});
+
+        console.log("subscribe change state key successfull")
+        ConnectedObjects.subscribe(req,connObject.id,['update']);
+        return res.json(result);
+      });
     }
-};
+
+}
 
