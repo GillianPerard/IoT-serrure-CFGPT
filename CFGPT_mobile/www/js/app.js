@@ -123,7 +123,19 @@ angular.module('CFGPT_Mobile', [
             templateUrl: 'templates/groupUsers.html',
             controller: 'GroupUsersCtrl'
           }
-        }
+        },
+        authenticate: true
+      })
+      
+      .state('app.profile', {
+        url: '/profile',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/profile.html',
+            controller: 'AccountCtrl'
+          }
+        },
+        authenticate: true
       })
 
 

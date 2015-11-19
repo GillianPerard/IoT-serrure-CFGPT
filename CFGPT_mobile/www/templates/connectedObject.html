@@ -3,5 +3,13 @@
     {{detail.name}}
   </ion-nav-title>
   <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="log in logs | orderBy: '-date'" class="fontSize16 item-text-wrap">
+        <b>{{log.date | date : "medium"}}</b><br>
+        {{log.user.firstname}} {{log.user.lastname}} <br>
+        {{log.state}} <br>
+        {{log.content}}
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>
