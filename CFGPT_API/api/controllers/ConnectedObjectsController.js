@@ -127,7 +127,7 @@ module.exports = {
 
         ConnectedObjects.update({ token: _connectedObjectToken }, { state: _connectedObjectState }).exec(function (err, updated) {
             if (err) return res.serverError({ "state": "Error when trying update database", "error": err });
-            LogService.addLogs(updated.id, null, updated.state, "balec");
+            LogService.addLogs(updated[0].id, null, updated[0].state, "balec");
             if (updated.length == 0) return res.json(400, { err: 'ERROR.' });
 
             ConnectedObjects.findOneById(updated[0].id).populate('groups').exec(function (err, connObjUpdated) {
