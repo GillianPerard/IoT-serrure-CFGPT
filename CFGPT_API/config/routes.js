@@ -55,11 +55,11 @@ module.exports.routes = {
 
   /*DASHBOARD*/
   '/': { view: 'homepage' }, //TO DELETE
-  'GET  /app/connectedobjects/': {  //TO DELETE
-    view: 'connectedobjects/test',
-    controller: 'ConnectedObjects',
-    action: 'getConnectedObjects'
-  },
+  // 'GET  /app/connectedobjects/': {  //TO DELETE
+  //   view: 'connectedobjects/test',
+  //   controller: 'ConnectedObjects',
+  //   action: 'getConnectedObjects'
+  // },
 
   'GET  /connexion': { view: 'auth/connexion'},
   'GET  /inscription': { view: 'auth/inscription'},
