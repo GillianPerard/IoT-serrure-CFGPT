@@ -12,6 +12,7 @@ module.exports.routes = {
   /*DONE*/'POST /app/login' : 'Auth.login', //(email, password)
   /*DONE*/'POST /app/refresh': 'Auth.refresh',
   /*DONE*/'GET /app/users/groups' : 'Users.getGroupsByToken', //(tokenUser)
+  /*DONE*/'GET /app/users/administredGroups' : 'Users.getAdminedGroupsByToken', //(tokenUser)
   /*DONE*/'POST /app/users/getByMail' : 'Users.getUserByMail', //(tokenUser)
 
 // Url de gestion des objets connectés
