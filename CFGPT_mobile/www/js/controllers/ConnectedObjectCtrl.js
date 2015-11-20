@@ -44,6 +44,11 @@ angular.module('CFGPT_Mobile.controllers.ConnectedObjectCtrl', [])
 					}
 				});
 		};
+		
+		$scope.imagePath = function(imgPath){
+			if(imgPath != null) return true;
+			else return false;
+		}
 
 		$scope.assignToGroup = function () {
 			$scope.assignedUserGroups = [];
