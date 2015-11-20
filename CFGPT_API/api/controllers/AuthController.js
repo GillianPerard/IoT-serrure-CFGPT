@@ -63,5 +63,15 @@ module.exports = {
       }else{
           return res.json(403, {err:'forbidden'});
       }
+    },
+
+    connexion: function (req, res) {
+
+      //res.redirect('/login');
+      /*
+       res.view({
+       mavariable : valeur
+       });
+       */
     }
 };
