@@ -17,11 +17,11 @@
   <ion-side-menu side="left" class="backgroundGray">
     <ion-content>
       <div style="width:100%; margin-top:60px;margin-bottom:30px;">
-        <img src="http://localhost:1337/images/tortle.jpg" width="125px" height="125px" alt="" style="display:block;border-radius:50%;margin:0 auto;border:6px solid #181818;">
+        <img ng-src="{{imagePath(AccountService.user.imagePath) ? AccountService.user.imagePath : 'http://localhost:1337/images/jarjar.jpeg'}}" width="125px" height="125px" alt="" style="display:block;border-radius:50%;margin:0 auto;border:6px solid #181818;">
         <p style="text-align:center; color:white;margin-top:10px">
           {{AccountService.user.firstname}}
           <b class="colorMainColor"> {{AccountService.user.lastname}}</b>
-          <br>{{AccountService.user.email}}  
+          <br>{{AccountService.user.email}}
         </p>
       </div>
       <ion-list>
