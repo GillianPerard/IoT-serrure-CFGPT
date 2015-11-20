@@ -2,7 +2,8 @@
 angular.module('CFGPT_Mobile.services.APIService', [])
 
 	.service('APIService', function ($http) {
-		var baseUrl = "http://localhost:1337";
+		//var baseUrl = "http://localhost:1337";
+		var baseUrl = "";
 		this.user = {
 			login: function (user, callbackSuccess, callbackError) {
 				$http.post(baseUrl + '/app/login', user).then(
@@ -10,7 +11,11 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 						callbackSuccess(success.data);
 					},
 					function (error) {
-						callbackError(error.data);
+						if (!error.data) {
+							callbackError({ status: "Une erreur esst survenue. Vérifiez vos paramètres réseaux", err: error.data });
+						} else {
+							callbackError(error.data);
+						}
 					});
 			},
 
@@ -55,6 +60,16 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 						callbackError(error.data);
 					});
 			},
+			
+			getLogs: function (objectToken, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/connectedobjects/logs', { tokenObject: objectToken }).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
 
 			remove: function (objectToken, callbackSuccess, callbackError) {
 				$http.post(baseUrl + '/app/connectedobjects/remove', { tokenObject: objectToken }).then(
@@ -84,6 +99,30 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 					function (error) {
 						callbackError(error.data);
 					});
+			},
+
+			changeStateAfterRing: function (tokenObject, newState, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/connectedobjects/changeStateAfterRing', {
+					tokenObject: tokenObject,
+					newState: newState
+				}).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					}
+				);
+			},
+			
+			changeState: function (objectToken, state, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/connectedobjects/changeState', { tokenObject: objectToken, stateObject: state }).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
 			}
 		};
 
@@ -96,7 +135,7 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 					function (error) {
 						callbackError(error.data);
 					});
-			},
+			}
 		}
 
 		this.groups = {
@@ -129,6 +168,56 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 						callbackError(error.data);
 					});
 			},
+
+			getGroupUsers: function (groupId, callbackSuccess, callbackError) {
+				$http.get(baseUrl + '/app/groups/' + groupId + '/users').then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
+
+			assignUserToGroup: function (groupId, userInfo, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/groups/' + groupId + '/users/assign', { userId: userInfo.userId, isAdmin: userInfo.isAdmin, isToCall: userInfo.isToCall }).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
+
+			removeUserFromGroup: function (groupId, userId, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/groups/' + groupId + '/users/remove', { userId: userId }).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
+			
+			updateUserFromGroup: function (groupId, userInfo, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/groups/' + groupId + '/users/update', { userId: userInfo.userId, isAdmin: userInfo.isAdmin, isToCall: userInfo.isToCall }).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			},
+
+			searchUser: function (email, callbackSuccess, callbackError) {
+				$http.post(baseUrl + '/app/users/getByMail', { email: email }).then(
+					function (success) {
+						callbackSuccess(success.data);
+					},
+					function (error) {
+						callbackError(error.data);
+					});
+			}
 		};
 
 	});
