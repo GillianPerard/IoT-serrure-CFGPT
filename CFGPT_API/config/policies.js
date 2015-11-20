@@ -29,16 +29,17 @@ module.exports.policies = {
    '*': 'authenticated',
 
    AuthController :  {
-    'login' : []
+    'login' : [],
     },
-    
+
    UsersController : {
         'newAccount' : []
-    
+
    },
    ConnectedObjectsController : {
-        'ringring' : []
-   } 
+        'ringring' : [],
+        'getConnectedObjects' : []
+   }
 
   /***************************************************************************
   *                                                                          *
