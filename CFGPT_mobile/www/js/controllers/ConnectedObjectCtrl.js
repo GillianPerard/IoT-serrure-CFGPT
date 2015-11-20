@@ -3,17 +3,14 @@ angular.module('CFGPT_Mobile.controllers.ConnectedObjectCtrl', [])
 	.controller('ConnectedObjectCtrl', function ($scope, $stateParams, $ionicPopup, ConnectedObjectsService, UserGroupsService) {
 
 		var init = function () {
-			if ($stateParams.connectedObject && $stateParams.connectedObject != "") {
-				$scope.detail = $stateParams.connectedObject;
-			} else {
-				ConnectedObjectsService.getByToken($stateParams.objectToken, function (data, error) {
-					if (!data && error) {
-						alert(error);
-					} else {
-						$scope.detail = data;
-					}
-				});
-			}
+
+			ConnectedObjectsService.getByToken($stateParams.objectToken, function (data, error) {
+				if (!data && error) {
+					alert(error);
+				} else {
+					$scope.detail = data;
+				}
+			});
 
 			if ($stateParams.userGroup && $stateParams.userGroup != "") {
 				$scope.userGroup = $stateParams.userGroup;
@@ -46,14 +43,22 @@ angular.module('CFGPT_Mobile.controllers.ConnectedObjectCtrl', [])
 		};
 
 		$scope.assignToGroup = function () {
-			$scope.assignedUserGroups = [];
-			UserGroupsService.getMyUserGroups(function (groups, error) {
-				if (!groups && error) {
+			$scope.allGroups = [];
+			UserGroupsService.getMyUserGroups(function (userGroups, error) {
+				if (!userGroups && error) {
 					alert(error);
 					return;
 				}
+				
+				$scope.allGroups = [];
 
-				$scope.allGroups = groups;
+				userGroups.forEach(function (userGroup) {
+					var group = $scope.detail.groups.find(function (group) { return group.id == userGroup.group.id; });
+					if (!group) {
+						$scope.allGroups.push(userGroup.group);
+					}
+				});
+
 				$ionicPopup.show({
 					templateUrl: 'templates/assignGroup.html',
 					title: 'Ajouter à un autre trousseau',
@@ -71,7 +76,7 @@ angular.module('CFGPT_Mobile.controllers.ConnectedObjectCtrl', [])
 								$scope.assignedUserGroups.forEach(function (userGroup, index) {
 									ConnectedObjectsService.assignToGroup(userGroup.group.id, $scope.detail.id,
 										function (data, error) {
-											
+
 										});
 								});
 							}
