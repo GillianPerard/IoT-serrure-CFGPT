@@ -1,8 +1,4 @@
 {
   "name": "mobile",
-  "app_id": "",
-  "proxies": [{
-    "path": "/app",
-    "proxyUrl": "http://localhost:1337/"
-   }]
+  "app_id": ""
 }
