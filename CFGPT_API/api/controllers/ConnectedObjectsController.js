@@ -19,7 +19,7 @@ module.exports = {
 
         if (!_tokenObject) return res.serverError({ "state" : "Params error" });  //Si il manque le param, on drop.
 
-        ConnectedObjects.findOneByToken(_tokenObject).exec(function (err, connObject) {
+        ConnectedObjects.findOneByToken(_tokenObject).populate('groups').exec(function (err, connObject) {
             if (err) return res.serverError({ "state": "Error when trying acces to database", "error": err });
             if (!connObject) return res.ok({});     //No result
 

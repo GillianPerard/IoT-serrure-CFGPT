@@ -2,6 +2,10 @@
   <ion-nav-title>
     {{detail.name}}
   </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button ng-if="userGroup.is_admin" class="button button-icon button-clear ion-android-add" ng-click="assignToGroup()">
+    </button>
+  </ion-nav-buttons>
   <ion-content>
     <ion-list>
       <ion-item ng-repeat="log in logs | orderBy: '-date'" class="fontSize16 item-text-wrap">
