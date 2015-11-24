@@ -12,15 +12,15 @@
 -- Export de données de la table cfgpt_db.connectedobjects : ~8 rows (environ)
 /*!40000 ALTER TABLE `connectedobjects` DISABLE KEYS */;
 INSERT INTO `connectedobjects` (`name`, `token`, `state`, `id`, `createdAt`, `updatedAt`) VALUES
-	('Porte Entrée', 'fefedeizzef84zfse8fz', 'fermé', 1, '2015-10-23 13:53:51', '2015-10-23 13:53:52'),
-	('Garage', 'efrzed755dez8ez4se', 'fermé', 2, '2015-10-23 13:55:05', '2015-10-23 13:55:06'),
-	('Cuisine', 'efzfsef5sfe554f8ef48', 'fermé', 3, '2015-10-23 13:55:58', '2015-10-23 13:55:59'),
-	('MiniBar', 'ezf5ed5dzqd1de4ee', 'fermé', 4, '2015-10-23 13:56:33', '2015-10-23 13:56:33'),
-	('Bureaux', 'uujgjjgjg5jggj4y7ky4d', 'fermé', 5, '2015-10-23 13:57:13', '2015-10-23 13:57:13'),
-	('Batiment', 'hukyubnknk4jb84yuj4', 'fermé', 6, '2015-10-23 13:57:45', '2015-10-23 13:57:45'),
-	('SalleServeur', 'gjbunkyk4kny8k4nyb8', 'fermé', 7, '2015-10-23 13:58:29', '2015-10-23 13:58:29'),
-	('PlacardSecurisé', 'unyiunkjjnynjb8jb4y8b', 'fermé', 8, '2015-10-23 13:59:07', '2015-10-23 13:59:08'),
-	('NouvelleSerrure', 'ezffsgkdzzekkdeob4y8b', 'fermé', 9, '2015-10-23 13:59:17', '2015-10-23 13:59:18');
+	('Porte Entrée', 'fefedeizzef84zfse8fz', 'Fermé', 1, '2015-10-23 13:53:51', '2015-10-23 13:53:52'),
+	('Garage', 'efrzed755dez8ez4se', 'Fermé', 2, '2015-10-23 13:55:05', '2015-10-23 13:55:06'),
+	('Cuisine', 'efzfsef5sfe554f8ef48', 'Fermé', 3, '2015-10-23 13:55:58', '2015-10-23 13:55:59'),
+	('MiniBar', 'ezf5ed5dzqd1de4ee', 'Fermé', 4, '2015-10-23 13:56:33', '2015-10-23 13:56:33'),
+	('Bureaux', 'uujgjjgjg5jggj4y7ky4d', 'Fermé', 5, '2015-10-23 13:57:13', '2015-10-23 13:57:13'),
+	('Batiment', 'hukyubnknk4jb84yuj4', 'Fermé', 6, '2015-10-23 13:57:45', '2015-10-23 13:57:45'),
+	('SalleServeur', 'gjbunkyk4kny8k4nyb8', 'Fermé', 7, '2015-10-23 13:58:29', '2015-10-23 13:58:29'),
+	('PlacardSecurisé', 'unyiunkjjnynjb8jb4y8b', 'Fermé', 8, '2015-10-23 13:59:07', '2015-10-23 13:59:08'),
+	('NouvelleSerrure', 'ezffsgkdzzekkdeob4y8b', 'Fermé', 9, '2015-10-23 13:59:17', '2015-10-23 13:59:18');
 /*!40000 ALTER TABLE `connectedobjects` ENABLE KEYS */;
 
 -- Export de données de la table cfgpt_db.connectedobjects_groups__groups_connectedobjects : ~8 rows (environ)
