@@ -12,6 +12,7 @@ module.exports.routes = {
   /*DONE*/'POST /app/login' : 'Auth.login', //(email, password)
   /*DONE*/'POST /app/refresh': 'Auth.refresh',
   /*DONE*/'GET /app/users/groups' : 'Users.getGroupsByToken', //(tokenUser)
+  /*DONE*/'GET /app/users/administredGroups' : 'Users.getAdminedGroupsByToken', //(tokenUser)
   /*DONE*/'POST /app/users/getByMail' : 'Users.getUserByMail', //(tokenUser)
 
 // Url de gestion des objets connectés
@@ -61,9 +62,9 @@ module.exports.routes = {
   //VUES : LISTE DES TROUSSEAUX
   'GET  /connexion': 'Auth.connexion',
   'GET  /inscription': 'Auth.inscription',
-    'POST /login' : 'Auth.dashLogin', //(email, password)
-    'GET  /logout' : 'Auth.dashLogout',
-    'POST /register' : 'Users.dashNewAccount', //(email, password, firstName, lastName)
+  'POST /login' : 'Auth.dashLogin', //(email, password)
+  'GET  /logout' : 'Auth.dashLogout',
+  'POST /register' : 'Users.dashNewAccount', //(email, password, firstName, lastName)
 
 
 
@@ -75,11 +76,11 @@ module.exports.routes = {
   //VUE : CONSULTATION D'UN TROUSSEAU
   'GET  /trousseau/:groupId' : 'DashGroups.getGroup',
   'POST /cfgpt/trousseau/serrures' : 'DashGroups.getConnectedObjects', //(groupId)
-    'POST /cfgpt/connectedobjects/add' : 'DashConnectedObjects.addConnectedObject', //(tokenObject)
-      'POST /cfgpt/trousseau/connectedobjects/assign' : 'DashGroups.assignConnectedObjectById', //(groupId,connObjId)
-    'POST /cfgpt/connectedobjects/addexist':  'DashGroups.assignConnectedObjectByToken', //(groupId,connObjToken)
-    'POST /cfgpt/trousseau/connectedobjects/remove' : 'DashGroups.removeConnectedObjectById', //(groupId,connObjId)
-    'POST /cfgpt/connectedobject/changeetat' : 'DashConnectedObjects.changeStateById', //(id, state)
+  'POST /cfgpt/connectedobjects/add' : 'DashConnectedObjects.addConnectedObject', //(tokenObject)
+  'POST /cfgpt/trousseau/connectedobjects/assign' : 'DashGroups.assignConnectedObjectById', //(groupId,connObjId)
+  'POST /cfgpt/connectedobjects/addexist':  'DashGroups.assignConnectedObjectByToken', //(groupId,connObjToken)
+  'POST /cfgpt/trousseau/connectedobjects/remove' : 'DashGroups.removeConnectedObjectById', //(groupId,connObjId)
+  'POST /cfgpt/connectedobject/changeetat' : 'DashConnectedObjects.changeStateById', //(id, state)
   'POST /cfgpt/connectedobject/logs' : 'DashConnectedObjects.logsByToken'
 
 

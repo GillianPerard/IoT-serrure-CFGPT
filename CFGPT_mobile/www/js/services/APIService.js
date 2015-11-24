@@ -3,6 +3,7 @@ angular.module('CFGPT_Mobile.services.APIService', [])
 
 	.service('APIService', function ($http) {
 		var baseUrl = "http://localhost:1337";
+
 		this.user = {
 			login: function (user, callbackSuccess, callbackError) {
 				$http.post(baseUrl + '/app/login', user).then(

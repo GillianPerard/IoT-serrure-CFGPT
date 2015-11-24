@@ -9394,3 +9394,6 @@ div, p, a, h1, h2, h3, h4, h5, h6, span {
 .checkbox input:checked:before, .checkbox input:checked + .checkbox-icon:before {
   background: #48C1BE;
   border-color: #48C1BE; }
+
+.users, .users .item-content {
+  padding: 0px !important; }

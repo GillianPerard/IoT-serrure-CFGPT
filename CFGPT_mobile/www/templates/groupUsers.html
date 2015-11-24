@@ -5,13 +5,17 @@
   </ion-nav-buttons>
   <ion-content>
     <ion-list show-delete="false" can-swipe="true">
-      <ion-item ng-repeat="groupUser in groupUsers" class="fontSize16 card" ng-class="{
+      <ion-item ng-repeat="groupUser in groupUsers" class="fontSize16 card users" ng-class="{
       'borderLeftMainColor': groupUser.is_admin && groupUser.is_to_call, 
       'borderLeftDoorClosedColor': !groupUser.is_admin && !groupUser.is_to_call,
       'borderLeftGreenColor': groupUser.is_admin && !groupUser.is_to_call,
       'borderLeftYellowColor': !groupUser.is_admin && groupUser.is_to_call
       }">
-        {{groupUser.user.firstname}} {{groupUser.user.lastname}}
+      <a class="item item-avatar" href="#">
+        <img ng-src="{{imagePath(groupeUser.user.imagePath) ? groupUser.user.imagePath : 'http://localhost:1337/images/jarjar.jpeg'}}">
+        <h2>{{groupUser.user.firstname}} {{groupUser.user.lastname}}</h2>
+        <p>{{groupUser.user.email}}</p>
+      </a>
         <ion-option-button class="button-assertive backgroundGray icon" ng-class="{'ion-android-sad': groupUser.is_admin, 'ion-android-happy': !groupUser.is_admin}" ng-if="currentUserGroup.is_admin && !itsMe(groupUser)" ng-click="toggleIsAdmin(groupUser)"></ion-option-button>
         <ion-option-button class="button-assertive backgroundGray icon" ng-class="{'ion-android-notifications-off': groupUser.is_to_call, 'ion-android-notifications': !groupUser.is_to_call}" ng-if="currentUserGroup.is_admin" ng-click="toggleIsToCall(groupUser)"></ion-option-button>
         <ion-option-button class="button-assertive icon ion-android-delete" ng-if="currentUserGroup.is_admin" ng-click="removeGroupUser(groupUser)"></ion-option-button>

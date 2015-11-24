@@ -1,0 +1,37 @@
+<ion-modal-view>
+	<ion-content class="">
+		<div class="bar bar-header">
+			<button class="button icon ion-android-close noBorder noBackground" ng-click="closeAssign()"></button>
+			<div class="h1 title">Ajouter un utilisateur</div>
+		</div>
+		<form ng-submit="doAssign()">
+			<div class="list">
+				<label class="item item-input" style="margin-top:100px">
+					<p  style="width:45px"><i class="icon ion-android-done placeholder-icon" ng-if="assignUserData.userId != 0" style="font-size:22px"></i></p>
+					<input type="search" ng-model="assignUserData.email" placeholder="Email de l'utilisateur" class="" ng-change="searchUser()">
+				</label>
+				<div ng-if="assignUserData.userId != 0">
+					<ul class="list">
+						<li class="item item-checkbox">
+							<label class="checkbox">
+								<input ng-model="assignUserData.isAdmin" type="checkbox">
+							</label>
+							Administrateur
+						</li>
+						<li class="item item-checkbox">
+							<label class="checkbox">
+								<input ng-model="assignUserData.isToCall" type="checkbox">
+							</label>
+							À appeler
+						</li>
+					</ul>
+					<label class="item noBorder noBackground noPadding">
+						<button class="button button-full backgroundMainColor noBorder colorWhite" type="submit">
+							<i class="ion ion-android-clipboard" style="width:25px;"></i> Ajouter l'utilisateur
+						</button>
+					</label>
+				</div>
+			</div>
+		</form>
+	</ion-content>
+</ion-modal-view>

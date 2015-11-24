@@ -129,4 +129,10 @@ angular.module('CFGPT_Mobile.controllers.GroupUsersCtrl', [
 					}
 				});
 		};
+		
+		$scope.imagePath = function(imgPath){
+			if(imgPath != null) return true;
+			else return false;
+		}
+		
 	});

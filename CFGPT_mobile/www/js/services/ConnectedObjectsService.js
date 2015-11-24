@@ -57,6 +57,16 @@ angular.module('CFGPT_Mobile.services.ConnectedObjectsService', [])
 					callback(undefined, error);
 				});
 		};
+		
+		this.assignToGroup = function (groupId, connectedObjectId, callback) {
+			APIService.connectedObjects.assignToGroup(groupId, connectedObjectId,
+						function (success) {
+							callback(success);
+						},
+						function (error) {
+							callback(undefined, error);
+						});
+		}
 
 		this.remove = function (connectedObject, callback) {
 			APIService.connectedObjects.remove(connectedObject.token,

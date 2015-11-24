@@ -47,6 +47,20 @@ module.exports = {
         });
 
     },
+    getAdminedGroupsByToken: function (req, res) {
+        var _tokenUser = req.headers.authorization;
+
+        //Si pas de token, on drop
+        if (!_tokenUser) return res.serverError({ 'state': 'error, invalid session token', 'error': 'Invalid session token.' });
+        Users.findOneByToken(_tokenUser).exec(function (err, currUser) {
+            if (err) return res.serverError({ 'state': 'error', 'error' : err });
+            if (!currUser) return res.serverError({ 'state': 'There are no result :(' });
+            GroupUsers.find({ user: currUser.id, is_admin : true }).populate('group').exec(function (err, groupUsers) {
+                if (err) return res.serverError({ 'state' : 'error when trying update database', 'error': err });
+                return res.ok(groupUsers);
+            });
+        });
+    },
 
     /** DASHBOARD **/
     //Creation d'un nouvel utilisateur
@@ -92,6 +106,6 @@ module.exports = {
         });
 
       });
-    },
+    }
 };
 

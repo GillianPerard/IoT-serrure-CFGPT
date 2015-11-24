@@ -12,4 +12,9 @@ angular.module('CFGPT_Mobile.controllers.AppCtrl', [])
 			$state.go("login");
 		}
 		
+		$scope.imagePath = function(imgPath){
+			if(imgPath != null) return true;
+			else return false;
+		}
+		
 	});

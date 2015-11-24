@@ -2,13 +2,22 @@
   <ion-nav-title>
     {{detail.name}}
   </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button ng-if="userGroup.is_admin" class="button button-icon button-clear ion-android-add" ng-click="assignToGroup()">
+    </button>
+  </ion-nav-buttons>
   <ion-content>
-    <ion-list>
-      <ion-item ng-repeat="log in logs | orderBy: '-date'" class="fontSize16 item-text-wrap">
-        <b>{{log.date | date : "medium"}}</b><br>
-        {{log.user.firstname}} {{log.user.lastname}} <br>
-        {{log.state}} <br>
-        {{log.content}}
+    <ion-list show-delete="false" can-swipe="true">
+      <ion-item ng-repeat="log in logs | orderBy: '-date'" class="fontSize16 users">
+        <a class="item item-avatar noBorder" href="#">
+          <img ng-src="{{imagePath(groupeUser.user.imagePath) ? groupUser.user.imagePath : 'http://localhost:1337/images/jarjar.jpeg'}}">
+          <h2>{{log.date | date : "medium"}}</h2>
+          <p>
+            {{log.user.firstname}} {{log.user.lastname}} <br>
+            {{log.state}} <br>
+            {{log.content}}
+          </p>
+        </a>
       </ion-item>
     </ion-list>
   </ion-content>
