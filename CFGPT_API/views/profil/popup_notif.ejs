@@ -1,0 +1,30 @@
+<div id="popup_notifs_user" class="ui fullscreen modal">
+  <div class="header">
+    Mes notifications :
+  </div>
+  <div class="content">
+    <div class="ui one column relaxed grid">
+      <div class="column" style="margin:0px 20px;">
+        <table id="table_notifs" class="ui celled selectable right aligned table">
+          <thead>
+          <tr>
+            <th class="left aligned" style="width:70%;">Contenu</th>
+            <th class="left aligned" style="width:15%;">Date</th>
+            <th class="left aligned" style="width:15%;">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr id="line_no_notifs">
+            <td class="center aligned" colspan="3">Aucune notification.</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui red button" onclick="closePopupNotifications();">
+      Fermer
+    </div>
+  </div>
+</div>
