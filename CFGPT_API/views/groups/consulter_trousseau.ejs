@@ -1,0 +1,42 @@
+<% include ../HEADER %>
+
+<div class="ui two column stackable grid" style="margin:5px;">
+  <div class="column" style="width:50%">
+    <h1>Trousseau - <%= _group.name %></h1>
+    <p>Vous trouverez sur cette page l'ensemble des serrures et utilisateurs associés à ce trousseau.</br>
+    Pour consulter l'une ou l'autre des informations, cliquez sur les boutons associés situés en tête de page.</p>
+    <span id="hid_trousseau_id" style="display:none"><%= _group.id %></span>
+  </div>
+  <div class="column right aligned" style="width:50%">
+    <button id="btn_show_serrures" class="ui blue icon button" onclick="affichePartieSerrures(<%= _group.id %>)">
+      <i class="icon key" style="margin-right:10px"></i>Serrures
+    </button>
+    <button id="btn_show_users" class="ui green icon button" onclick="affichePartieUtilisateurs(<%= _group.id %>)">
+      <i class="icon user" style="margin-right:10px"></i>Utilisateurs
+    </button>
+  </div>
+</div>
+
+<div id="no_info_warning" class="ui three column stackable grid" style="padding:40px;">
+  <div class="centered column" style="text-align:center;">
+    <h2>Aucune information demandée.</h2>
+    <p><small>Cliquez sur le bouton de votre choix pour afficher les informations concernées</small></p>
+  </div>
+</div>
+
+<div id="partie_serrures" class="ui one column relaxed grid" style="display:none;"></div>
+
+<div id="partie_utilisateurs" class="ui one column relaxed grid" style="display:none;"></div>
+
+
+
+<!-- Ajout des popups -->
+<% include serrures/suppression_serrure %>
+<% include serrures/ajout_serrure %>
+<% include serrures/link_serrure %>
+<% include serrures/logs/journaux_serrure %>
+
+<!-- FOOTER -->
+<% include ../FOOTER %>
+
+<%- block('localScripts', '<script src="/js/pages/consulter_trousseau.js"></script>') %>

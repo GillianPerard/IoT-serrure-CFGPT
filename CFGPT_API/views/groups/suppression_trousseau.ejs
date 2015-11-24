@@ -1,0 +1,30 @@
+<div class="ui basic modal">
+  <span id="suppr_id_trousseau" style="display:none"></span>
+  <div class="header">
+    Suppression d'un trousseau
+  </div>
+  <div class="image content">
+    <div class="image">
+      <i class="trash icon"></i>
+    </div>
+    <div class="description">
+      <p>
+        Vous vous apprêtez à supprimer le trousseau '<span id="suppr_name"></span>'.
+        Les utilisateurs auxquels il a été partagé n'auront plus accès à ce dernier.
+        Voulez-vous continuer ?
+      </p>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="two fluid ui inverted buttons">
+      <div id="suppr_btn_close" class="ui red basic inverted button" onclick="closePopupSupprimerTrousseau()">
+        <i class="remove icon"></i>
+        Annuler
+      </div>
+      <div id="suppr_btn_valid" class="ui green basic inverted button" onclick="delTrousseauPopupSupprimerTrousseau()">
+        <i class="checkmark icon"></i>
+        Confirmer
+      </div>
+    </div>
+  </div>
+</div>
