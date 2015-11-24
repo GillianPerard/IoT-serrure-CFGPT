@@ -1,0 +1,31 @@
+<div id="popup_ajout_serrure" class="ui small modal">
+  <div class="header">
+    Ajout d'une serrure
+  </div>
+  <div class="content">
+    <div class="ui form">
+      <p style="margin-bottom: 25px;">Veuillez renseigner les champs suivants avant l'ajout de la serrure à ce trousseau.</p>
+      <div class="field">
+        <div class="ui left icon input">
+          <i class="privacy icon"></i>
+          <input id="add_serrure_name" name="name" placeholder="Nom de la serrure">
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui left icon input">
+          <i class="privacy icon"></i>
+          <input id="add_serrure_token" name="tokenObject" placeholder="Token de la serrure">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui red button" onclick="closePopupAjoutSerrure();">
+      Non
+    </div>
+    <div class="ui green right labeled icon button" onclick="addSerrurePopupAjoutSerrure();">
+      Oui
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
+</div>

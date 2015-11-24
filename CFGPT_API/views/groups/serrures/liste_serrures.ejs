@@ -1,0 +1,71 @@
+<div class="ui one column relaxed grid">
+  <div class="column right aligned" style="margin:0px 20px;text-align:right;">
+    <button class="ui blue button" onclick="showPopupAjoutSerrure()">Ajouter une serrure</button>
+    <button class="ui blue button" onclick="showPopupLinkSerrure()">Associer une serrure</button>
+  </div>
+  </div>
+  <div class="column" style="margin:0px 20px;">
+    <table id="table_serrures" class="ui celled selectable right aligned table">
+      <thead>
+        <tr>
+          <th class="left aligned" style="width:10%;">Etat</th>
+          <th class="left aligned" style="width:30%;">Nom</th>
+          <th style="width:15%;">Dernière modification</th>
+          <th style="width:55%;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="line_no_serrure" style="display:<%= _group.connectedobjects.length == 0 ? '':'none'%>">
+          <td class="center aligned" colspan="4">Aucune serrure trouvée.</td>
+        </tr>
+        <% _group.connectedobjects.forEach(function(serrure)  { %>
+        <tr id="line_serrure_id_<%= serrure.id %>" class="line_serrure">
+
+          <% if (serrure.state == "Ouvert") {%>
+          <td class="left aligned" style="background:#82d853;color:white;">
+            <i class="icon unlock alternate" style="margin-right:10px"></i> <%= serrure.state %>
+          </td>
+          <% } else if (serrure.state == "Fermé") { %>
+          <td class="left aligned" style="background:#ff5a37;color:white;">
+            <i class="icon lock" style="margin-right:10px"></i> <%= serrure.state %>
+          </td>
+          <% } else if (serrure.state == "Sonne") { %>
+          <td class="left aligned" style="background:#ffb312;color:white;">
+            <i class="icon alarm" style="margin-right:10px"></i> <%= serrure.state %>
+          </td>
+          <% }%>
+
+          <td class="left aligned"><%= serrure.name %></td>
+          <td><%=: serrure.updatedAt | formatDate %></td>
+
+          <td>
+            <% if (serrure.state == "Fermé" || serrure.state == "Sonne") {%>
+            <button class="ui green icon button" onclick="serrureChangeEtat('<%= serrure.id %>',1);">
+              <i class="icon unlock alternate" style="margin-right:10px"></i>Ouvrir
+            </button>
+            <% } %>
+            <% if (serrure.state == "Ouvert" || serrure.state == "Sonne") {%>
+            <button class="ui red icon button" onclick="serrureChangeEtat('<%= serrure.id %>',0);">
+              <i class="icon lock" style="margin-right:10px"></i>Fermer
+            </button>
+            <% } %>
+
+            <button class="ui orange icon button" onclick="">
+              <i class="icon alarm slash" style="margin-right:10px"></i>Silence
+            </button>
+            <button class="ui red icon button"
+              onclick="showPopupSupprimerSerrure('<%= serrure.id %>','<%= serrure.name %>');">
+              <i class="icon trash" style="margin-right:10px"></i>Dissocier
+            </button>
+
+            <button class="ui purple icon button"
+              onclick="showPopupJournauxSerrure('<%= serrure.token %>','<%= serrure.name %>');">
+              <i class="icon browser" style="margin-right:10px"></i>Journaux
+            </button>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+</div>
