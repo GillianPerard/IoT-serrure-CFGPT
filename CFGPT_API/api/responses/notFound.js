@@ -28,7 +28,7 @@ module.exports = function notFound (data, options) {
   res.status(404);
 
   // Set friendly message :)
-  res.err("Not found");
+  //res.err("Not found");
 
   // Log error to console
   if (data !== undefined) {
