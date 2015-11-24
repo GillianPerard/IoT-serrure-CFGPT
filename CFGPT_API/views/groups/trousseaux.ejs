@@ -1,0 +1,60 @@
+<% include ../HEADER %>
+
+<div class="ui two column stackable grid" style="margin:5px;">
+  <div class="column" style="width:80%">
+    <h1>Mes trousseaux</h1>
+    <p>Veuillez trouver ci-dessous la liste des trousseaux auxquels vous avez accès.</p>
+  </div>
+  <div class="column right aligned" style="width:20%">
+    <button class="ui blue button" onclick="showPopupAjoutTrousseau()">Créer un trousseau</button>
+  </div>
+</div>
+
+<div id="line_no_trousseau" class="ui three column stackable grid"
+     style="padding:40px;display:<%= _groupUsers.length == 0 ? '':'none'%>">
+  <div class="centered column" style="text-align:center;">
+    <h2>Aucun trousseau trouvé.</h2>
+    <p><small>Vous n'avez actuellement aucun trousseau à votre disposition !</br> N'hésitez pas à en créer un à l'aide du bouton
+      "Créer un trousseau".</small></p>
+  </div>
+</div>
+
+<div style="padding:40px">
+  <div id="cards_trousseaux" class="ui five cards">
+    <% _groupUsers.forEach(function(groupuser)  { %>
+      <div class="ui card card_trousseau" id="card_trousseau_id_<%= groupuser.group.id %>" class="card_trousseau">
+        <div class=" blurring image dimmable">
+          <div class="ui blurring inverted dimmer transition hidden">
+            <div class="content">
+              <div class="center">
+                <div class="ui blue button" onclick="">
+                  <a style="width:100%;color:white" href="/trousseau/<%= groupuser.group.id %>">Consulter</a>
+                </div>
+                <div class="ui red button" style="margin-top:10px;"
+                  onclick="showPopupSupprimerTrousseau('<%= groupuser.group.id %>','<%= groupuser.group.name %>');"
+                 >Supprimer</div>
+              </div>
+            </div>
+          </div>
+          <img src="images/maison.jpeg">
+        </div>
+        <div class="content">
+          <div class="header"><%= groupuser.group.name %></div>
+          <div class="meta">
+            <a class="group">Dernière modification : <span><%=: groupuser.group.updatedAt | formatDate %></span></a>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+</div>
+
+<!-- Ajout des popups -->
+<% include suppression_trousseau %>
+<% include ajout_trousseau %>
+
+<!-- FOOTER -->
+<% include ../FOOTER %>
+
+<!-- Local scripts -->
+<% block('localScripts', '<script src="/js/pages/trousseaux.js"></script>') %>
