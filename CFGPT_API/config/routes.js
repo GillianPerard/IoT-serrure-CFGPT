@@ -16,7 +16,7 @@ module.exports.routes = {
 
 // Url de gestion des objets connectés
 //[VerifAccount]
-  /*DONE'*/'GET  /app/connectedobjects/': 'ConnectedObjects.getConnectedObjects',
+  ///*DONE'*/'GET  /app/connectedobjects/': 'ConnectedObjects.getConnectedObjects',
 
   /*DONE*/'POST /app/connectedobjects/get' : 'ConnectedObjects.getByToken', //(tokenObject)
   /*DONE*/'POST /app/connectedobjects/add' : 'ConnectedObjects.addConnectedObject', //(tokenObject, name)
@@ -52,15 +52,37 @@ module.exports.routes = {
   /*DONE*/'POST /app/groups/:groupId/users/update' : 'Groups.updateUserById', //(groupId, userId)
 
 
-  /*DASHBOARD*/
-  '/': { view: 'homepage' }, //TO DELETE
-  'GET  /app/connectedobjects/': {  //TO DELETE
-    view: 'connectedobjects/test',
-    controller: 'ConnectedObjects',
-    action: 'getConnectedObjects'
-  },
+  /*********************** DASHBOARD ***********************/
+  'GET /': 'Auth.connexion',
 
-  'GET  /connexion': { view: 'auth/connexion'},
-  'GET  /inscription': { view: 'auth/inscription'},
+  //GENERAL : SOUSCRIPTION SOCKET
+  'GET  /souscription/changeetat' : 'DashConnectedObjects.changeStateSubscribe',
+
+  //VUES : LISTE DES TROUSSEAUX
+  'GET  /connexion': 'Auth.connexion',
+  'GET  /inscription': 'Auth.inscription',
+    'POST /login' : 'Auth.dashLogin', //(email, password)
+    'GET  /logout' : 'Auth.dashLogout',
+    'POST /register' : 'Users.dashNewAccount', //(email, password, firstName, lastName)
+
+
+
+  //VUE : LISTE DES TROUSSEAUX
+  'GET  /trousseaux' : 'Users.dashGetGroupsByToken',
+  'POST /cfgpt/groups/add' : 'DashGroups.addGroup', //(name)
+  'POST /cfgpt/groups/remove' : 'DashGroups.removeByGroupId', //(groupId)
+
+  //VUE : CONSULTATION D'UN TROUSSEAU
+  'GET  /trousseau/:groupId' : 'DashGroups.getGroup',
+  'POST /cfgpt/trousseau/serrures' : 'DashGroups.getConnectedObjects', //(groupId)
+    'POST /cfgpt/connectedobjects/add' : 'DashConnectedObjects.addConnectedObject', //(tokenObject)
+      'POST /cfgpt/trousseau/connectedobjects/assign' : 'DashGroups.assignConnectedObjectById', //(groupId,connObjId)
+    'POST /cfgpt/connectedobjects/addexist':  'DashGroups.assignConnectedObjectByToken', //(groupId,connObjToken)
+    'POST /cfgpt/trousseau/connectedobjects/remove' : 'DashGroups.removeConnectedObjectById', //(groupId,connObjId)
+    'POST /cfgpt/connectedobject/changeetat' : 'DashConnectedObjects.changeStateById', //(id, state)
+  'POST /cfgpt/connectedobject/logs' : 'DashConnectedObjects.logsByToken'
+
+
+  //'GET  /profil/journal' : 'DashGroups.getConnectedObjects',
 
 };
