@@ -1,20 +1,69 @@
-<div>
-  <div>
-    <form id="form_connexion" action="/app/login" method="post">
-      <div>
-        <div class="">
-          <input id="email" type="text" name="email" placeholder="Enter your email">
-          <label for="email">Email</label>
-        </div>
-        <div class="">
-          <input id="password" type="password" name="password" >
-          <label for="password">Mot de passe</label>
-        </div>
+<style type="text/css">
+  body { background-color: #222;  }
+  body > .grid {  height: 100%;  }
+  .image {  margin-top: -100px;  }
+  .column {  max-width: 450px;  }
+</style>
+
+
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
+    <h2 class="ui teal image header">
+      <img src="/images/logoTest.png" class="image">
+      <div class="content">
+        CFGPT - Inscription
       </div>
-      <button class="" type="submit">Connexion</button>
+    </h2>
+    <form class="ui large form" id="form_inscription" action="/register" method="post">
+      <div class="ui stacked segment">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="mail outline icon"></i>
+            <input name="email" placeholder="Adresse e-mail" type="text">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input name="firstname" placeholder="Prénom" type="text">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input name="lastname" placeholder="Nom" type="text">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input name="password" placeholder="Mot de passe" type="password">
+          </div>
+        </div>
+        <div class="ui fluid large teal submit button">Je m'inscris !</div>
+      </div>
+
+      <div class="ui error message">
+        <ul class="list">
+        </ul>
+      </div>
+
     </form>
 
-    <p>Vous n'avez pas de compte ? </p>
-    <a class="" href="inscription">Inscrivez-vous !</a>
+    <% messagesFlash = req.flash('message'); %>
+    <% if (messagesFlash.length > 0) { %>
+    <div class="ui message error">
+      <% messagesFlash.forEach(function(mess)  { %>
+      <%= mess %>
+      <% }); %>
+    </div>
+    <% }%>
+
+    <div class="ui message">
+      Vous possédez déjà un compte ? <a class="" href="connexion">Connectez-vous !</a>
+    </div>
+
   </div>
 </div>
+
+<%- block('localScripts', '<script src="/js/pages/inscription.js"></script>') %>
