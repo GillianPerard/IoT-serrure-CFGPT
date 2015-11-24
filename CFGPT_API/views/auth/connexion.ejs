@@ -5,33 +5,20 @@
   .column {  max-width: 450px;  }
 </style>
 
-
 <div class="ui middle aligned center aligned grid">
   <div class="column">
     <h2 class="ui teal image header">
       <img src="/images/logoTest.png" class="image">
       <div class="content">
-        CFGPT - Inscription
+        CFGPT - Connexion
       </div>
     </h2>
-    <form class="ui large form" id="form_inscription" action="/register" method="post">
+    <form class="ui large form" id="form_connexion" action="/login" method="post">
       <div class="ui stacked segment">
         <div class="field">
           <div class="ui left icon input">
-            <i class="mail outline icon"></i>
+            <i class="user icon"></i>
             <input name="email" placeholder="Adresse e-mail" type="text">
-          </div>
-        </div>
-        <div class="field">
-          <div class="ui left icon input">
-            <i class="user icon"></i>
-            <input name="firstname" placeholder="Prénom" type="text">
-          </div>
-        </div>
-        <div class="field">
-          <div class="ui left icon input">
-            <i class="user icon"></i>
-            <input name="lastname" placeholder="Nom" type="text">
           </div>
         </div>
         <div class="field">
@@ -40,7 +27,7 @@
             <input name="password" placeholder="Mot de passe" type="password">
           </div>
         </div>
-        <div class="ui fluid large teal submit button">Je m'inscris !</div>
+        <div class="ui fluid large teal submit button">Connexion</div>
       </div>
 
       <div class="ui error message">
@@ -59,11 +46,20 @@
     </div>
     <% }%>
 
+    <% validFlash = req.flash('valid'); %>
+    <% if (validFlash.length > 0) { %>
+    <div class="ui message" style="color:darkseagreen">
+      <% validFlash.forEach(function(mess)  { %>
+      <%= mess %>
+      <% }); %>
+    </div>
+    <% }%>
+
     <div class="ui message">
-      Vous possédez déjà un compte ? <a class="" href="connexion">Connectez-vous !</a>
+      Vous n'avez pas de compte ? <a class="" href="inscription">Inscrivez-vous !</a>
     </div>
 
   </div>
 </div>
 
-<%- block('localScripts', '<script src="/js/pages/inscription.js"></script>') %>
+<%- block('localScripts', '<script src="/js/pages/connexion.js"></script>') %>
