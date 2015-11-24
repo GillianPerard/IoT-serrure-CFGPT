@@ -1,0 +1,54 @@
+<% include ../HEADER %>
+
+<div class="ui one column stackable grid" style="margin:5px;">
+  <div class="column">
+    <h1>Mes trousseaux</h1>
+    <p>Veuillez trouver ci-dessous la liste des trousseaux auxquels vous avez accès.</p>
+  </div>
+</div>
+
+<div class="ui one column relaxed grid">
+  <div class="column" style="margin:0px 20px;">
+    <table id="table_trousseaux" class="ui celled selectable right aligned table">
+      <thead>
+        <tr>
+          <th class="left aligned" style="width:50%">Trousseau</th>
+          <th>Dernière modification</th>
+          <th style="width:25%">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="line_no_trousseau" style="display:<%= _groupUsers.length == 0 ? '':'none'%>">
+          <td class="center aligned" colspan="4">Aucun trousseau trouvé.</td>
+        </tr>
+        <% _groupUsers.forEach(function(groupuser)  { %>
+        <tr id="line_trousseau_id_<%= groupuser.group.id %>" class="line_trousseau">
+          <td class="left aligned"><%= groupuser.group.name %></td>
+          <td><%=: groupuser.group.updatedAt | formatDate %></td>
+          <td>
+            <button class="ui blue button" onclick="">Consulter</button>
+            <button class="ui red button"
+              onclick="showPopupSupprimerTrousseau('<%= groupuser.group.id %>','<%= groupuser.group.name %>');"
+             >Supprimer</button>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="ui one column" style="margin:10px 20px;">
+  <div class="column">
+    <button class="ui blue button" onclick="showPopupAjoutTrousseau()">Créer un trousseau</button>
+  </div>
+</div>
+
+
+<% include suppression_trousseau %>
+<% include ajout_trousseau %>
+
+
+<% include ../FOOTER %>
+
+<%- block('localScripts', '<script src="/js/pages/trousseaux.js"></script>') %>
