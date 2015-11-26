@@ -281,7 +281,7 @@ module.exports = {
 
     // méthode appelée par un connectedObject pour souscrire aux modifications le concernant
     connectedObjectSubscribe : function(req,res){
-      var _token = req.param('userToken');
+      var _tokenObject = req.param('userToken');
 
       //Si il manque le param, on drop.
       if (!_tokenObject) return res.serverError({ "state": "Params error" });
@@ -293,7 +293,7 @@ module.exports = {
 
         console.log("subscribe change state key successfull")
         ConnectedObjects.subscribe(req,connObject.id,['update']);
-        return res.json(result);
+        return res.json(connObject);
       });
     }
 

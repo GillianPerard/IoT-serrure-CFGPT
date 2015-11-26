@@ -37,7 +37,8 @@ module.exports.policies = {
    },
 
    ConnectedObjectsController : {
-     'ringring' : [],
+     'ringring': [],
+     'connectedObjectSubscribe':  [],
      '*': 'authenticated',
    },
 
